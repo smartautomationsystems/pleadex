@@ -55,7 +55,7 @@ export async function uploadToS3(file: Buffer, key: string, contentType: string)
     const url = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
     console.log('Generated S3 URL:', url);
     
-    return url;
+    return { url, key };
   } catch (error) {
     console.error('S3 upload error:', error);
     throw new Error(`Failed to upload file to S3: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -93,7 +93,17 @@ export async function getSignedUrlForDocument(key: string): Promise<string> {
       Key: key,
     });
 
-    const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+    const expiresIn = 3600; // 1 hour
+    const url = await getSignedUrl(s3Client, command, { expiresIn });
+    
+    console.log('Generated signed URL:', {
+      key,
+      expiresIn,
+      url: url.substring(0, 50) + '...', // Log first 50 chars to avoid exposing full URL
+      generatedAt: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + expiresIn * 1000).toISOString()
+    });
+    
     return url;
   } catch (error) {
     console.error('Error generating signed URL:', error);

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/api/auth/config';
 import { connectToDatabase } from '@/libs/mongo';
 import { uploadToS3 } from '@/libs/storage';
 import { v4 as uuidv4 } from 'uuid';
@@ -109,8 +109,8 @@ export async function POST(request: Request) {
     try {
       // Upload to S3
       console.log('Attempting S3 upload...');
-      const s3Url = await uploadToS3(buffer, key, file.type);
-      console.log('S3 upload successful:', s3Url);
+      const { url: s3Url, key: s3Key } = await uploadToS3(buffer, key, file.type);
+      console.log('S3 upload successful:', { s3Url, s3Key });
 
       // Connect to MongoDB
       console.log('Connecting to MongoDB...');
@@ -124,7 +124,7 @@ export async function POST(request: Request) {
         size: file.size,
         uploadedAt: new Date(),
         status: 'pending',
-        s3Key: key,
+        s3Key: s3Key,
         s3Url: s3Url,
         content: null
       };
@@ -135,18 +135,38 @@ export async function POST(request: Request) {
 
       // Trigger OCR processing
       console.log('Triggering OCR processing...');
-      const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/documents/process`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          documentId: result.insertedId.toString()
-        })
-      });
+      try {
+        const baseUrl = process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000'
+          : process.env.NEXT_PUBLIC_BASE_URL;
 
-      if (!response.ok) {
-        console.error('Failed to trigger OCR processing:', await response.text());
+        console.log('Using base URL:', baseUrl);
+        
+        const response = await fetch(`${baseUrl}/api/documents/process`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`,
+          },
+          body: JSON.stringify({
+            documentId: result.insertedId.toString(),
+            userId: session.user.id
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Failed to trigger OCR processing:', {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorText
+          });
+        } else {
+          console.log('OCR processing triggered successfully');
+        }
+      } catch (error) {
+        console.error('Error triggering OCR processing:', error);
+        // Don't fail the upload if OCR fails
       }
 
       return NextResponse.json({ success: true, documentId: result.insertedId });
