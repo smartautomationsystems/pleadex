@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageResponse } from 'next/og';
 
+// Force rebuild to clear cache
 export const runtime = 'edge';
 
 export async function GET() {
