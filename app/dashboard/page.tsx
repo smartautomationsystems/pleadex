@@ -1,17 +1,28 @@
-import ButtonAccount from "@/components/ButtonAccount";
+'use client';
 
-export const dynamic = "force-dynamic";
+import { useSession, signOut } from 'next-auth/react';
 
-// This is a private page: It's protected by the layout.js component which ensures the user is authenticated.
-// It's a server compoment which means you can fetch data (like the user profile) before the page is rendered.
-// See https://shipfa.st/docs/tutorials/private-page
-export default async function Dashboard() {
+export default function DashboardPage() {
+  const { data: session } = useSession();
+
   return (
-    <main className="min-h-screen p-8 pb-24">
-      <section className="max-w-xl mx-auto space-y-8">
-        <ButtonAccount />
-        <h1 className="text-3xl md:text-4xl font-extrabold">Private Page</h1>
-      </section>
-    </main>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <button
+          onClick={() => signOut()}
+          className="btn btn-ghost"
+        >
+          Sign Out
+        </button>
+      </div>
+      
+      <div className="card bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title">Welcome, {session?.user?.name || 'User'}!</h2>
+          <p>Select an option from the side menu to get started.</p>
+        </div>
+      </div>
+    </div>
   );
 }

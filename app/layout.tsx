@@ -1,34 +1,39 @@
-import { ReactNode } from "react";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Viewport } from "next";
-import { getSEOTags } from "@/libs/seo";
-import ClientLayout from "@/components/LayoutClient";
-import config from "@/config";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
-const font = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
-export const viewport: Viewport = {
-	// Will use the primary color of your theme to show a nice theme color in the URL bar of supported browsers
-	themeColor: config.colors.main,
-	width: "device-width",
-	initialScale: 1,
+export const metadata: Metadata = {
+	title: "Pleadex",
+	description: "Your legal case management system",
+	icons: {
+		icon: [
+			{ url: "/images/Pleadex-Logo.svg", sizes: "32x32", type: "image/svg+xml" },
+			{ url: "/images/Pleadex-Logo.svg", sizes: "16x16", type: "image/svg+xml" },
+		],
+		apple: [
+			{ url: "/images/Pleadex-Logo.svg", sizes: "180x180", type: "image/svg+xml" },
+		],
+	},
 };
 
-// This adds default SEO tags to all pages in our app.
-// You can override them in each page passing params to getSOTags() function.
-export const metadata = getSEOTags();
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
-		<html
-			lang="en"
-			data-theme={config.colors.theme}
-			className={font.className}
-		>
-			<body>
-				{/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
-				<ClientLayout>{children}</ClientLayout>
+		<html lang="en" data-theme="light">
+			<head>
+				<link rel="icon" type="image/svg+xml" href="/images/Pleadex-Logo.svg" />
+				<link rel="apple-touch-icon" href="/images/Pleadex-Logo.svg" />
+			</head>
+			<body className={inter.className}>
+				<Providers>
+					{children}
+				</Providers>
 			</body>
 		</html>
 	);

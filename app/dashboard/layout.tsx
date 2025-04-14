@@ -1,24 +1,41 @@
-import { ReactNode } from "react";
-import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/libs/next-auth";
-import config from "@/config";
+'use client';
+
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import SideMenu from '@/components/SideMenu';
 
 // This is a server-side component to ensure the user is logged in.
 // If not, it will redirect to the login page.
 // It's applied to all subpages of /dashboard in /app/dashboard/*** pages
 // You can also add custom static UI elements like a Navbar, Sidebar, Footer, etc..
 // See https://shipfa.st/docs/tutorials/private-page
-export default async function LayoutPrivate({
+export default function DashboardLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  if (!session) {
-    redirect(config.auth.loginUrl);
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
 
-  return <>{children}</>;
+  if (!session) {
+    router.push('/login');
+    return null;
+  }
+
+  return (
+    <div className="flex min-h-screen">
+      <SideMenu />
+      <main className="flex-1 p-8">
+        {children}
+      </main>
+    </div>
+  );
 }
