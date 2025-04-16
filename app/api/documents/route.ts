@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/config';
+import { authOptions } from '@/libs/auth';
 import { connectToDatabase } from '@/libs/mongo';
 import { ObjectId } from 'mongodb';
 import { deleteObject } from '@/libs/storage';
@@ -8,17 +8,23 @@ import { deleteObject } from '@/libs/storage';
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
+    console.log('Documents API - Session:', session);
+    
     if (!session?.user?.id) {
+      console.log('Documents API - No user ID in session');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { db } = await connectToDatabase();
+    console.log('Documents API - User ID:', session.user.id);
+    
     const documents = await db
       .collection('documents')
       .find({ userId: new ObjectId(session.user.id) })
       .sort({ uploadedAt: -1 })
       .toArray();
 
+    console.log('Documents API - Found documents:', documents);
     return NextResponse.json(documents);
   } catch (error) {
     console.error('Error fetching documents:', error);

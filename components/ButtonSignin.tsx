@@ -23,7 +23,7 @@ const ButtonSignin = ({
     if (status === "authenticated") {
       router.push(config.auth.callbackUrl);
     } else {
-      signIn(undefined, { callbackUrl: config.auth.callbackUrl });
+      router.push("/login");
     }
   };
 
