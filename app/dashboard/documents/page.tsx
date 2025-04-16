@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { FaUpload, FaFile, FaTrash, FaDownload, FaList, FaThLarge } from 'react-icons/fa';
+import { FaUpload, FaFile, FaTrash, FaDownload, FaList, FaThLarge, FaEye } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 
 interface Document {
@@ -22,13 +22,11 @@ export default function DocumentsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [currentDocument, setCurrentDocument] = useState<{ url: string; content: string | null } | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
-
-  useEffect(() => {
-    if (session?.user) {
-      fetchDocuments();
-    }
-  }, [session]);
+  const [documentViewMode, setDocumentViewMode] = useState<'image' | 'text'>('image');
+  const [isPolling, setIsPolling] = useState(false);
 
   const fetchDocuments = async () => {
     try {
@@ -38,15 +36,20 @@ export default function DocumentsPage() {
         throw new Error(errorData.error || 'Failed to fetch documents');
       }
       const data = await response.json();
-      setDocuments(data.map((doc: any) => ({
-        id: doc._id,
+      console.log('Raw documents data:', data);
+      
+      const newDocuments = data.map((doc: any) => ({
+        id: doc._id.toString(),
         name: doc.name,
         type: doc.type,
         size: doc.size,
-        uploadedAt: doc.uploadedAt,
+        uploadedAt: doc.uploadedAt || doc.createdAt,
         status: doc.status || 'pending',
         content: doc.content
-      })));
+      }));
+      
+      console.log('Mapped documents:', newDocuments.map((d: Document) => ({ id: d.id, name: d.name, status: d.status })));
+      setDocuments(newDocuments);
     } catch (error: any) {
       console.error('Error fetching documents:', error);
       toast.error(error.message || 'Failed to load documents');
@@ -54,6 +57,42 @@ export default function DocumentsPage() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (session?.user) {
+      fetchDocuments();
+    }
+  }, [session]);
+
+  // Add polling effect for processing documents
+  useEffect(() => {
+    const hasProcessingDocuments = documents.some(doc => doc.status === 'processing');
+    console.log('Polling check:', { hasProcessingDocuments, isPolling, documentCount: documents.length });
+
+    if (!hasProcessingDocuments) {
+      if (isPolling) {
+        console.log('Stopping polling - no more processing documents');
+        setIsPolling(false);
+      }
+      return;
+    }
+
+    if (!isPolling) {
+      console.log('Starting polling for processing documents');
+      setIsPolling(true);
+    }
+
+    const pollInterval = setInterval(async () => {
+      console.log('Polling for document updates...');
+      await fetchDocuments();
+    }, 2000); // Poll every 2 seconds
+
+    return () => {
+      console.log('Cleaning up polling interval');
+      clearInterval(pollInterval);
+      setIsPolling(false);
+    };
+  }, [documents, isPolling, fetchDocuments]);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -127,6 +166,21 @@ export default function DocumentsPage() {
     }
   };
 
+  const handleView = async (documentId: string) => {
+    try {
+      const response = await fetch(`/api/documents/view?id=${documentId}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch document');
+      }
+      const data = await response.json();
+      setCurrentDocument(data);
+      setViewModalOpen(true);
+    } catch (error: any) {
+      console.error('Error viewing document:', error);
+      toast.error(error.message || 'Failed to view document');
+    }
+  };
+
   const getStatusClass = (status: string) => {
     switch (status) {
       case 'completed':
@@ -171,6 +225,13 @@ export default function DocumentsPage() {
               <td>
                 <div className="flex gap-2">
                   <button
+                    onClick={() => handleView(doc.id)}
+                    className="btn btn-sm btn-info"
+                  >
+                    <FaEye className="mr-1" />
+                    View
+                  </button>
+                  <button
                     onClick={() => handleDownload(doc.id)}
                     className="btn btn-sm btn-primary"
                   >
@@ -209,6 +270,13 @@ export default function DocumentsPage() {
               <p>Status: {document.status}</p>
             </div>
             <div className="card-actions justify-end">
+              <button
+                className="btn btn-sm btn-info"
+                onClick={() => handleView(document.id)}
+              >
+                <FaEye className="mr-1" />
+                View
+              </button>
               <button
                 className="btn btn-sm btn-primary"
                 onClick={() => handleDownload(document.id)}
@@ -289,6 +357,58 @@ export default function DocumentsPage() {
               <button className="btn btn-error" onClick={confirmDelete}>
                 Delete
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* View Modal */}
+      {viewModalOpen && currentDocument && (
+        <div className="modal modal-open">
+          <div className="modal-box max-w-5xl">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-bold text-lg">Document Viewer</h3>
+              <div className="flex gap-2">
+                {currentDocument.content && (
+                  <button
+                    className={`btn btn-sm ${documentViewMode === 'image' ? 'btn-primary' : 'btn-ghost'}`}
+                    onClick={() => setDocumentViewMode('image')}
+                  >
+                    Image
+                  </button>
+                )}
+                {currentDocument.content && (
+                  <button
+                    className={`btn btn-sm ${documentViewMode === 'text' ? 'btn-primary' : 'btn-ghost'}`}
+                    onClick={() => setDocumentViewMode('text')}
+                  >
+                    Text
+                  </button>
+                )}
+                <button
+                  className="btn btn-sm btn-ghost"
+                  onClick={() => setViewModalOpen(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4">
+              {documentViewMode === 'image' ? (
+                <div className="w-full h-[500px]">
+                  <iframe
+                    src={currentDocument.url}
+                    className="w-full h-full"
+                    title="Document Viewer"
+                  />
+                </div>
+              ) : (
+                <div className="w-full h-[500px] overflow-auto">
+                  <div className="bg-base-200 p-4 rounded-lg h-full">
+                    <pre className="whitespace-pre-wrap">{currentDocument.content}</pre>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

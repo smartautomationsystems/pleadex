@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaFolder, FaFileAlt, FaClipboardList, FaUsers } from 'react-icons/fa';
+import { FaFolder, FaFileAlt, FaClipboardList, FaUsers, FaSignOutAlt } from 'react-icons/fa';
 import Image from 'next/image';
+import { signOut } from 'next-auth/react';
 
 const menuItems = [
   { name: 'Cases', href: '/dashboard/cases', icon: FaFolder },
@@ -16,7 +17,7 @@ export default function SideMenu() {
   const pathname = usePathname();
 
   return (
-    <div className="w-64 min-h-screen bg-base-200 p-4">
+    <div className="w-64 min-h-screen bg-base-200 p-4 flex flex-col">
       <div className="mb-8">
         <Link href="/dashboard" className="flex items-center justify-center">
           <Image
@@ -29,7 +30,7 @@ export default function SideMenu() {
           />
         </Link>
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 flex-grow">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -50,6 +51,13 @@ export default function SideMenu() {
           );
         })}
       </div>
+      <button
+        onClick={() => signOut()}
+        className="flex items-center space-x-2 p-3 rounded-lg transition-colors hover:bg-base-300 mt-auto"
+      >
+        <FaSignOutAlt className="w-5 h-5" />
+        <span>Sign Out</span>
+      </button>
     </div>
   );
 } 

@@ -1,5 +1,8 @@
-import { TextractClient, StartDocumentTextDetectionCommand, GetDocumentTextDetectionCommand } from "@aws-sdk/client-textract";
-import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
+import {
+  TextractClient,
+  StartDocumentTextDetectionCommand,
+  GetDocumentTextDetectionCommand
+} from "@aws-sdk/client-textract";
 import { connectToDatabase } from "./mongo";
 import { Document } from "@/models/document";
 import { ObjectId } from "mongodb";
@@ -8,83 +11,47 @@ const textract = new TextractClient({
   region: process.env.AWS_REGION || "us-east-1",
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
-
-const sns = new SNSClient({
-  region: process.env.AWS_REGION || "us-east-1",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+  }
 });
 
 export async function processDocumentWithOCR(documentId: string, userId: string) {
   try {
     console.log("Starting OCR processing for document:", documentId);
-    console.log("AWS Configuration:", {
-      region: process.env.AWS_REGION,
-      bucket: process.env.AWS_BUCKET_NAME,
-      roleArn: process.env.AWS_TEXTTRACT_ROLE_ARN,
-      topicArn: process.env.AWS_SNS_TOPIC_ARN
-    });
-    
+
     const { db } = await connectToDatabase();
-    const document = await db.collection<Document>("documents").findOne({ 
-      _id: new ObjectId(documentId), 
-      userId: new ObjectId(userId) 
+    const document = await db.collection<Document>("documents").findOne({
+      _id: new ObjectId(documentId),
+      userId: new ObjectId(userId)
     });
-    
+
     if (!document) {
       console.error("Document not found:", { documentId, userId });
       throw new Error("Document not found");
     }
 
-    console.log("Found document:", {
-      id: document._id,
-      s3Key: document.s3Key,
-      status: document.status
-    });
-
-    // Start Textract job
     const startCommand = new StartDocumentTextDetectionCommand({
       DocumentLocation: {
         S3Object: {
-          Bucket: process.env.AWS_BUCKET_NAME,
-          Name: document.s3Key,
-        },
+          Bucket: process.env.AWS_S3_BUCKET,
+          Name: document.s3Key
+        }
       },
-      NotificationChannel: {
-        RoleArn: process.env.AWS_TEXTTRACT_ROLE_ARN,
-        SNSTopicArn: process.env.AWS_SNS_TOPIC_ARN,
-      },
-      ClientRequestToken: documentId, // Unique token for idempotency
-      JobTag: documentId, // Tag to identify the job
-    });
-
-    console.log("Starting Textract job with params:", {
-      bucket: process.env.AWS_BUCKET_NAME,
-      key: document.s3Key,
-      roleArn: process.env.AWS_TEXTTRACT_ROLE_ARN,
-      topicArn: process.env.AWS_SNS_TOPIC_ARN,
+      ClientRequestToken: documentId,
+      JobTag: documentId
     });
 
     const startResponse = await textract.send(startCommand);
     const jobId = startResponse.JobId;
 
     if (!jobId) {
-      console.error("Failed to start Textract job:", startResponse);
-      throw new Error("Failed to start Textract job");
+      throw new Error("Textract job failed to start");
     }
 
-    console.log("Started Textract job successfully:", jobId);
-
-    // Update document status
     await db.collection<Document>("documents").updateOne(
       { _id: new ObjectId(documentId) },
-      { 
-        $set: { 
+      {
+        $set: {
           status: "processing",
           ocrJobId: jobId,
           updatedAt: new Date()
@@ -92,104 +59,133 @@ export async function processDocumentWithOCR(documentId: string, userId: string)
       }
     );
 
-    console.log("Updated document status to processing");
-    return { success: true, jobId };
+    let jobStatus = "IN_PROGRESS";
+    let attempts = 0;
+    const maxAttempts = 75; // 2.5 minutes at 2s interval
+    let allText = "";
+
+    while (jobStatus === "IN_PROGRESS" && attempts < maxAttempts) {
+      await new Promise((r) => setTimeout(r, 2000));
+      attempts++;
+
+      const statusCommand = new GetDocumentTextDetectionCommand({ JobId: jobId });
+      const statusResponse = await textract.send(statusCommand);
+      jobStatus = statusResponse.JobStatus || "IN_PROGRESS";
+
+      if (jobStatus === "SUCCEEDED") {
+        // Get all pages of text
+        let nextToken = statusResponse.NextToken;
+        let currentPage = 1;
+        
+        // Process first page
+        const firstPageText = statusResponse.Blocks?.filter((b) => b.BlockType === "LINE")
+          .map((b) => b.Text || "")
+          .join("\n") || "";
+        allText += firstPageText;
+
+        // Process remaining pages
+        while (nextToken) {
+          const nextPageCommand = new GetDocumentTextDetectionCommand({
+            JobId: jobId,
+            NextToken: nextToken
+          });
+          const nextPageResponse = await textract.send(nextPageCommand);
+          currentPage++;
+          
+          const pageText = nextPageResponse.Blocks?.filter((b) => b.BlockType === "LINE")
+            .map((b) => b.Text || "")
+            .join("\n") || "";
+          allText += "\n\n" + pageText;
+          
+          nextToken = nextPageResponse.NextToken;
+        }
+
+        console.log(`Extracted text from ${currentPage} pages`);
+
+        await db.collection<Document>("documents").updateOne(
+          { _id: new ObjectId(documentId) },
+          {
+            $set: {
+              status: "completed",
+              content: allText,
+              updatedAt: new Date()
+            }
+          }
+        );
+
+        console.log("OCR complete for document:", documentId);
+        return { success: true, text: allText };
+      } else if (jobStatus === "FAILED") {
+        throw new Error("Textract job failed");
+      }
+    }
+
+    throw new Error("Textract job timed out");
   } catch (error) {
-    console.error("OCR processing error:", {
-      error,
-      documentId,
-      userId,
-      timestamp: new Date().toISOString()
-    });
-    
-    // Update document status to failed
+    console.error("OCR processing error:", error);
     try {
       const { db } = await connectToDatabase();
       await db.collection<Document>("documents").updateOne(
         { _id: new ObjectId(documentId) },
-        { 
-          $set: { 
+        {
+          $set: {
             status: "failed",
             updatedAt: new Date()
           }
         }
       );
-      console.log("Updated document status to failed");
     } catch (dbError) {
-      console.error("Failed to update document status:", dbError);
+      console.error("Failed to update status to failed:", dbError);
     }
-    
     throw error;
   }
 }
 
 export async function checkOCRStatus(jobId: string) {
   try {
-    console.log("Checking OCR status for job:", jobId);
     const command = new GetDocumentTextDetectionCommand({ JobId: jobId });
     const response = await textract.send(command);
-    
-    console.log("OCR status response:", {
-      jobId,
-      status: response.JobStatus,
-      hasText: !!response.Blocks?.length
-    });
-    
+
     return {
       status: response.JobStatus,
-      text: response.Blocks?.map(block => block.Text || "").join(" ") || "",
+      text: response.Blocks?.map((block) => block.Text || "").join(" ") || ""
     };
   } catch (error) {
-    console.error("Error checking OCR status:", {
-      error,
-      jobId,
-      timestamp: new Date().toISOString()
-    });
+    console.error("Error checking OCR status:", error);
     throw error;
   }
 }
 
-// Handle SNS notifications
-export async function handleOCRNotification(message: any) {
+export async function handleOCRNotification(notification: any) {
   try {
-    console.log("Received OCR notification:", message);
     const { db } = await connectToDatabase();
-    const { JobId, Status, DocumentLocation } = message;
-    
+    const { JobId, Status } = notification;
+
     if (Status === "SUCCEEDED") {
-      console.log("OCR job succeeded:", JobId);
       const result = await checkOCRStatus(JobId);
-      
       await db.collection<Document>("documents").updateOne(
         { ocrJobId: JobId },
-        { 
-          $set: { 
+        {
+          $set: {
             status: "completed",
-            ocrText: result.text,
+            content: result.text,
             updatedAt: new Date()
           }
         }
       );
-      console.log("Updated document with OCR text");
     } else if (Status === "FAILED") {
-      console.error("OCR job failed:", JobId);
       await db.collection<Document>("documents").updateOne(
         { ocrJobId: JobId },
-        { 
-          $set: { 
+        {
+          $set: {
             status: "failed",
             updatedAt: new Date()
           }
         }
       );
-      console.log("Updated document status to failed");
     }
   } catch (error) {
-    console.error("Error handling OCR notification:", {
-      error,
-      message,
-      timestamp: new Date().toISOString()
-    });
+    console.error("Error handling OCR notification:", error);
     throw error;
   }
 } 

@@ -20,168 +20,70 @@ interface Document {
 
 export async function POST(request: Request) {
   try {
-    console.log('Starting document upload process...');
-
-    // Check AWS configuration
-    const requiredEnvVars = {
-      AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
-      AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-      AWS_REGION: process.env.AWS_REGION,
-      AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
-    };
-
-    const missingVars = Object.entries(requiredEnvVars)
-      .filter(([_, value]) => !value)
-      .map(([key]) => key);
-
-    if (missingVars.length > 0) {
-      console.error('Missing AWS environment variables:', missingVars);
-      return NextResponse.json(
-        { error: `Missing AWS configuration: ${missingVars.join(', ')}` },
-        { status: 500 }
-      );
-    }
-
-    console.log('AWS Configuration:', {
-      region: process.env.AWS_REGION,
-      bucket: process.env.AWS_BUCKET_NAME,
-      hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
-      hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
-    });
-
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
-      console.error('Unauthorized: No session or user ID found');
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-    console.log('User authenticated:', session.user.email);
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-
     if (!file) {
-      console.error('No file provided in request');
-      return NextResponse.json(
-        { error: 'No file provided' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    console.log('File received:', {
+    const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
+    const maxSize = 10 * 1024 * 1024;
+    if (!allowedTypes.includes(file.type) || file.size > maxSize) {
+      return NextResponse.json({ error: 'Invalid file type or size exceeds 10MB' }, { status: 400 });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const key = `${session.user.email}/${uuidv4()}.${file.name.split('.').pop()}`;
+
+    const [uploadResult, dbConnection] = await Promise.all([
+      uploadToS3(buffer, key, file.type),
+      connectToDatabase(),
+    ]);
+
+    const document: Document = {
+      userId: new ObjectId(session.user.id),
       name: file.name,
       type: file.type,
-      size: file.size
-    });
+      size: file.size,
+      uploadedAt: new Date(),
+      status: 'pending',
+      s3Key: uploadResult.key,
+      s3Url: uploadResult.url,
+      content: null,
+    };
 
-    // Validate file type
-    const allowedTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
-    if (!allowedTypes.includes(file.type)) {
-      console.error('Invalid file type:', file.type);
-      return NextResponse.json(
-        { error: 'Invalid file type. Only PDF, PNG, and JPG files are allowed.' },
-        { status: 400 }
-      );
-    }
+    const result = await dbConnection.db.collection('documents').insertOne(document);
 
-    // Validate file size (10MB limit)
-    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-    if (file.size > maxSize) {
-      console.error('File size exceeds limit:', file.size);
-      return NextResponse.json(
-        { error: 'File size exceeds 10MB limit' },
-        { status: 400 }
-      );
-    }
+    const baseUrl = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : process.env.NEXT_PUBLIC_BASE_URL;
 
-    // Get file buffer
-    const buffer = Buffer.from(await file.arrayBuffer());
-    console.log('File converted to buffer, size:', buffer.length);
-
-    // Generate a unique key for the file
-    const fileExtension = file.name.split('.').pop();
-    const key = `${session.user.email}/${uuidv4()}.${fileExtension}`;
-    console.log('Generated S3 key:', key);
-
-    try {
-      // Upload to S3
-      console.log('Attempting S3 upload...');
-      const { url: s3Url, key: s3Key } = await uploadToS3(buffer, key, file.type);
-      console.log('S3 upload successful:', { s3Url, s3Key });
-
-      // Connect to MongoDB
-      console.log('Connecting to MongoDB...');
-      const { db } = await connectToDatabase();
-
-      // Create document record
-      const document: Document = {
-        userId: new ObjectId(session.user.id),
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        uploadedAt: new Date(),
-        status: 'pending',
-        s3Key: s3Key,
-        s3Url: s3Url,
-        content: null
-      };
-
-      console.log('Creating MongoDB document...');
-      const result = await db.collection('documents').insertOne(document);
-      console.log('MongoDB document created:', result.insertedId);
-
-      // Trigger OCR processing
-      console.log('Triggering OCR processing...');
-      try {
-        const baseUrl = process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3000'
-          : process.env.NEXT_PUBLIC_BASE_URL;
-
-        console.log('Using base URL:', baseUrl);
-        
-        const response = await fetch(`${baseUrl}/api/documents/process`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`,
-          },
-          body: JSON.stringify({
-            documentId: result.insertedId.toString(),
-            userId: session.user.id
-          }),
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('Failed to trigger OCR processing:', {
-            status: response.status,
-            statusText: response.statusText,
-            error: errorText
-          });
-        } else {
-          console.log('OCR processing triggered successfully');
-        }
-      } catch (error) {
-        console.error('Error triggering OCR processing:', error);
-        // Don't fail the upload if OCR fails
-      }
-
-      return NextResponse.json({ success: true, documentId: result.insertedId });
-    } catch (error) {
-      console.error('Error during document upload:', error);
-      return NextResponse.json(
-        { error: 'Failed to upload document' },
-        { status: 500 }
-      );
-    }
-  } catch (error) {
-    console.error('Error processing request:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+    // Update document status to processing immediately
+    await dbConnection.db.collection('documents').updateOne(
+      { _id: result.insertedId },
+      { $set: { status: 'processing' } }
     );
+
+    fetch(`${baseUrl}/api/documents/process`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`,
+      },
+      body: JSON.stringify({
+        documentId: result.insertedId.toString(),
+        userId: session.user.id
+      }),
+    }).catch(err => console.error('OCR trigger failed silently:', err));
+
+    return NextResponse.json({ success: true, documentId: result.insertedId });
+  } catch (error) {
+    console.error('Fatal error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 } 

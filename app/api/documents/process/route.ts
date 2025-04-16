@@ -24,11 +24,16 @@ export async function POST(request: Request) {
       return new NextResponse('Document ID and User ID are required', { status: 400 });
     }
 
-    // Process the document with OCR
+    // Process the document with OCR and wait for completion
     const result = await processDocumentWithOCR(documentId, userId);
-    console.log('OCR processing completed successfully');
+    
+    if (!result.success) {
+      console.error('OCR processing failed:', result);
+      return new NextResponse('OCR processing failed', { status: 500 });
+    }
 
-    return NextResponse.json({ success: true, text: result });
+    console.log('OCR processing completed successfully with text:', result.text?.length);
+    return NextResponse.json({ success: true, text: result.text });
   } catch (error) {
     console.error('OCR processing error:', {
       error,
