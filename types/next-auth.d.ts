@@ -8,6 +8,14 @@ declare module 'next-auth' {
     user: {
       /** The user's id. */
       id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role?: string;
     } & DefaultSession['user'];
+  }
+
+  interface User {
+    role?: string;
   }
 }
