@@ -32,8 +32,7 @@ export interface UserCourtOverride {
   overrides: {
     departments?: Department[];
     judges?: Judge[];
-    [key: string]: any;
-  };
+  } & Record<string, any>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -73,8 +72,7 @@ const userCourtOverrideSchema = new mongoose.Schema({
   courtId: { type: String, required: true, index: true },
   overrides: {
     departments: [departmentSchema],
-    judges: [judgeSchema],
-    [key: string]: any
+    judges: [judgeSchema]
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }

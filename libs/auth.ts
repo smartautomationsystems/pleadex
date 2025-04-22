@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
           name: superadmin.name,
           role: superadmin.role
         };
-      },
+      }
     }),
   ],
   session: {

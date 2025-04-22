@@ -1,3 +1,6 @@
+// DO NOT MODIFY — critical config, dev server must not restart
+
+
 {
   "compilerOptions": {
     "lib": [

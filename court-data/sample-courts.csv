@@ -1,0 +1,3 @@
+courtName,jurisdiction,courtState,courtCounty,address,phone,website,branchName,departments,caseTypes
+"Superior Court of California, County of Los Angeles",state,CA,"Los Angeles","111 N Hill St, Los Angeles, CA 90012","(213) 974-5555","https://www.lacourt.org","Stanley Mosk Courthouse","8B:(213) 974-5555:Eric Rosen,Samantha Jessner;12A:(213) 974-5556:John Smith;3C:(213) 974-5557:Jane Doe","Civil,Criminal,Family Law,Probate,Small Claims"
+"Superior Court of California, County of San Francisco",state,CA,"San Francisco","400 McAllister St, San Francisco, CA 94102","(415) 551-4000","https://www.sfsuperiorcourt.org","Hall of Justice","5B:(415) 551-4000:Samuel K. Feng;8A:(415) 551-4001:Victor M. Hwang;12C:(415) 551-4002:Mary Morgan","Civil,Criminal,Family Law,Probate" 

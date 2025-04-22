@@ -1,0 +1,3860 @@
+[
+  {
+    "name": "Supreme Court of California - San Francisco Headquarters\"",
+    "jurisdiction": "supreme court",
+    "level": "supreme",
+    "state": "California",
+    "locations": [
+      {
+        "address": "350 McAllister Street, San Francisco, CA 94102-4797\"",
+        "phone": "415-865-7000\"",
+        "website": "https://supreme.courts.ca.gov\"",
+        "name": "Earl Warren Building\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Supreme Court of California - Los Angeles\"",
+    "jurisdiction": "supreme court",
+    "level": "supreme",
+    "state": "California",
+    "locations": [
+      {
+        "address": "Ronald Reagan State Office Building, 300 South Spring Street, 3rd Floor, Los Angeles, CA 90013\"",
+        "website": "https://supreme.courts.ca.gov\"",
+        "name": "Los Angeles Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-865-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Supreme Court of California - Sacramento\"",
+    "jurisdiction": "supreme court",
+    "level": "supreme",
+    "state": "California",
+    "locations": [
+      {
+        "address": "Stanley Mosk Library and Courts Building, 914 Capitol Mall, Sacramento, CA 95814\"",
+        "website": "https://supreme.courts.ca.gov\"",
+        "name": "Sacramento Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-865-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "First District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "350 McAllister Street, San Francisco, CA 94102-4797\"",
+        "website": "https://courts.ca.gov/1dca.htm\"",
+        "name": "First District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-865-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Second District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "300 South Spring Street, 2nd Floor, Los Angeles, CA 90013\"",
+        "website": "https://courts.ca.gov/2dca.htm\"",
+        "name": "Second District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "213-830-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Third District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "914 Capitol Mall, Sacramento, CA 95814\"",
+        "website": "https://courts.ca.gov/3dca.htm\"",
+        "name": "Third District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "916-654-0200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fourth District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "750 B Street, Suite 300, San Diego, CA 92101\"",
+        "website": "https://courts.ca.gov/4dca.htm\"",
+        "name": "Fourth District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-645-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fifth District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "2424 Ventura Street, Fresno, CA 93721\"",
+        "website": "https://courts.ca.gov/5dca.htm\"",
+        "name": "Fifth District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-445-5490\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sixth District Court of Appeal\"",
+    "jurisdiction": "appellate court",
+    "level": "appellate",
+    "state": "California",
+    "locations": [
+      {
+        "address": "333 West Santa Clara Street, Suite 1060, San Jose, CA 95113\"",
+        "website": "https://courts.ca.gov/6dca.htm\"",
+        "name": "Sixth District\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "408-882-2700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "1225 Fallon Street, Oakland, CA 94612\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Rene C. Davidson Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-891-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "24405 Amador Street, Hayward, CA 94544\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Hayward Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-891-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "1225 Fallon Street, Oakland, CA 94612\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-891-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "1225 Fallon Street, Oakland, CA 94612\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-891-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "2233 Shore Line Drive, Alameda, CA 94501\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "George E. McDonald Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "2120 Martin Luther King, Jr. Way, Berkeley, CA 94704\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Berkeley Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "5151 Gleason Drive, Dublin, CA 94568\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "East County Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "39439 Paseo Padre Parkway, Fremont, CA 94538\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Fremont Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "1000 Fairmont Drive, San Leandro, CA 94578\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "San Leandro Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-577-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "1221 Oak Street, Oakland, CA 94612\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Administration Building\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alameda County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alameda",
+    "locations": [
+      {
+        "address": "661 Washington Street, Oakland, CA 94607\"",
+        "website": "https://www.alameda.courts.ca.gov\"",
+        "name": "Wiley W. Manuel Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "510-891-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alpine County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Alpine",
+    "locations": [
+      {
+        "address": "14777 State Highway 89, Markleeville, CA 96120\"",
+        "website": "https://www.alpine.courts.ca.gov\"",
+        "name": "Alpine County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-694-2141\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Amador County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Amador",
+    "locations": [
+      {
+        "address": "500 Argonaut Lane, Jackson, CA 95642\"",
+        "website": "https://www.amador.courts.ca.gov\"",
+        "name": "Amador County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-257-2600\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Butte County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Butte",
+    "locations": [
+      {
+        "address": "1 Court Street, Oroville, CA 95965\"",
+        "website": "https://www.butte.courts.ca.gov\"",
+        "name": "Butte County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-532-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Calaveras County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Calaveras",
+    "locations": [
+      {
+        "address": "400 Government Center Drive, San Andreas, CA 95249\"",
+        "website": "https://www.calaveras.courts.ca.gov\"",
+        "name": "Calaveras County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-754-6500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Colusa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Colusa",
+    "locations": [
+      {
+        "address": "532 Oak Street, Colusa, CA 95932\"",
+        "website": "https://www.colusa.courts.ca.gov\"",
+        "name": "Colusa County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-458-0500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contra Costa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Contra Costa",
+    "locations": [
+      {
+        "address": "725 Court Street, Martinez, CA 94553\"",
+        "website": "https://www.cc-courts.org\"",
+        "name": "Martinez Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "925-608-1000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contra Costa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Contra Costa",
+    "locations": [
+      {
+        "address": "1000 Ward Street, Martinez, CA 94553\"",
+        "website": "https://www.cc-courts.org\"",
+        "name": "Juvenile Hall\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "925-608-1000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contra Costa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Contra Costa",
+    "locations": [
+      {
+        "address": "1000 Ward Street, Martinez, CA 94553\"",
+        "website": "https://www.cc-courts.org\"",
+        "name": "Family Law Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "925-608-1000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Del Norte County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Del Norte",
+    "locations": [
+      {
+        "address": "450 H Street, Crescent City, CA 95531\"",
+        "website": "https://www.delnorte.courts.ca.gov\"",
+        "name": "Del Norte County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-464-8115\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "El Dorado County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "El Dorado",
+    "locations": [
+      {
+        "address": "2850 Fairlane Court, Placerville, CA 95667\"",
+        "website": "https://www.eldorado.courts.ca.gov\"",
+        "name": "Main Street Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-621-6426\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "El Dorado County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "El Dorado",
+    "locations": [
+      {
+        "address": "1354 Johnson Blvd., South Lake Tahoe, CA 96150\"",
+        "website": "https://www.eldorado.courts.ca.gov\"",
+        "name": "South Lake Tahoe Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-573-3075\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fresno County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Fresno",
+    "locations": [
+      {
+        "address": "1100 Van Ness Avenue, Fresno, CA 93724\"",
+        "website": "https://www.fresno.courts.ca.gov\"",
+        "name": "B.F. Sisk Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-457-2000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fresno County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Fresno",
+    "locations": [
+      {
+        "address": "1255 M Street, Fresno, CA 93721\"",
+        "website": "https://www.fresno.courts.ca.gov\"",
+        "name": "M Street Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-457-2000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fresno County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Fresno",
+    "locations": [
+      {
+        "address": "1100 West Shaw Avenue, Fresno, CA 93711\"",
+        "website": "https://www.fresno.courts.ca.gov\"",
+        "name": "West Shaw Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-457-2000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Glenn County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Glenn",
+    "locations": [
+      {
+        "address": "526 West Sycamore Street, Willows, CA 95988\"",
+        "website": "https://www.glenn.courts.ca.gov\"",
+        "name": "Willows Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-934-6446\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Humboldt County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Humboldt",
+    "locations": [
+      {
+        "address": "825 Fifth Street, Eureka, CA 95501\"",
+        "website": "https://www.humboldt.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-445-7256\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Imperial County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Imperial",
+    "locations": [
+      {
+        "address": "939 West Main Street, El Centro, CA 92243\"",
+        "website": "https://www.imperial.courts.ca.gov\"",
+        "name": "El Centro Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-482-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Imperial County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Imperial",
+    "locations": [
+      {
+        "address": "220 Main Street, Brawley, CA 92227\"",
+        "website": "https://www.imperial.courts.ca.gov\"",
+        "name": "Brawley Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-482-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Inyo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Inyo",
+    "locations": [
+      {
+        "address": "168 North Edwards Street, Independence, CA 93526\"",
+        "website": "https://www.inyo.courts.ca.gov\"",
+        "name": "Historic Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-878-0217\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kern County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Kern",
+    "locations": [
+      {
+        "address": "1415 Truxtun Avenue, Bakersfield, CA 93301\"",
+        "website": "https://www.kern.courts.ca.gov\"",
+        "name": "Metropolitan Division\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "661-868-5300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kern County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Kern",
+    "locations": [
+      {
+        "address": "1215 Truxtun Avenue, Bakersfield, CA 93301\"",
+        "website": "https://www.kern.courts.ca.gov\"",
+        "name": "Justice Building\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "661-868-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kern County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Kern",
+    "locations": [
+      {
+        "address": "2100 College Avenue, Bakersfield, CA 93305\"",
+        "website": "https://www.kern.courts.ca.gov\"",
+        "name": "Traffic Division\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "661-873-7100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kings County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Kings",
+    "locations": [
+      {
+        "address": "1640 Kings County Drive, Hanford, CA 93230\"",
+        "website": "https://www.kings.courts.ca.gov\"",
+        "name": "Kings County Superior Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-582-1010\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lake County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Lake",
+    "locations": [
+      {
+        "address": "255 N. Forbes Street, Lakeport, CA 95453\"",
+        "website": "https://www.lake.courts.ca.gov\"",
+        "name": "Lakeport Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-263-2374\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lake County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Lake",
+    "locations": [
+      {
+        "address": "7000-A South Center Drive, Clearlake, CA 95422\"",
+        "website": "https://www.lake.courts.ca.gov\"",
+        "name": "South Lake Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-994-6598\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lassen County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Lassen",
+    "locations": [
+      {
+        "address": "2610 Riverside Drive, Susanville, CA 96130\"",
+        "website": "https://www.lassen.courts.ca.gov\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-251-8205\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "111 North Hill Street, Los Angeles, CA 90012\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Stanley Mosk Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "1945 South Hill Street, Los Angeles, CA 90007\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Metropolitan Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "1150 North San Fernando Road, Los Angeles, CA 90065\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Mental Health Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "210 West Temple Street, Los Angeles, CA 90012\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Clara Shortridge Foltz Criminal Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "600 South Commonwealth Avenue, Los Angeles, CA 90005\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Central Civil West Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "201 Centre Plaza Drive, Monterey Park, CA 91754\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Edmund D. Edelman Children's Court\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "200 West Compton Boulevard, Compton, CA 90220\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Compton Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "600 East Broadway, Glendale, CA 91206\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Glendale Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "42011 4th Street West, Lancaster, CA 93534\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Michael D. Antonovich Antelope Valley Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "825 Maple Avenue, Torrance, CA 90503\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Southwest District - Torrance Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "6230 Sylmar Avenue, Van Nuys, CA 91401\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Van Nuys Courthouse East\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "14400 Erwin Street Mall, Van Nuys, CA 91401\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Van Nuys Courthouse West\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "300 East Walnut Street, Pasadena, CA 91101\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Pasadena Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "400 Civic Center Plaza, Pomona, CA 91766\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Pomona Courthouse South\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "12720 Norwalk Boulevard, Norwalk, CA 90650\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Norwalk Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "11701 South La Cienega Boulevard, Los Angeles, CA 90045\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "LAX Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "45058 10th Street West, Lancaster, CA 93534\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Lancaster Mental Health Court\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "11234 East Valley Boulevard, El Monte, CA 91731\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "El Monte Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "23747 West Valencia Boulevard, Santa Clarita, CA 91355\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Santa Clarita Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "9355 Burton Way, Beverly Hills, CA 90210\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Beverly Hills Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "1040 West Avenue J, Lancaster, CA 93534\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Lancaster Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "150 West Commonwealth Avenue, Alhambra, CA 91801\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Alhambra Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "1633 Purdue Avenue, Los Angeles, CA 90025\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "West Los Angeles Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "7281 East Quill Drive, Downey, CA 90242\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Los Padrinos Juvenile Court\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "16350 Filbert Street, Sylmar, CA 91342\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Sylmar Juvenile Court\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Los Angeles County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Los Angeles",
+    "locations": [
+      {
+        "address": "1601 Eastlake Avenue, Los Angeles, CA 90033\"",
+        "website": "https://www.lacourt.org\"",
+        "name": "Eastlake Juvenile Court\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Madera County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Madera",
+    "locations": [
+      {
+        "address": "200 South G Street, Madera, CA 93637\"",
+        "website": "https://www.madera.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-416-5599\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Madera County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Madera",
+    "locations": [
+      {
+        "address": "40601 Road 274, Bass Lake, CA 93604\"",
+        "website": "https://www.madera.courts.ca.gov\"",
+        "name": "Sierra Division\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-642-2210\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Marin County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Marin",
+    "locations": [
+      {
+        "address": "3501 Civic Center Drive, San Rafael, CA 94903\"",
+        "website": "https://www.marincourt.org\"",
+        "name": "Civic Center Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-444-7000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mariposa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Mariposa",
+    "locations": [
+      {
+        "address": "5088 Bullion Street, Mariposa, CA 95338\"",
+        "website": "https://www.mariposa.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-966-2005\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mendocino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Mendocino",
+    "locations": [
+      {
+        "address": "100 North State Street, Ukiah, CA 95482\"",
+        "website": "https://www.mendocino.courts.ca.gov\"",
+        "name": "Ukiah Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-468-2000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mendocino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Mendocino",
+    "locations": [
+      {
+        "address": "700 South Franklin Street, Fort Bragg, CA 95437\"",
+        "website": "https://www.mendocino.courts.ca.gov\"",
+        "name": "Ten Mile Branch\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-964-3192\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Merced County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Merced",
+    "locations": [
+      {
+        "address": "627 West 21st Street, Merced, CA 95340\"",
+        "website": "https://www.merced.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-725-4100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Merced County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Merced",
+    "locations": [
+      {
+        "address": "1159 G Street, Los Banos, CA 93635\"",
+        "website": "https://www.merced.courts.ca.gov\"",
+        "name": "Los Banos Division\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-725-4124\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Modoc County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Modoc",
+    "locations": [
+      {
+        "address": "205 South East Street, Alturas, CA 96101\"",
+        "website": "https://www.modoc.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-233-6516\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mono County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Mono",
+    "locations": [
+      {
+        "address": "100 Thompson Way, Mammoth Lakes, CA 93546\"",
+        "website": "https://www.mono.courts.ca.gov\"",
+        "name": "Mammoth Lakes Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-924-5444\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mono County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Mono",
+    "locations": [
+      {
+        "address": "278 Main Street, Bridgeport, CA 93517\"",
+        "website": "https://www.mono.courts.ca.gov\"",
+        "name": "Bridgeport Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-932-5222\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Monterey County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Monterey",
+    "locations": [
+      {
+        "address": "1200 Aguajito Road, Monterey, CA 93940\"",
+        "website": "https://www.monterey.courts.ca.gov\"",
+        "name": "Monterey Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-647-5800\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Monterey County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Monterey",
+    "locations": [
+      {
+        "address": "240 Church Street, Salinas, CA 93901\"",
+        "website": "https://www.monterey.courts.ca.gov\"",
+        "name": "Salinas Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-775-5400\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Monterey County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Monterey",
+    "locations": [
+      {
+        "address": "599 El Camino Real, Greenfield, CA 93927\"",
+        "website": "https://www.monterey.courts.ca.gov\"",
+        "name": "King City Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-385-5200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Napa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Napa",
+    "locations": [
+      {
+        "address": "825 Brown Street, Napa, CA 94559\"",
+        "website": "https://www.napa.courts.ca.gov\"",
+        "name": "Criminal Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-299-1100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Napa County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Napa",
+    "locations": [
+      {
+        "address": "1111 Third Street, Napa, CA 94559\"",
+        "website": "https://www.napa.courts.ca.gov\"",
+        "name": "Historic Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-299-1100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Nevada County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Nevada",
+    "locations": [
+      {
+        "address": "201 Church Street, Nevada City, CA 95959\"",
+        "website": "https://www.nevada.courts.ca.gov\"",
+        "name": "Nevada City Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-362-4309\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Nevada County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Nevada",
+    "locations": [
+      {
+        "address": "10075 Levon Avenue, Truckee, CA 96161\"",
+        "website": "https://www.nevada.courts.ca.gov\"",
+        "name": "Truckee Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-582-7835\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "700 Civic Center Drive West, Santa Ana, CA 92701\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Central Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "4601 Jamboree Road, Newport Beach, CA 92660\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Harbor Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "1275 North Berkeley Avenue, Fullerton, CA 92832\"",
+        "website": "https://www.occourts.org\"",
+        "name": "North Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "341 The City Drive South, Orange, CA 92868\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Lamoreaux Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "700 Civic Center Drive West, Santa Ana, CA 92701\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "657-622-5400\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "700 Civic Center Drive West, Santa Ana, CA 92701\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Juvenile Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "657-622-5400\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "700 Civic Center Drive West, Santa Ana, CA 92701\"",
+        "website": "https://www.occourts.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "657-622-5400\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Placer County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Placer",
+    "locations": [
+      {
+        "address": "10820 Justice Center Drive, Roseville, CA 95678\"",
+        "website": "https://www.placer.courts.ca.gov\"",
+        "name": "Santucci Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "916-408-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Placer County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Placer",
+    "locations": [
+      {
+        "address": "2501 North Lake Boulevard, Tahoe City, CA 96145\"",
+        "website": "https://www.placer.courts.ca.gov\"",
+        "name": "Tahoe City Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-581-6300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Placer County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Placer",
+    "locations": [
+      {
+        "address": "11270 B Avenue, Auburn, CA 95603\"",
+        "website": "https://www.placer.courts.ca.gov\"",
+        "name": "Historic Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-886-5800\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Plumas County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Plumas",
+    "locations": [
+      {
+        "address": "520 Main Street, Room 104, Quincy, CA 95971\"",
+        "website": "https://www.plumas.courts.ca.gov\"",
+        "name": "Main Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-283-6232\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "4050 Main Street, Riverside, CA 92501\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Historic Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "951-777-3147\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "4100 Main Street, Riverside, CA 92501\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "951-777-3147\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "880 North State Street, Hemet, CA 92543\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Hemet Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "951-777-3147\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "46-200 Oasis Street, Indio, CA 92201\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Larson Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-863-8127\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "265 North Broadway, Blythe, CA 92225\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Blythe Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-921-7981\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Riverside County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Riverside",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.riverside.courts.ca.gov\"",
+        "name": "Southwest Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "951-777-3147\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sacramento County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sacramento",
+    "locations": [
+      {
+        "address": "720 9th Street, Sacramento, CA 95814\"",
+        "website": "https://www.saccourt.ca.gov\"",
+        "name": "Gordon D. Schaber Sacramento County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "916-874-5522\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sacramento County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sacramento",
+    "locations": [
+      {
+        "address": "8000 Bruceville Road, Elk Grove, CA 95758\"",
+        "website": "https://www.saccourt.ca.gov\"",
+        "name": "Carol Miller Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "916-683-3700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sacramento County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sacramento",
+    "locations": [
+      {
+        "address": "10800 Justice Center Drive, Roseville, CA 95678\"",
+        "website": "https://www.saccourt.ca.gov\"",
+        "name": "Santucci Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "916-408-6000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Benito County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Benito",
+    "locations": [
+      {
+        "address": "450 Fourth Street, Hollister, CA 95023\"",
+        "website": "https://www.sanbenito.courts.ca.gov\"",
+        "name": "San Benito County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-636-4050\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "351 North Arrowhead Avenue, San Bernardino, CA 92415\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "San Bernardino Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "8303 Haven Avenue, Rancho Cucamonga, CA 91730\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Rancho Cucamonga Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "17746 Arrow Boulevard, Fontana, CA 92335\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Fontana Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "28555 Highway 18, Apple Valley, CA 92307\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Apple Valley Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "15900 Civic Center Drive, Victorville, CA 92392\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Victorville Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Barstow Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Big Bear Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Chino Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Joshua Tree Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Bernardino County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Bernardino",
+    "locations": [
+      {
+        "address": "30755-D Auld Road, Murrieta, CA 92563\"",
+        "website": "https://www.sb-court.org\"",
+        "name": "Needles Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "909-708-8747\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "220 West Broadway, San Diego, CA 92101\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Central Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "325 South Melrose Drive, Vista, CA 92081\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Vista Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-201-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "451 West 4th Avenue, Escondido, CA 92025\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "North County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "760-201-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "500 Third Avenue, Chula Vista, CA 91910\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "South County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "2851 Meadow Lark Drive, San Diego, CA 92123\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Kearny Mesa Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "1555 Sixth Avenue, San Diego, CA 92101\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "2851 Meadow Lark Drive, San Diego, CA 92123\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Juvenile Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Diego County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Diego",
+    "locations": [
+      {
+        "address": "2851 Meadow Lark Drive, San Diego, CA 92123\"",
+        "website": "https://www.sdcourt.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "619-450-7200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Francisco County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Francisco",
+    "locations": [
+      {
+        "address": "400 McAllister Street, San Francisco, CA 94102\"",
+        "website": "https://www.sfsuperiorcourt.org\"",
+        "name": "Civic Center Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-551-4000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Francisco County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Francisco",
+    "locations": [
+      {
+        "address": "850 Bryant Street, San Francisco, CA 94103\"",
+        "website": "https://www.sfsuperiorcourt.org\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-551-4000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Francisco County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Francisco",
+    "locations": [
+      {
+        "address": "350 Rhode Island Street, San Francisco, CA 94103\"",
+        "website": "https://www.sfsuperiorcourt.org\"",
+        "name": "Family Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-551-4000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Francisco County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Francisco",
+    "locations": [
+      {
+        "address": "400 McAllister Street, San Francisco, CA 94102\"",
+        "website": "https://www.sfsuperiorcourt.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "415-551-4000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Clara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Clara",
+    "locations": [
+      {
+        "address": "191 North First Street, San Jose, CA 95113\"",
+        "website": "https://www.scscourt.org\"",
+        "name": "Downtown Superior Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "408-882-2700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Clara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Clara",
+    "locations": [
+      {
+        "address": "1095 Homestead Road, Santa Clara, CA 95050\"",
+        "website": "https://www.scscourt.org\"",
+        "name": "Santa Clara Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "408-882-2700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Clara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Clara",
+    "locations": [
+      {
+        "address": "201 North First Street, San Jose, CA 95113\"",
+        "website": "https://www.scscourt.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "408-882-2700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Clara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Clara",
+    "locations": [
+      {
+        "address": "191 North First Street, San Jose, CA 95113\"",
+        "website": "https://www.scscourt.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "408-882-2700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Joaquin County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Joaquin",
+    "locations": [
+      {
+        "address": "222 E. Weber Avenue, Stockton, CA 95202\"",
+        "website": "https://www.stocktoncourt.org\"",
+        "name": "Stockton Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-468-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Joaquin County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Joaquin",
+    "locations": [
+      {
+        "address": "400 E. Main Street, Manteca, CA 95336\"",
+        "website": "https://www.stocktoncourt.org\"",
+        "name": "Manteca Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-468-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Joaquin County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Joaquin",
+    "locations": [
+      {
+        "address": "222 E. Weber Avenue, Stockton, CA 95202\"",
+        "website": "https://www.stocktoncourt.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-468-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Joaquin County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Joaquin",
+    "locations": [
+      {
+        "address": "222 E. Weber Avenue, Stockton, CA 95202\"",
+        "website": "https://www.stocktoncourt.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-468-3000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Luis Obispo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Luis Obispo",
+    "locations": [
+      {
+        "address": "1050 Monterey Street, San Luis Obispo, CA 93408\"",
+        "website": "https://www.slo.courts.ca.gov\"",
+        "name": "San Luis Obispo Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-781-5670\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Luis Obispo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Luis Obispo",
+    "locations": [
+      {
+        "address": "1035 Palm Street, San Luis Obispo, CA 93408\"",
+        "website": "https://www.slo.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-781-5670\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Luis Obispo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Luis Obispo",
+    "locations": [
+      {
+        "address": "1050 Monterey Street, San Luis Obispo, CA 93408\"",
+        "website": "https://www.slo.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-781-5670\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Mateo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Mateo",
+    "locations": [
+      {
+        "address": "400 County Center, Redwood City, CA 94063\"",
+        "website": "https://www.sanmateocourt.org\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "650-261-5100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Mateo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Mateo",
+    "locations": [
+      {
+        "address": "1050 Mission Road, South San Francisco, CA 94080\"",
+        "website": "https://www.sanmateocourt.org\"",
+        "name": "South San Francisco Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "650-261-5100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Mateo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Mateo",
+    "locations": [
+      {
+        "address": "400 County Center, Redwood City, CA 94063\"",
+        "website": "https://www.sanmateocourt.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "650-261-5100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "San Mateo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "San Mateo",
+    "locations": [
+      {
+        "address": "400 County Center, Redwood City, CA 94063\"",
+        "website": "https://www.sanmateocourt.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "650-261-5100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Barbara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Barbara",
+    "locations": [
+      {
+        "address": "1100 Anacapa Street, Santa Barbara, CA 93101\"",
+        "website": "https://www.sbcourts.org\"",
+        "name": "Santa Barbara Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-882-4500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Barbara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Barbara",
+    "locations": [
+      {
+        "address": "312-C East Cook Street, Santa Maria, CA 93454\"",
+        "website": "https://www.sbcourts.org\"",
+        "name": "Santa Maria Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-882-4500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Barbara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Barbara",
+    "locations": [
+      {
+        "address": "1100 Anacapa Street, Santa Barbara, CA 93101\"",
+        "website": "https://www.sbcourts.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-882-4500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Barbara County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Barbara",
+    "locations": [
+      {
+        "address": "1100 Anacapa Street, Santa Barbara, CA 93101\"",
+        "website": "https://www.sbcourts.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-882-4500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Cruz County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Cruz",
+    "locations": [
+      {
+        "address": "701 Ocean Street, Santa Cruz, CA 95060\"",
+        "website": "https://www.santacruzcourt.org\"",
+        "name": "Santa Cruz Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-420-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Cruz County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Cruz",
+    "locations": [
+      {
+        "address": "5200 Soquel Avenue, Santa Cruz, CA 95062\"",
+        "website": "https://www.santacruzcourt.org\"",
+        "name": "Watsonville Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-420-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Cruz County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Cruz",
+    "locations": [
+      {
+        "address": "701 Ocean Street, Santa Cruz, CA 95060\"",
+        "website": "https://www.santacruzcourt.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-420-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Santa Cruz County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Santa Cruz",
+    "locations": [
+      {
+        "address": "701 Ocean Street, Santa Cruz, CA 95060\"",
+        "website": "https://www.santacruzcourt.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "831-420-2200\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shasta County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Shasta",
+    "locations": [
+      {
+        "address": "1500 Court Street, Redding, CA 96001\"",
+        "website": "https://www.shasta.courts.ca.gov\"",
+        "name": "Shasta County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-225-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shasta County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Shasta",
+    "locations": [
+      {
+        "address": "1500 Court Street, Redding, CA 96001\"",
+        "website": "https://www.shasta.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-225-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shasta County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Shasta",
+    "locations": [
+      {
+        "address": "1500 Court Street, Redding, CA 96001\"",
+        "website": "https://www.shasta.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-225-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Solano County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Solano",
+    "locations": [
+      {
+        "address": "600 Union Avenue, Fairfield, CA 94533\"",
+        "website": "https://www.solano.courts.ca.gov\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-207-7300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Solano County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Solano",
+    "locations": [
+      {
+        "address": "321 Tuolumne Street, Vallejo, CA 94590\"",
+        "website": "https://www.solano.courts.ca.gov\"",
+        "name": "Vallejo Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-207-7300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Solano County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Solano",
+    "locations": [
+      {
+        "address": "600 Union Avenue, Fairfield, CA 94533\"",
+        "website": "https://www.solano.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-207-7300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Solano County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Solano",
+    "locations": [
+      {
+        "address": "600 Union Avenue, Fairfield, CA 94533\"",
+        "website": "https://www.solano.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-207-7300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sonoma County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sonoma",
+    "locations": [
+      {
+        "address": "600 Administration Drive, Santa Rosa, CA 95403\"",
+        "website": "https://www.sonoma.courts.ca.gov\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-521-6500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sonoma County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sonoma",
+    "locations": [
+      {
+        "address": "600 Administration Drive, Santa Rosa, CA 95403\"",
+        "website": "https://www.sonoma.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-521-6500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sonoma County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sonoma",
+    "locations": [
+      {
+        "address": "600 Administration Drive, Santa Rosa, CA 95403\"",
+        "website": "https://www.sonoma.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "707-521-6500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stanislaus County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Stanislaus",
+    "locations": [
+      {
+        "address": "800 11th Street, Modesto, CA 95354\"",
+        "website": "https://www.stanct.org\"",
+        "name": "Downtown Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-530-3100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stanislaus County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Stanislaus",
+    "locations": [
+      {
+        "address": "800 11th Street, Modesto, CA 95354\"",
+        "website": "https://www.stanct.org\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-530-3100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stanislaus County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Stanislaus",
+    "locations": [
+      {
+        "address": "800 11th Street, Modesto, CA 95354\"",
+        "website": "https://www.stanct.org\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-530-3100\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sutter County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sutter",
+    "locations": [
+      {
+        "address": "1175 Civic Center Boulevard, Yuba City, CA 95993\"",
+        "website": "https://www.sutter.courts.ca.gov\"",
+        "name": "Sutter County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-822-3300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sutter County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sutter",
+    "locations": [
+      {
+        "address": "1175 Civic Center Boulevard, Yuba City, CA 95993\"",
+        "website": "https://www.sutter.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-822-3300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sutter County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Sutter",
+    "locations": [
+      {
+        "address": "1175 Civic Center Boulevard, Yuba City, CA 95993\"",
+        "website": "https://www.sutter.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-822-3300\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tehama County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tehama",
+    "locations": [
+      {
+        "address": "1740 Walnut Street, Red Bluff, CA 96080\"",
+        "website": "https://www.tehama.courts.ca.gov\"",
+        "name": "Tehama County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-527-3351\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tehama County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tehama",
+    "locations": [
+      {
+        "address": "1740 Walnut Street, Red Bluff, CA 96080\"",
+        "website": "https://www.tehama.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-527-3351\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tehama County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tehama",
+    "locations": [
+      {
+        "address": "1740 Walnut Street, Red Bluff, CA 96080\"",
+        "website": "https://www.tehama.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-527-3351\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Trinity County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Trinity",
+    "locations": [
+      {
+        "address": "11 Court Street, Weaverville, CA 96093\"",
+        "website": "https://www.trinity.courts.ca.gov\"",
+        "name": "Trinity County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-623-3151\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Trinity County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Trinity",
+    "locations": [
+      {
+        "address": "11 Court Street, Weaverville, CA 96093\"",
+        "website": "https://www.trinity.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-623-3151\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Trinity County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Trinity",
+    "locations": [
+      {
+        "address": "11 Court Street, Weaverville, CA 96093\"",
+        "website": "https://www.trinity.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-623-3151\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tulare County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tulare",
+    "locations": [
+      {
+        "address": "221 South Mooney Boulevard, Visalia, CA 93291\"",
+        "website": "https://www.tularesuperiorcourt.ca.gov\"",
+        "name": "Visalia Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-730-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tulare County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tulare",
+    "locations": [
+      {
+        "address": "300 East Olive Avenue, Porterville, CA 93257\"",
+        "website": "https://www.tularesuperiorcourt.ca.gov\"",
+        "name": "Porterville Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-730-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tulare County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tulare",
+    "locations": [
+      {
+        "address": "221 South Mooney Boulevard, Visalia, CA 93291\"",
+        "website": "https://www.tularesuperiorcourt.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-730-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tulare County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tulare",
+    "locations": [
+      {
+        "address": "221 South Mooney Boulevard, Visalia, CA 93291\"",
+        "website": "https://www.tularesuperiorcourt.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "559-730-5000\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tuolumne County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tuolumne",
+    "locations": [
+      {
+        "address": "41 West Yaney Street, Sonora, CA 95370\"",
+        "website": "https://www.tuolumne.courts.ca.gov\"",
+        "name": "Tuolumne County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-533-5500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tuolumne County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tuolumne",
+    "locations": [
+      {
+        "address": "41 West Yaney Street, Sonora, CA 95370\"",
+        "website": "https://www.tuolumne.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-533-5500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tuolumne County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Tuolumne",
+    "locations": [
+      {
+        "address": "41 West Yaney Street, Sonora, CA 95370\"",
+        "website": "https://www.tuolumne.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "209-533-5500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ventura County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Ventura",
+    "locations": [
+      {
+        "address": "800 South Victoria Avenue, Ventura, CA 93009\"",
+        "website": "https://www.ventura.courts.ca.gov\"",
+        "name": "Hall of Justice\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-289-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ventura County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Ventura",
+    "locations": [
+      {
+        "address": "800 South Victoria Avenue, Ventura, CA 93009\"",
+        "website": "https://www.ventura.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-289-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ventura County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Ventura",
+    "locations": [
+      {
+        "address": "800 South Victoria Avenue, Ventura, CA 93009\"",
+        "website": "https://www.ventura.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-289-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ventura County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Ventura",
+    "locations": [
+      {
+        "address": "4353 East Vineyard Avenue, Oxnard, CA 93036\"",
+        "website": "https://www.ventura.courts.ca.gov\"",
+        "name": "Oxnard Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-289-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ventura County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Ventura",
+    "locations": [
+      {
+        "address": "3855-F Alamo Street, Simi Valley, CA 93063\"",
+        "website": "https://www.ventura.courts.ca.gov\"",
+        "name": "Simi Valley Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "805-289-8500\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yolo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yolo",
+    "locations": [
+      {
+        "address": "725 Court Street, Woodland, CA 95695\"",
+        "website": "https://www.yolo.courts.ca.gov\"",
+        "name": "Yolo County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-406-6700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yolo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yolo",
+    "locations": [
+      {
+        "address": "725 Court Street, Woodland, CA 95695\"",
+        "website": "https://www.yolo.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-406-6700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yolo County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yolo",
+    "locations": [
+      {
+        "address": "725 Court Street, Woodland, CA 95695\"",
+        "website": "https://www.yolo.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-406-6700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yuba County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yuba",
+    "locations": [
+      {
+        "address": "215 5th Street, Marysville, CA 95901\"",
+        "website": "https://www.yuba.courts.ca.gov\"",
+        "name": "Yuba County Courthouse\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-749-7700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yuba County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yuba",
+    "locations": [
+      {
+        "address": "215 5th Street, Marysville, CA 95901\"",
+        "website": "https://www.yuba.courts.ca.gov\"",
+        "name": "Family Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-749-7700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yuba County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Yuba",
+    "locations": [
+      {
+        "address": "215 5th Street, Marysville, CA 95901\"",
+        "website": "https://www.yuba.courts.ca.gov\"",
+        "name": "Probate Court\"",
+        "caseTypes": [],
+        "departments": [
+          {
+            "phone": "530-749-7700\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orange County Superior Court\"",
+    "jurisdiction": "superior court",
+    "level": "superior",
+    "state": "California",
+    "county": "Orange",
+    "locations": [
+      {
+        "address": "8141 13th Street, Westminster, CA 92683\"",
+        "website": "https://www.occourts.org\"",
+        "name": "West Justice Center\"",
+        "caseTypes": [],
+        "departments": [
+          {}
+        ]
+      }
+    ]
+  }
+]

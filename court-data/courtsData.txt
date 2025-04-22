@@ -1,0 +1,3602 @@
+    const courtsData = [
+              // Supreme Court locations
+      {
+                courtName: "Supreme Court of California - San Francisco Headquarters",
+                jurisdiction: "Supreme Court",
+                courtLevel: "Supreme",
+                courtState: "California",
+                address: "350 McAllister Street, San Francisco, CA 94102-4797",
+                phone: "415-865-7000",
+                website: "https://supreme.courts.ca.gov",
+                branchName: "Earl Warren Building",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Supreme Court of California - Los Angeles",
+                jurisdiction: "Supreme Court",
+                courtLevel: "Supreme",
+                courtState: "California",
+                address: "Ronald Reagan State Office Building, 300 South Spring Street, 3rd Floor, Los Angeles, CA 90013",
+                phone: "415-865-7000",
+                website: "https://supreme.courts.ca.gov",
+                branchName: "Los Angeles Branch",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Supreme Court of California - Sacramento",
+                jurisdiction: "Supreme Court",
+                courtLevel: "Supreme",
+                courtState: "California",
+                address: "Stanley Mosk Library and Courts Building, 914 Capitol Mall, Sacramento, CA 95814",
+                phone: "415-865-7000",
+                website: "https://supreme.courts.ca.gov",
+                branchName: "Sacramento Branch",
+                departments: [],
+                caseTypes: []
+              },
+              // Appellate Court locations
+              {
+                courtName: "First District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "350 McAllister Street, San Francisco, CA 94102-4797",
+                phone: "415-865-7000",
+                website: "https://courts.ca.gov/1dca.htm",
+                branchName: "First District",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Second District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "300 South Spring Street, 2nd Floor, Los Angeles, CA 90013",
+                phone: "213-830-7000",
+                website: "https://courts.ca.gov/2dca.htm",
+                branchName: "Second District",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Third District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "914 Capitol Mall, Sacramento, CA 95814",
+                phone: "916-654-0200",
+                website: "https://courts.ca.gov/3dca.htm",
+                branchName: "Third District",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Fourth District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "750 B Street, Suite 300, San Diego, CA 92101",
+                phone: "619-645-3000",
+                website: "https://courts.ca.gov/4dca.htm",
+                branchName: "Fourth District",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Fifth District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "2424 Ventura Street, Fresno, CA 93721",
+                phone: "559-445-5490",
+                website: "https://courts.ca.gov/5dca.htm",
+                branchName: "Fifth District",
+                departments: [],
+                caseTypes: []
+              },
+      {
+                courtName: "Sixth District Court of Appeal",
+                jurisdiction: "Appellate Court",
+                courtLevel: "Appellate",
+                courtState: "California",
+                address: "333 West Santa Clara Street, Suite 1060, San Jose, CA 95113",
+                phone: "408-882-2700",
+                website: "https://courts.ca.gov/6dca.htm",
+                branchName: "Sixth District",
+                departments: [],
+                caseTypes: []
+              },
+              // Superior Court locations
+              {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1225 Fallon Street, Oakland, CA 94612",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Rene C. Davidson Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "24405 Amador Street, Hayward, CA 94544",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Hayward Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1225 Fallon Street, Oakland, CA 94612",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1225 Fallon Street, Oakland, CA 94612",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2233 Shore Line Drive, Alameda, CA 94501",
+                phone: "510-891-6005",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "George E. McDonald Hall of Justice",
+                departments: [
+                  { number: "301" },
+                  { number: "302" },
+                  { number: "303" }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2120 Martin Luther King, Jr. Way, Berkeley, CA 94704",
+                phone: "510-647-4439",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Berkeley Courthouse",
+                departments: [
+                  { number: "201" },
+                  { number: "202" }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "5151 Gleason Drive, Dublin, CA 94568",
+                phone: "925-227-6700",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "East County Hall of Justice",
+                departments: [
+                  { number: "701" },
+                  { number: "702" },
+                  { number: "703" },
+                  { number: "704" },
+                  { number: "705" },
+                  { number: "706" },
+                  { number: "707" },
+                  { number: "708" },
+                  { number: "709" },
+                  { number: "710" },
+                  { number: "711" },
+                  { number: "712" },
+                  { number: "713" }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "39439 Paseo Padre Parkway, Fremont, CA 94538",
+                phone: "510-818-7500",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Fremont Hall of Justice",
+                departments: [
+                  { number: "601" },
+                  { number: "602" },
+                  { number: "603" },
+                  { number: "604" },
+                  { number: "605" },
+                  { number: "606" },
+                  { number: "607" },
+                  { number: "608" }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1000 Fairmont Drive, San Leandro, CA 94578",
+                phone: "510-577-3000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "San Leandro Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1221 Oak Street, Oakland, CA 94612",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Administration Building",
+                departments: [
+                  { number: "14" },
+                  { number: "15" },
+                  { number: "16" },
+                  { number: "17" },
+                  { number: "18" },
+                  { number: "19" },
+                  { number: "20" },
+                  { number: "21" },
+                  { number: "22" },
+                  { number: "23" },
+                  { number: "24" },
+                  { number: "25" },
+                  { number: "26" },
+                  { number: "27" },
+                  { number: "28" },
+                  { number: "29" },
+                  { number: "30" },
+                  { number: "31" },
+                  { number: "32" },
+                  { number: "33" },
+                  { number: "34" },
+                  { number: "35" },
+                  { number: "36" },
+                  { number: "37" },
+                  { number: "38" },
+                  { number: "39" },
+                  { number: "40" },
+                  { number: "41" },
+                  { number: "42" },
+                  { number: "43" },
+                  { number: "44" },
+                  { number: "45" },
+                  { number: "46" },
+                  { number: "47" },
+                  { number: "48" },
+                  { number: "49" },
+                  { number: "50" },
+                  { number: "51" },
+                  { number: "52" },
+                  { number: "53" },
+                  { number: "54" },
+                  { number: "55" },
+                  { number: "56" },
+                  { number: "57" },
+                  { number: "58" },
+                  { number: "59" },
+                  { number: "60" },
+                  { number: "61" },
+                  { number: "62" },
+                  { number: "63" },
+                  { number: "64" },
+                  { number: "65" },
+                  { number: "66" },
+                  { number: "67" },
+                  { number: "68" },
+                  { number: "69" },
+                  { number: "70" },
+                  { number: "71" },
+                  { number: "72" },
+                  { number: "73" },
+                  { number: "74" },
+                  { number: "75" },
+                  { number: "76" },
+                  { number: "77" },
+                  { number: "78" },
+                  { number: "79" },
+                  { number: "80" },
+                  { number: "81" },
+                  { number: "82" },
+                  { number: "83" },
+                  { number: "84" },
+                  { number: "85" },
+                  { number: "86" },
+                  { number: "87" },
+                  { number: "88" },
+                  { number: "89" },
+                  { number: "90" },
+                  { number: "91" },
+                  { number: "92" },
+                  { number: "93" },
+                  { number: "94" },
+                  { number: "95" },
+                  { number: "96" },
+                  { number: "97" },
+                  { number: "98" },
+                  { number: "99" },
+                  { number: "100" },
+                  { number: "101" },
+                  { number: "102" },
+                  { number: "103" },
+                  { number: "104" },
+                  { number: "105" },
+                  { number: "106" },
+                  { number: "107" },
+                  { number: "108" },
+                  { number: "109" },
+                  { number: "110" },
+                  { number: "111" },
+                  { number: "112" },
+                  { number: "113" },
+                  { number: "114" },
+                  { number: "115" },
+                  { number: "116" },
+                  { number: "117" },
+                  { number: "118" },
+                  { number: "119" },
+                  { number: "120" },
+                  { number: "121" },
+                  { number: "122" },
+                  { number: "123" },
+                  { number: "124" }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Alameda County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "661 Washington Street, Oakland, CA 94607",
+                phone: "510-891-6000",
+                website: "https://www.alameda.courts.ca.gov",
+                branchName: "Wiley W. Manuel Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Alpine County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "14777 State Highway 89, Markleeville, CA 96120",
+                phone: "530-694-2141",
+                website: "https://www.alpine.courts.ca.gov",
+                branchName: "Alpine County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Appeals",
+                  "Civil",
+                  "Small Claims",
+                  "Unlawful Detainer",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Amador County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "500 Argonaut Lane, Jackson, CA 95642",
+                phone: "209-257-2600",
+                website: "https://www.amador.courts.ca.gov",
+                branchName: "Amador County Courthouse",
+                departments: [],
+                caseTypes: []
+              },
+              {
+                courtName: "Butte County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1 Court Street, Oroville, CA 95965",
+                phone: "530-532-7000",
+                website: "https://www.butte.courts.ca.gov",
+                branchName: "Butte County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Unlawful Detainer",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Calaveras County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 Government Center Drive, San Andreas, CA 95249",
+                phone: "209-754-6500",
+                website: "https://www.calaveras.courts.ca.gov",
+                branchName: "Calaveras County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Unlawful Detainer",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Colusa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "532 Oak Street, Colusa, CA 95932",
+                phone: "530-458-0500",
+                website: "https://www.colusa.courts.ca.gov",
+                branchName: "Colusa County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Unlawful Detainer",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Contra Costa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "725 Court Street, Martinez, CA 94553",
+                phone: "925-608-1000",
+                website: "https://www.cc-courts.org",
+                branchName: "Martinez Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Unlawful Detainer",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Contra Costa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1000 Ward Street, Martinez, CA 94553",
+                phone: "925-608-1000",
+                website: "https://www.cc-courts.org",
+                branchName: "Juvenile Hall",
+                departments: [],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Contra Costa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1000 Ward Street, Martinez, CA 94553",
+                phone: "925-608-1000",
+                website: "https://www.cc-courts.org",
+                branchName: "Family Law Center",
+                departments: [],
+                caseTypes: [
+                  "Family Law"
+                ]
+              },
+      {
+                courtName: "Del Norte County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "450 H Street, Crescent City, CA 95531",
+                phone: "707-464-8115",
+                website: "https://www.delnorte.courts.ca.gov",
+                branchName: "Del Norte County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "El Dorado County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2850 Fairlane Court, Placerville, CA 95667",
+                phone: "530-621-6426",
+                website: "https://www.eldorado.courts.ca.gov",
+                branchName: "Main Street Branch",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "El Dorado County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1354 Johnson Blvd., South Lake Tahoe, CA 96150",
+                phone: "530-573-3075",
+                website: "https://www.eldorado.courts.ca.gov",
+                branchName: "South Lake Tahoe Branch",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Fresno County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1100 Van Ness Avenue, Fresno, CA 93724",
+                phone: "559-457-2000",
+                website: "https://www.fresno.courts.ca.gov",
+                branchName: "B.F. Sisk Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Family Law",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Fresno County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1255 M Street, Fresno, CA 93721",
+                phone: "559-457-2000",
+                website: "https://www.fresno.courts.ca.gov",
+                branchName: "M Street Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Fresno County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1100 West Shaw Avenue, Fresno, CA 93711",
+                phone: "559-457-2000",
+                website: "https://www.fresno.courts.ca.gov",
+                branchName: "West Shaw Branch",
+                departments: [],
+                caseTypes: [
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Glenn County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "526 West Sycamore Street, Willows, CA 95988",
+                phone: "530-934-6446",
+                website: "https://www.glenn.courts.ca.gov",
+                branchName: "Willows Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Humboldt County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "825 Fifth Street, Eureka, CA 95501",
+                phone: "707-445-7256",
+                website: "https://www.humboldt.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Imperial County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "939 West Main Street, El Centro, CA 92243",
+                phone: "760-482-2200",
+                website: "https://www.imperial.courts.ca.gov",
+                branchName: "El Centro Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Imperial County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "220 Main Street, Brawley, CA 92227",
+                phone: "760-482-2200",
+                website: "https://www.imperial.courts.ca.gov",
+                branchName: "Brawley Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Inyo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "168 North Edwards Street, Independence, CA 93526",
+                phone: "760-878-0217",
+                website: "https://www.inyo.courts.ca.gov",
+                branchName: "Historic Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Kern County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1415 Truxtun Avenue, Bakersfield, CA 93301",
+                phone: "661-868-5300",
+                website: "https://www.kern.courts.ca.gov",
+                branchName: "Metropolitan Division",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Family Law",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Kern County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1215 Truxtun Avenue, Bakersfield, CA 93301",
+                phone: "661-868-7200",
+                website: "https://www.kern.courts.ca.gov",
+                branchName: "Justice Building",
+                departments: [],
+                caseTypes: [
+                  "Criminal"
+                ]
+              },
+      {
+                courtName: "Kern County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2100 College Avenue, Bakersfield, CA 93305",
+                phone: "661-873-7100",
+                website: "https://www.kern.courts.ca.gov",
+                branchName: "Traffic Division",
+                departments: [],
+                caseTypes: [
+                  "Traffic",
+                  "Small Claims"
+                ]
+              },
+      {
+                courtName: "Kings County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1640 Kings County Drive, Hanford, CA 93230",
+                phone: "559-582-1010",
+                website: "https://www.kings.courts.ca.gov",
+                branchName: "Kings County Superior Court",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Lake County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "255 N. Forbes Street, Lakeport, CA 95453",
+                phone: "707-263-2374",
+                website: "https://www.lake.courts.ca.gov",
+                branchName: "Lakeport Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Lake County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "7000-A South Center Drive, Clearlake, CA 95422",
+                phone: "707-994-6598",
+                website: "https://www.lake.courts.ca.gov",
+                branchName: "South Lake Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Lassen County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2610 Riverside Drive, Susanville, CA 96130",
+                phone: "530-251-8205",
+                website: "https://www.lassen.courts.ca.gov",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate",
+                  "Criminal",
+                  "Juvenile",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "111 North Hill Street, Los Angeles, CA 90012",
+                phone: "213-830-0800",
+                website: "https://www.lacourt.org",
+                branchName: "Stanley Mosk Courthouse",
+                departments: [
+                  { number: "022", phone: "(213) 633-0622", judges: ["Weinberger, William E."] },
+                  { number: "023", phone: "(213) 633-6399", judges: ["White, Ryan D."] },
+                  { number: "037", phone: "(213) 628-7737", judges: ["Wilson, Victoria B."] },
+                  { number: "045", phone: "(213) 628-7745", judges: ["Windham, Mark E."] },
+                  { number: "053", phone: "(213) 628-7753", judges: ["Weinstein, Michael D."] },
+                  { number: "083", phone: "(213) 830-0783", judges: ["Watkins, David I."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Family Law",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1945 South Hill Street, Los Angeles, CA 90007",
+                phone: "213-742-1884",
+                website: "https://www.lacourt.org",
+                branchName: "Metropolitan Courthouse",
+                departments: [
+                  { number: "60", phone: "(213) 742-1885", judges: ["Cho, Annabelle G."] },
+                  { number: "61", phone: "(213) 742-1886", judges: ["Hanasono, Ray G."] },
+                  { number: "62", phone: "(213) 742-1887", judges: ["Luna, Melissa N."] },
+                  { number: "63", phone: "(213) 742-1888", judges: ["Riff, Michael R."] },
+                  { number: "64", phone: "(213) 742-1889", judges: ["Solorzano, Ronald H."] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1150 North San Fernando Road, Los Angeles, CA 90065",
+                phone: "323-441-2100",
+                website: "https://www.lacourt.org",
+                branchName: "Mental Health Courthouse",
+                departments: [
+                  { number: "95", phone: "(323) 441-2101", judges: ["Aceves, Sergio C."] },
+                  { number: "96", phone: "(323) 441-2102", judges: ["Gallagher, James"] },
+                  { number: "97", phone: "(323) 441-2103", judges: ["Marquez, Jose I."] }
+                ],
+                caseTypes: [
+                  "Mental Health"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "210 West Temple Street, Los Angeles, CA 90012",
+                phone: "213-628-7700",
+                website: "https://www.lacourt.org",
+                branchName: "Clara Shortridge Foltz Criminal Justice Center",
+                departments: [
+                  { number: "30", phone: "(213) 628-7701", judges: ["Coen, Robert J."] },
+                  { number: "31", phone: "(213) 628-7702", judges: ["Herriford, Curtis B."] },
+                  { number: "32", phone: "(213) 628-7703", judges: ["Lomeli, Larry P."] },
+                  { number: "33", phone: "(213) 628-7704", judges: ["Marcus, Stephen A."] },
+                  { number: "34", phone: "(213) 628-7705", judges: ["Ohta, George G."] },
+                  { number: "35", phone: "(213) 628-7706", judges: ["Perry, Sam"] }
+                ],
+                caseTypes: [
+                  "Criminal"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 South Commonwealth Avenue, Los Angeles, CA 90005",
+                phone: "213-351-7500",
+                website: "https://www.lacourt.org",
+                branchName: "Central Civil West Courthouse",
+                departments: [
+                  { number: "310", phone: "(213) 351-7501", judges: ["Beckloff, Mitchell L."] },
+                  { number: "311", phone: "(213) 351-7502", judges: ["Chalfant, James C."] },
+                  { number: "312", phone: "(213) 351-7503", judges: ["Fahey, Stephanie M."] },
+                  { number: "313", phone: "(213) 351-7504", judges: ["Linfield, Elizabeth Allen"] },
+                  { number: "314", phone: "(213) 351-7505", judges: ["Mohr, William F."] }
+                ],
+                caseTypes: [
+                  "Civil"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "201 Centre Plaza Drive, Monterey Park, CA 91754",
+                phone: "323-307-8000",
+                website: "https://www.lacourt.org",
+                branchName: "Edmund D. Edelman Children's Court",
+                departments: [
+                  { number: "400", phone: "(323) 307-8030", judges: ["Zeidler, Daniel Zeke"] }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "200 West Compton Boulevard, Compton, CA 90220",
+                phone: "310-761-4300",
+                website: "https://www.lacourt.org",
+                branchName: "Compton Courthouse",
+                departments: [
+                  { number: "261", phone: "(310) 761-4261", judges: ["Widdifield, Melissa N."] },
+                  { number: "E", phone: "(310) 761-4333", judges: ["Wilson, Michael B."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 East Broadway, Glendale, CA 91206",
+                phone: "818-500-3500",
+                website: "https://www.lacourt.org",
+                branchName: "Glendale Courthouse",
+                departments: [
+                  { number: "1", phone: "(818) 500-3501", judges: ["Amerian, Armenui Amy"] },
+                  { number: "2", phone: "(818) 500-3502", judges: ["Cho, Curtis A."] },
+                  { number: "3", phone: "(818) 500-3503", judges: ["Lowe, John C."] },
+                  { number: "4", phone: "(818) 500-3504", judges: ["Santini, Federico"] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "42011 4th Street West, Lancaster, CA 93534",
+                phone: "661-483-5700",
+                website: "https://www.lacourt.org",
+                branchName: "Michael D. Antonovich Antelope Valley Courthouse",
+                departments: [
+                  { number: "A1", phone: "(661) 483-5701", judges: ["Chung, Denise M."] },
+                  { number: "A2", phone: "(661) 483-5702", judges: ["Davenport, Shannon K."] },
+                  { number: "A3", phone: "(661) 483-5703", judges: ["Fraser, Kathleen"] },
+                  { number: "A4", phone: "(661) 483-5704", judges: ["Knill, Richard"] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "825 Maple Avenue, Torrance, CA 90503",
+                phone: "310-787-3700",
+                website: "https://www.lacourt.org",
+                branchName: "Southwest District - Torrance Courthouse",
+                departments: [
+                  { number: "B", phone: "(310) 787-3701", judges: ["Brandolino, Mark S."] },
+                  { number: "C", phone: "(310) 787-3702", judges: ["Chun, George F."] },
+                  { number: "D", phone: "(310) 787-3703", judges: ["Ellison, Gary"] },
+                  { number: "E", phone: "(310) 787-3704", judges: ["Goul, Alan B."] },
+                  { number: "F", phone: "(310) 787-3705", judges: ["Higa, Gary Y."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "6230 Sylmar Avenue, Van Nuys, CA 91401",
+                phone: "818-989-6900",
+                website: "https://www.lacourt.org",
+                branchName: "Van Nuys Courthouse East",
+                departments: [
+                  { number: "112", phone: "(818) 989-6701", judges: ["Harwin, Thomas"] },
+                  { number: "113", phone: "(818) 989-6702", judges: ["Kevane, Michael"] },
+                  { number: "114", phone: "(818) 989-6703", judges: ["Levanas, Michael I."] },
+                  { number: "115", phone: "(818) 989-6704", judges: ["Lord, Stephen M."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Family Law"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "14400 Erwin Street Mall, Van Nuys, CA 91401",
+                phone: "818-989-6500",
+                website: "https://www.lacourt.org",
+                branchName: "Van Nuys Courthouse West",
+                departments: [
+                  { number: "100", phone: "(818) 989-6501", judges: ["Mulcahy, Michael"] },
+                  { number: "101", phone: "(818) 989-6502", judges: ["O'Gara, Michael"] },
+                  { number: "102", phone: "(818) 989-6503", judges: ["Richman, Alan"] },
+                  { number: "103", phone: "(818) 989-6504", judges: ["Speer, Gregory A."] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "300 East Walnut Street, Pasadena, CA 91101",
+                phone: "626-396-3300",
+                website: "https://www.lacourt.org",
+                branchName: "Pasadena Courthouse",
+                departments: [
+                  { number: "D", phone: "(626) 396-3301", judges: ["Lew, Elaine"] },
+                  { number: "J", phone: "(626) 396-3302", judges: ["Menetrez, Gloria White"] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 Civic Center Plaza, Pomona, CA 91766",
+                phone: "909-802-1100",
+                website: "https://www.lacourt.org",
+                branchName: "Pomona Courthouse South",
+                departments: [
+                  { number: "O", phone: "(909) 802-1101", judges: ["Oki, Dan Thomas"] },
+                  { number: "P", phone: "(909) 802-1102", judges: ["Ponce, Robert"] },
+                  { number: "Q", phone: "(909) 802-1103", judges: ["Powell, Thomas C."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "12720 Norwalk Boulevard, Norwalk, CA 90650",
+                phone: "562-345-0800",
+                website: "https://www.lacourt.org",
+                branchName: "Norwalk Courthouse",
+                departments: [
+                  { number: "SE-A", phone: "(562) 345-0801", judges: ["Shintaku, Margaret"] },
+                  { number: "SE-B", phone: "(562) 345-0802", judges: ["Stewart, Brian F."] },
+                  { number: "SE-C", phone: "(562) 345-0803", judges: ["Treu, Rolf M."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11701 South La Cienega Boulevard, Los Angeles, CA 90045",
+                phone: "310-725-3000",
+                website: "https://www.lacourt.org",
+                branchName: "LAX Courthouse",
+                departments: [
+                  { number: "M1", phone: "(310) 725-3001", judges: ["Jessner, Kerry"] },
+                  { number: "M2", phone: "(310) 725-3002", judges: ["Johnson, Deborah L."] },
+                  { number: "M3", phone: "(310) 725-3003", judges: ["Kim, Dorothy C."] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "45058 10th Street West, Lancaster, CA 93534",
+                phone: "661-483-5924",
+                website: "https://www.lacourt.org",
+                branchName: "Lancaster Mental Health Court",
+                departments: [
+                  { number: "MH1", phone: "(661) 483-5925", judges: ["Naranjo, Rogelio"] }
+                ],
+                caseTypes: [
+                  "Mental Health"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11234 East Valley Boulevard, El Monte, CA 91731",
+                phone: "626-401-2200",
+                website: "https://www.lacourt.org",
+                branchName: "El Monte Courthouse",
+                departments: [
+                  { number: "4", phone: "(626) 401-2201", judges: ["Dominguez, Enrique"] },
+                  { number: "5", phone: "(626) 401-2202", judges: ["Villalobos, Rogelio"] },
+                  { number: "6", phone: "(626) 401-2203", judges: ["Yep, Peter"] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "23747 West Valencia Boulevard, Santa Clarita, CA 91355",
+                phone: "661-253-5600",
+                website: "https://www.lacourt.org",
+                branchName: "Santa Clarita Courthouse",
+                departments: [
+                  { number: "1", phone: "(661) 253-5601", judges: ["Barretto, David"] },
+                  { number: "2", phone: "(661) 253-5602", judges: ["Hintz, David W."] },
+                  { number: "3", phone: "(661) 253-5603", judges: ["Weiss, Lloyd M."] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "9355 Burton Way, Beverly Hills, CA 90210",
+                phone: "310-288-1300",
+                website: "https://www.lacourt.org",
+                branchName: "Beverly Hills Courthouse",
+                departments: [
+                  { number: "1", phone: "(310) 288-1301", judges: ["Cho, Deborah L."] },
+                  { number: "2", phone: "(310) 288-1302", judges: ["Harmatz, Elia"] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1040 West Avenue J, Lancaster, CA 93534",
+                phone: "661-949-6503",
+                website: "https://www.lacourt.org",
+                branchName: "Lancaster Courthouse",
+                departments: [
+                  { number: "A21", phone: "(661) 949-6521", judges: ["Chaffee, Shannon"] },
+                  { number: "A22", phone: "(661) 949-6522", judges: ["Rogers, Christopher G."] },
+                  { number: "A23", phone: "(661) 949-6523", judges: ["Spitzer, Harvey"] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "150 West Commonwealth Avenue, Alhambra, CA 91801",
+                phone: "626-308-5300",
+                website: "https://www.lacourt.org",
+                branchName: "Alhambra Courthouse",
+                departments: [
+                  { number: "1", phone: "(626) 308-5301", judges: ["Meyers, Robert"] },
+                  { number: "2", phone: "(626) 308-5302", judges: ["Villareal, Cathryn"] },
+                  { number: "3", phone: "(626) 308-5303", judges: ["Zuzga, Victor"] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1633 Purdue Avenue, Los Angeles, CA 90025",
+                phone: "310-312-3700",
+                website: "https://www.lacourt.org",
+                branchName: "West Los Angeles Courthouse",
+                departments: [
+                  { number: "144", phone: "(310) 312-3701", judges: ["Dybwad, Patricia"] },
+                  { number: "145", phone: "(310) 312-3702", judges: ["Geaney, Yvette"] },
+                  { number: "146", phone: "(310) 312-3703", judges: ["Hom, Amy N."] }
+                ],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "7281 East Quill Drive, Downey, CA 90242",
+                phone: "562-803-7000",
+                website: "https://www.lacourt.org",
+                branchName: "Los Padrinos Juvenile Court",
+                departments: [
+                  { number: "201", phone: "(562) 803-7001", judges: ["Boul, Catherine"] },
+                  { number: "202", phone: "(562) 803-7002", judges: ["Trendacosta, Robert J."] }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "16350 Filbert Street, Sylmar, CA 91342",
+                phone: "818-364-2100",
+                website: "https://www.lacourt.org",
+                branchName: "Sylmar Juvenile Court",
+                departments: [
+                  { number: "260", phone: "(818) 364-2101", judges: ["Downing, Akemi"] },
+                  { number: "261", phone: "(818) 364-2102", judges: ["Grodin, Morton"] },
+                  { number: "262", phone: "(818) 364-2103", judges: ["Marmaro, Benjamin"] }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Los Angeles County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1601 Eastlake Avenue, Los Angeles, CA 90033",
+                phone: "323-227-4399",
+                website: "https://www.lacourt.org",
+                branchName: "Eastlake Juvenile Court",
+                departments: [
+                  { number: "203", phone: "(323) 227-4401", judges: ["Campos, Stephanie"] },
+                  { number: "204", phone: "(323) 227-4402", judges: ["Navarro, Teresa"] },
+                  { number: "205", phone: "(323) 227-4403", judges: ["Tatro, Brett"] }
+                ],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Madera County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "200 South G Street, Madera, CA 93637",
+                phone: "559-416-5599",
+                website: "https://www.madera.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Madera County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "40601 Road 274, Bass Lake, CA 93604",
+                phone: "559-642-2210",
+                website: "https://www.madera.courts.ca.gov",
+                branchName: "Sierra Division",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Marin County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "3501 Civic Center Drive, San Rafael, CA 94903",
+                phone: "415-444-7000",
+                website: "https://www.marincourt.org",
+                branchName: "Civic Center Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Mariposa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "5088 Bullion Street, Mariposa, CA 95338",
+                phone: "209-966-2005",
+                website: "https://www.mariposa.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Mendocino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "100 North State Street, Ukiah, CA 95482",
+                phone: "707-468-2000",
+                website: "https://www.mendocino.courts.ca.gov",
+                branchName: "Ukiah Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Mendocino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "700 South Franklin Street, Fort Bragg, CA 95437",
+                phone: "707-964-3192",
+                website: "https://www.mendocino.courts.ca.gov",
+                branchName: "Ten Mile Branch",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Merced County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "627 West 21st Street, Merced, CA 95340",
+                phone: "209-725-4100",
+                website: "https://www.merced.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Merced County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1159 G Street, Los Banos, CA 93635",
+                phone: "209-725-4124",
+                website: "https://www.merced.courts.ca.gov",
+                branchName: "Los Banos Division",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Modoc County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "205 South East Street, Alturas, CA 96101",
+                phone: "530-233-6516",
+                website: "https://www.modoc.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Mono County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "100 Thompson Way, Mammoth Lakes, CA 93546",
+                phone: "760-924-5444",
+                website: "https://www.mono.courts.ca.gov",
+                branchName: "Mammoth Lakes Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Mono County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "278 Main Street, Bridgeport, CA 93517",
+                phone: "760-932-5222",
+                website: "https://www.mono.courts.ca.gov",
+                branchName: "Bridgeport Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Monterey County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1200 Aguajito Road, Monterey, CA 93940",
+                phone: "831-647-5800",
+                website: "https://www.monterey.courts.ca.gov",
+                branchName: "Monterey Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Monterey County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "240 Church Street, Salinas, CA 93901",
+                phone: "831-775-5400",
+                website: "https://www.monterey.courts.ca.gov",
+                branchName: "Salinas Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Monterey County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "599 El Camino Real, Greenfield, CA 93927",
+                phone: "831-385-5200",
+                website: "https://www.monterey.courts.ca.gov",
+                branchName: "King City Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Napa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "825 Brown Street, Napa, CA 94559",
+                phone: "707-299-1100",
+                website: "https://www.napa.courts.ca.gov",
+                branchName: "Criminal Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Napa County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1111 Third Street, Napa, CA 94559",
+                phone: "707-299-1100",
+                website: "https://www.napa.courts.ca.gov",
+                branchName: "Historic Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims"
+                ]
+              },
+      {
+                courtName: "Nevada County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "201 Church Street, Nevada City, CA 95959",
+                phone: "530-362-4309",
+                website: "https://www.nevada.courts.ca.gov",
+                branchName: "Nevada City Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Nevada County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "10075 Levon Avenue, Truckee, CA 96161",
+                phone: "530-582-7835",
+                website: "https://www.nevada.courts.ca.gov",
+                branchName: "Truckee Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "700 Civic Center Drive West, Santa Ana, CA 92701",
+                phone: "657-622-5400",
+                website: "https://www.occourts.org",
+                branchName: "Central Justice Center",
+                departments: [
+                  { number: "C05", phone: "657-622-5205", judges: ["FLYNN-PEISTER, TERRI"] },
+                  { number: "C06", phone: "657-622-5206", judges: ["HERNANDEZ, MARIA D.", "HANSON, SHEILA F."] },
+                  { number: "C15", phone: "657-622-5215", judges: ["STRICKROTH, MICHAEL J."] },
+                  { number: "C19", phone: "657-622-5219", judges: ["NELSON, SHAWN"] },
+                  { number: "C21", phone: "657-622-5221", judges: ["SERVINO, DEBORAH C."] },
+                  { number: "C22", phone: "657-622-5222", judges: ["CLAUSTRO, ISRAEL"] },
+                  { number: "C23", phone: "657-622-5223", judges: ["HESSELTINE, DAVID J."] },
+                  { number: "C24", phone: "657-622-5224", judges: ["APKARIAN, GASSIA"] },
+                  { number: "C25", phone: "657-622-5225", judges: ["DOURBETAS, NICK A."] },
+                  { number: "C26", phone: "657-622-5226", judges: ["YELLIN, LARRY"] },
+                  { number: "C27", phone: "657-622-5227", judges: ["ERDOSI, BRADLEY S."] },
+                  { number: "C28", phone: "657-622-5228", judges: ["MCCONVILLE, THOMAS S."] },
+                  { number: "C29", phone: "657-622-5229", judges: ["SCARBROUGH, ERIC"] },
+                  { number: "C30", phone: "657-622-5230", judges: ["MENNINGER, KIMBERLY K."] },
+                  { number: "C31", phone: "657-622-5231", judges: ["KNILL, KIMBERLY A."] },
+                  { number: "C32", phone: "657-622-5232", judges: ["GABRIEL, LEE L."] },
+                  { number: "C33", phone: "657-622-5233", judges: ["LEAL, SANDY N."] },
+                  { number: "C34", phone: "657-622-5234", judges: ["COLOVER, H. SHAINA"] },
+                  { number: "C35", phone: "657-622-5235", judges: ["CASSIDY, MICHAEL J."] },
+                  { number: "C36", phone: "657-622-5236", judges: ["PAER, GARY S."] },
+                  { number: "C37", phone: "657-622-5237", judges: ["ZITNY, JOHN R."] },
+                  { number: "C38", phone: "657-622-5238", judges: ["MACIAS, ELIZABETH"] },
+                  { number: "C39", phone: "657-622-5239", judges: ["KNOX, ROBERT A."] },
+                  { number: "C40", phone: "657-622-5240", judges: ["DONAHUE, PATRICK H."] },
+                  { number: "C41", phone: "657-622-5241", judges: ["CLAPP, LEWIS W."] },
+                  { number: "C42", phone: "657-622-5242", judges: ["HASKINS, KEVIN"] },
+                  { number: "C44", phone: "657-622-5244", judges: ["SCHWARM, WALTER P."] },
+                  { number: "C45", phone: "657-622-5245", judges: ["KING, RICHARD M."] },
+                  { number: "C46", phone: "657-622-5246", judges: ["COOPER, SCOTT B."] },
+                  { number: "C48", phone: "657-622-5248", judges: ["CLAVECILLA, BRYAN"] },
+                  { number: "C49", phone: "657-622-5249", judges: ["DANE, JOSEPH"] },
+                  { number: "C50", phone: "657-622-5250", judges: ["GLENN-LEISTIKOW, JUSTIN"] },
+                  { number: "C52", phone: "657-622-5252", judges: ["APKARIAN, ISABEL"] },
+                  { number: "C53", phone: "657-622-5253", judges: ["AZAR, BENJAMIN A."] },
+                  { number: "C54", phone: "657-622-5254", judges: ["PEREZ, MICHAEL E."] },
+                  { number: "C55", phone: "657-622-5255", judges: ["McGREEVY, STEPHEN J."] },
+                  { number: "C56", phone: "657-622-5256", judges: ["HERRERA, CYNTHIA M."] },
+                  { number: "C57", phone: "657-622-5257", judges: ["MURRAY, MICHAEL"] },
+                  { number: "C58", phone: "657-622-5258", judges: ["NGUYEN, HUY"] },
+                  { number: "C60", phone: "657-622-5260", judges: ["HALL, EDWARD W."] },
+                  { number: "C61", phone: "657-622-5261", judges: ["SNUGGS-SPRAGGINS, CARMEN D."] },
+                  { number: "C62", phone: "657-622-5262", judges: ["BETHUNE, RANDALL S."] },
+                  { number: "C64", phone: "657-622-5264", judges: ["MONDO, GLENN"] },
+                  { number: "C66", phone: "657-622-5266", judges: ["BAEZ, JASON", "HERNANDEZ, ALMA"] },
+                  { number: "CJ1", phone: "657-622-7102", judges: ["SANDECKI, SHERI R."] },
+                  { number: "CX101", phone: "657-622-5301", judges: ["CLASTER, WILLIAM D."] },
+                  { number: "CX102", phone: "657-622-5302", judges: ["MELZER, LAYNE H."] },
+                  { number: "CX103", phone: "657-622-5303", judges: ["HURWITZ, LON F."] },
+                  { number: "CX104", phone: "657-622-5304", judges: ["MCCORMICK, MELISSA R."] },
+                  { number: "CX105", phone: "657-622-5305", judges: ["SHERMAN, RANDALL J."] },
+                  { number: "CM01", phone: "657-622-5701", judges: [] },
+                  { number: "CM02", phone: "657-622-5702", judges: ["KIM, LORI A."] },
+                  { number: "CM03", phone: "657-622-5703", judges: ["ROWE, ERIN"] },
+                  { number: "CM04", phone: "657-622-5704", judges: ["HENSON, CAROL L."] },
+                  { number: "CM05", phone: "657-622-5705", judges: ["BAYTIEH, EBRAHIM"] },
+                  { number: "CM06", phone: "657-622-5706", judges: ["WAGNER, MEGAN"] },
+                  { number: "CM07", phone: "657-622-5707", judges: ["HEISLER, AARON W."] },
+                  { number: "CM08", phone: "657-622-5708", judges: ["ANDERSON, SHARON M."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "4601 Jamboree Road, Newport Beach, CA 92660",
+                phone: "657-622-5400",
+                website: "https://www.occourts.org",
+                branchName: "Harbor Justice Center",
+                departments: [
+                  { number: "H01", phone: "657-622-5401", judges: ["JOHNSON, DEREK G."] },
+                  { number: "H02", phone: "657-622-5402", judges: ["GERARD, ROBERT"] },
+                  { number: "H03", phone: "657-622-5403", judges: ["JOSEPH, JEANNIE M."] },
+                  { number: "H04", phone: "657-622-5404", judges: ["BAILEY, JULIAN"] },
+                  { number: "H05", phone: "657-622-5405", judges: ["GLAZIER, THOMAS A."] },
+                  { number: "H06", phone: "657-622-5406", judges: ["ADAMS, JOHN S."] },
+                  { number: "H07", phone: "657-622-5407", judges: ["PACHECO, RICHARD E."] },
+                  { number: "H08", phone: "657-622-5408", judges: ["LEE, SUSAN M."] },
+                  { number: "H09", phone: "657-622-5409", judges: ["UFLAND, ANTONY C."] },
+                  { number: "H10", phone: "657-622-5410", judges: ["ZIDBECK, WILLIAM S."] },
+                  { number: "H11", phone: "657-622-5411", judges: ["KELLY, M. MARC"] },
+                  { number: "H12", phone: "657-622-5412", judges: ["ROBINSON, KAREN L."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1275 North Berkeley Avenue, Fullerton, CA 92832",
+                phone: "657-622-5600",
+                website: "https://www.occourts.org",
+                branchName: "North Justice Center",
+                departments: [
+                  { number: "N02", phone: "657-622-5602", judges: ["RUBIN, KIRA"] },
+                  { number: "N03", phone: "657-622-5603", judges: ["DUFF, CHRISTOPHER"] },
+                  { number: "N04", phone: "657-622-5604", judges: ["GORDON, BEATRIZ M."] },
+                  { number: "N05", phone: "657-622-5605", judges: ["DOLNICK, JEREMY D."] },
+                  { number: "N06", phone: "657-622-5606", judges: ["SALTER, GLENN R."] },
+                  { number: "N07", phone: "657-622-5607", judges: ["THOMPSON, NICHOLAS S."] },
+                  { number: "N09", phone: "657-622-5609", judges: ["GILLER, OLGA"] },
+                  { number: "N10", phone: "657-622-5610", judges: ["ZIMMER, RICHARD"] },
+                  { number: "N11", phone: "657-622-5611", judges: ["ROBERTS, KATHLEEN"] },
+                  { number: "N12", phone: "657-622-5612", judges: ["VALLE, FERNANDO"] },
+                  { number: "N13", phone: "657-622-5613", judges: ["WAITE, BRIAN"] },
+                  { number: "N14", phone: "657-622-5614", judges: ["NICHOLS, CYNTHIA"] },
+                  { number: "N15", phone: "657-622-5615", judges: ["VU, NATHAN NHAN"] },
+                  { number: "N16", phone: "657-622-5616", judges: ["GAFFNEY, DONALD F."] },
+                  { number: "N17", phone: "657-622-5617", judges: ["GRIFFIN, CRAIG"] },
+                  { number: "N18", phone: "657-622-5618", judges: ["STEINER, SCOTT A."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "341 The City Drive South, Orange, CA 92868",
+                phone: "657-622-5500",
+                website: "https://www.occourts.org",
+                branchName: "Lamoreaux Justice Center",
+                departments: [
+                  { number: "L11", phone: "657-622-5511", judges: ["PHAM, CHERI T."] },
+                  { number: "L14", phone: "657-622-5514", judges: ["WERSCHING, ERIC J."] },
+                  { number: "L21", phone: "657-622-5521", judges: ["ARTHUR, CRAIG E."] },
+                  { number: "L22", phone: "657-622-5522", judges: ["MARTINEZ, LINDSEY E."] },
+                  { number: "L23", phone: "657-622-5523", judges: ["GOODKIN, ROBERT"] },
+                  { number: "L31", phone: "657-622-5531", judges: ["MARSHACK, ADRIANNE E."] },
+                  { number: "L32", phone: "657-622-5532", judges: ["SYKES, DAPHNE G."] },
+                  { number: "L33", phone: "657-622-5533", judges: ["SWAIN, JULIE"] },
+                  { number: "L34", phone: "657-622-5534", judges: ["AN, JUNE J."] },
+                  { number: "L41", phone: "657-622-5541", judges: ["MITTAL, VIBHAV"] },
+                  { number: "L42", phone: "657-622-5542", judges: ["PEREZ, JOE T."] },
+                  { number: "L43", phone: "657-622-5543", judges: ["KANG, JOSEPH"] },
+                  { number: "L51", phone: "657-622-5551", judges: ["PONCY, TIFFANY"] },
+                  { number: "L52", phone: "657-622-5552", judges: ["MACAULAY, JULIET O."] },
+                  { number: "L53", phone: "657-622-5553", judges: ["MINERICH, PAUL"] },
+                  { number: "L54", phone: "657-622-5554", judges: ["REICHMAN, MATTHEW"] },
+                  { number: "L60", phone: "657-622-5560", judges: ["CARASSO, KIMBERLY A."] },
+                  { number: "L61", phone: "657-622-5561", judges: ["PAULSON-DUFFY, JESSICA"] },
+                  { number: "L62", phone: "657-622-5562", judges: ["SANDHU, MEHTAB"] },
+                  { number: "L63", phone: "657-622-5563", judges: ["GUIRGUIS, MENA"] },
+                  { number: "L65", phone: "657-622-5565", judges: ["KREBER VARIPAPA, MARY"] },
+                  { number: "L66", phone: "657-622-5566", judges: ["TORRES, YOLANDA V."] },
+                  { number: "L67", phone: "657-622-5567", judges: ["NAQVI, ELIA A."] },
+                  { number: "L68", phone: "657-622-5568", judges: ["HICKLIN, STEPHEN"] },
+                  { number: "L69", phone: "657-622-5569", judges: ["KOHLER, ROBERT F."] },
+                  { number: "L71", phone: "657-622-5571", judges: ["SOLIS, EILEEN"] },
+                  { number: "L72", phone: "657-622-5572", judges: ["SAGEL, AMI SHETH"] },
+                  { number: "L73", phone: "657-622-5573", judges: ["PALAFOX, JULIE A."] }
+                ],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "700 Civic Center Drive West, Santa Ana, CA 92701",
+                phone: "657-622-5400",
+                website: "https://www.occourts.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "700 Civic Center Drive West, Santa Ana, CA 92701",
+                phone: "657-622-5400",
+                website: "https://www.occourts.org",
+                branchName: "Juvenile Court",
+                departments: [],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "700 Civic Center Drive West, Santa Ana, CA 92701",
+                phone: "657-622-5400",
+                website: "https://www.occourts.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Placer County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "10820 Justice Center Drive, Roseville, CA 95678",
+                phone: "916-408-6000",
+                website: "https://www.placer.courts.ca.gov",
+                branchName: "Santucci Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Placer County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2501 North Lake Boulevard, Tahoe City, CA 96145",
+                phone: "530-581-6300",
+                website: "https://www.placer.courts.ca.gov",
+                branchName: "Tahoe City Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Placer County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11270 B Avenue, Auburn, CA 95603",
+                phone: "530-886-5800",
+                website: "https://www.placer.courts.ca.gov",
+                branchName: "Historic Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Family Law",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Plumas County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "520 Main Street, Room 104, Quincy, CA 95971",
+                phone: "530-283-6232",
+                website: "https://www.plumas.courts.ca.gov",
+                branchName: "Main Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "4050 Main Street, Riverside, CA 92501",
+                phone: "951-777-3147",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Historic Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "4100 Main Street, Riverside, CA 92501",
+                phone: "951-777-3147",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "880 North State Street, Hemet, CA 92543",
+                phone: "951-777-3147",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Hemet Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "46-200 Oasis Street, Indio, CA 92201",
+                phone: "760-863-8127",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Larson Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "265 North Broadway, Blythe, CA 92225",
+                phone: "760-921-7981",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Blythe Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Riverside County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "951-777-3147",
+                website: "https://www.riverside.courts.ca.gov",
+                branchName: "Southwest Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Sacramento County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "720 9th Street, Sacramento, CA 95814",
+                phone: "916-874-5522",
+                website: "https://www.saccourt.ca.gov",
+                branchName: "Gordon D. Schaber Sacramento County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Sacramento County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "8000 Bruceville Road, Elk Grove, CA 95758",
+                phone: "916-683-3700",
+                website: "https://www.saccourt.ca.gov",
+                branchName: "Carol Miller Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Sacramento County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "10800 Justice Center Drive, Roseville, CA 95678",
+                phone: "916-408-6000",
+                website: "https://www.saccourt.ca.gov",
+                branchName: "Santucci Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Benito County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "450 Fourth Street, Hollister, CA 95023",
+                phone: "831-636-4050",
+                website: "https://www.sanbenito.courts.ca.gov",
+                branchName: "San Benito County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "351 North Arrowhead Avenue, San Bernardino, CA 92415",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "San Bernardino Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "8303 Haven Avenue, Rancho Cucamonga, CA 91730",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Rancho Cucamonga Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "17746 Arrow Boulevard, Fontana, CA 92335",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Fontana Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "28555 Highway 18, Apple Valley, CA 92307",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Apple Valley Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "15900 Civic Center Drive, Victorville, CA 92392",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Victorville Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Barstow Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Big Bear Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Chino Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Joshua Tree Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Bernardino County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "30755-D Auld Road, Murrieta, CA 92563",
+                phone: "909-708-8747",
+                website: "https://www.sb-court.org",
+                branchName: "Needles Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "220 West Broadway, San Diego, CA 92101",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Central Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "325 South Melrose Drive, Vista, CA 92081",
+                phone: "760-201-8500",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Vista Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "451 West 4th Avenue, Escondido, CA 92025",
+                phone: "760-201-8500",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "North County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "500 Third Avenue, Chula Vista, CA 91910",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "South County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2851 Meadow Lark Drive, San Diego, CA 92123",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Kearny Mesa Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1555 Sixth Avenue, San Diego, CA 92101",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2851 Meadow Lark Drive, San Diego, CA 92123",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Juvenile Court",
+                departments: [],
+                caseTypes: [
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Diego County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "2851 Meadow Lark Drive, San Diego, CA 92123",
+                phone: "619-450-7200",
+                website: "https://www.sdcourt.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "San Francisco County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 McAllister Street, San Francisco, CA 94102",
+                phone: "415-551-4000",
+                website: "https://www.sfsuperiorcourt.org",
+                branchName: "Civic Center Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Francisco County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "850 Bryant Street, San Francisco, CA 94103",
+                phone: "415-551-4000",
+                website: "https://www.sfsuperiorcourt.org",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Francisco County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "350 Rhode Island Street, San Francisco, CA 94103",
+                phone: "415-551-4000",
+                website: "https://www.sfsuperiorcourt.org",
+                branchName: "Family Justice Center",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Francisco County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 McAllister Street, San Francisco, CA 94102",
+                phone: "415-551-4000",
+                website: "https://www.sfsuperiorcourt.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Santa Clara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "191 North First Street, San Jose, CA 95113",
+                phone: "408-882-2700",
+                website: "https://www.scscourt.org",
+                branchName: "Downtown Superior Court",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Clara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1095 Homestead Road, Santa Clara, CA 95050",
+                phone: "408-882-2700",
+                website: "https://www.scscourt.org",
+                branchName: "Santa Clara Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Clara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "201 North First Street, San Jose, CA 95113",
+                phone: "408-882-2700",
+                website: "https://www.scscourt.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Santa Clara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "191 North First Street, San Jose, CA 95113",
+                phone: "408-882-2700",
+                website: "https://www.scscourt.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "San Joaquin County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "222 E. Weber Avenue, Stockton, CA 95202",
+                phone: "209-468-3000",
+                website: "https://www.stocktoncourt.org",
+                branchName: "Stockton Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Joaquin County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 E. Main Street, Manteca, CA 95336",
+                phone: "209-468-3000",
+                website: "https://www.stocktoncourt.org",
+                branchName: "Manteca Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Joaquin County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "222 E. Weber Avenue, Stockton, CA 95202",
+                phone: "209-468-3000",
+                website: "https://www.stocktoncourt.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Joaquin County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "222 E. Weber Avenue, Stockton, CA 95202",
+                phone: "209-468-3000",
+                website: "https://www.stocktoncourt.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "San Luis Obispo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1050 Monterey Street, San Luis Obispo, CA 93408",
+                phone: "805-781-5670",
+                website: "https://www.slo.courts.ca.gov",
+                branchName: "San Luis Obispo Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Luis Obispo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1035 Palm Street, San Luis Obispo, CA 93408",
+                phone: "805-781-5670",
+                website: "https://www.slo.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Luis Obispo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1050 Monterey Street, San Luis Obispo, CA 93408",
+                phone: "805-781-5670",
+                website: "https://www.slo.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "San Mateo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 County Center, Redwood City, CA 94063",
+                phone: "650-261-5100",
+                website: "https://www.sanmateocourt.org",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Mateo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1050 Mission Road, South San Francisco, CA 94080",
+                phone: "650-261-5100",
+                website: "https://www.sanmateocourt.org",
+                branchName: "South San Francisco Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "San Mateo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 County Center, Redwood City, CA 94063",
+                phone: "650-261-5100",
+                website: "https://www.sanmateocourt.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "San Mateo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "400 County Center, Redwood City, CA 94063",
+                phone: "650-261-5100",
+                website: "https://www.sanmateocourt.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Santa Barbara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1100 Anacapa Street, Santa Barbara, CA 93101",
+                phone: "805-882-4500",
+                website: "https://www.sbcourts.org",
+                branchName: "Santa Barbara Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Barbara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "312-C East Cook Street, Santa Maria, CA 93454",
+                phone: "805-882-4500",
+                website: "https://www.sbcourts.org",
+                branchName: "Santa Maria Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Barbara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1100 Anacapa Street, Santa Barbara, CA 93101",
+                phone: "805-882-4500",
+                website: "https://www.sbcourts.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Santa Barbara County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1100 Anacapa Street, Santa Barbara, CA 93101",
+                phone: "805-882-4500",
+                website: "https://www.sbcourts.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Santa Cruz County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "701 Ocean Street, Santa Cruz, CA 95060",
+                phone: "831-420-2200",
+                website: "https://www.santacruzcourt.org",
+                branchName: "Santa Cruz Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Cruz County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "5200 Soquel Avenue, Santa Cruz, CA 95062",
+                phone: "831-420-2200",
+                website: "https://www.santacruzcourt.org",
+                branchName: "Watsonville Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Santa Cruz County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "701 Ocean Street, Santa Cruz, CA 95060",
+                phone: "831-420-2200",
+                website: "https://www.santacruzcourt.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Santa Cruz County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "701 Ocean Street, Santa Cruz, CA 95060",
+                phone: "831-420-2200",
+                website: "https://www.santacruzcourt.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Shasta County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1500 Court Street, Redding, CA 96001",
+                phone: "530-225-5000",
+                website: "https://www.shasta.courts.ca.gov",
+                branchName: "Shasta County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Shasta County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1500 Court Street, Redding, CA 96001",
+                phone: "530-225-5000",
+                website: "https://www.shasta.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Shasta County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1500 Court Street, Redding, CA 96001",
+                phone: "530-225-5000",
+                website: "https://www.shasta.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Solano County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Union Avenue, Fairfield, CA 94533",
+                phone: "707-207-7300",
+                website: "https://www.solano.courts.ca.gov",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Solano County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "321 Tuolumne Street, Vallejo, CA 94590",
+                phone: "707-207-7300",
+                website: "https://www.solano.courts.ca.gov",
+                branchName: "Vallejo Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Solano County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Union Avenue, Fairfield, CA 94533",
+                phone: "707-207-7300",
+                website: "https://www.solano.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Solano County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Union Avenue, Fairfield, CA 94533",
+                phone: "707-207-7300",
+                website: "https://www.solano.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Sonoma County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Administration Drive, Santa Rosa, CA 95403",
+                phone: "707-521-6500",
+                website: "https://www.sonoma.courts.ca.gov",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Sonoma County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Administration Drive, Santa Rosa, CA 95403",
+                phone: "707-521-6500",
+                website: "https://www.sonoma.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Sonoma County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "600 Administration Drive, Santa Rosa, CA 95403",
+                phone: "707-521-6500",
+                website: "https://www.sonoma.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Stanislaus County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 11th Street, Modesto, CA 95354",
+                phone: "209-530-3100",
+                website: "https://www.stanct.org",
+                branchName: "Downtown Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Stanislaus County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 11th Street, Modesto, CA 95354",
+                phone: "209-530-3100",
+                website: "https://www.stanct.org",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Stanislaus County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 11th Street, Modesto, CA 95354",
+                phone: "209-530-3100",
+                website: "https://www.stanct.org",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Sutter County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1175 Civic Center Boulevard, Yuba City, CA 95993",
+                phone: "530-822-3300",
+                website: "https://www.sutter.courts.ca.gov",
+                branchName: "Sutter County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Sutter County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1175 Civic Center Boulevard, Yuba City, CA 95993",
+                phone: "530-822-3300",
+                website: "https://www.sutter.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Sutter County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1175 Civic Center Boulevard, Yuba City, CA 95993",
+                phone: "530-822-3300",
+                website: "https://www.sutter.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Tehama County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1740 Walnut Street, Red Bluff, CA 96080",
+                phone: "530-527-3351",
+                website: "https://www.tehama.courts.ca.gov",
+                branchName: "Tehama County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Tehama County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1740 Walnut Street, Red Bluff, CA 96080",
+                phone: "530-527-3351",
+                website: "https://www.tehama.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Tehama County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "1740 Walnut Street, Red Bluff, CA 96080",
+                phone: "530-527-3351",
+                website: "https://www.tehama.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Trinity County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11 Court Street, Weaverville, CA 96093",
+                phone: "530-623-3151",
+                website: "https://www.trinity.courts.ca.gov",
+                branchName: "Trinity County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Trinity County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11 Court Street, Weaverville, CA 96093",
+                phone: "530-623-3151",
+                website: "https://www.trinity.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Trinity County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "11 Court Street, Weaverville, CA 96093",
+                phone: "530-623-3151",
+                website: "https://www.trinity.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Tulare County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "221 South Mooney Boulevard, Visalia, CA 93291",
+                phone: "559-730-5000",
+                website: "https://www.tularesuperiorcourt.ca.gov",
+                branchName: "Visalia Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Tulare County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "300 East Olive Avenue, Porterville, CA 93257",
+                phone: "559-730-5000",
+                website: "https://www.tularesuperiorcourt.ca.gov",
+                branchName: "Porterville Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Tulare County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "221 South Mooney Boulevard, Visalia, CA 93291",
+                phone: "559-730-5000",
+                website: "https://www.tularesuperiorcourt.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Tulare County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "221 South Mooney Boulevard, Visalia, CA 93291",
+                phone: "559-730-5000",
+                website: "https://www.tularesuperiorcourt.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Tuolumne County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "41 West Yaney Street, Sonora, CA 95370",
+                phone: "209-533-5500",
+                website: "https://www.tuolumne.courts.ca.gov",
+                branchName: "Tuolumne County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Tuolumne County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "41 West Yaney Street, Sonora, CA 95370",
+                phone: "209-533-5500",
+                website: "https://www.tuolumne.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Tuolumne County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "41 West Yaney Street, Sonora, CA 95370",
+                phone: "209-533-5500",
+                website: "https://www.tuolumne.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Ventura County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 South Victoria Avenue, Ventura, CA 93009",
+                phone: "805-289-8500",
+                website: "https://www.ventura.courts.ca.gov",
+                branchName: "Hall of Justice",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Ventura County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 South Victoria Avenue, Ventura, CA 93009",
+                phone: "805-289-8500",
+                website: "https://www.ventura.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Ventura County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "800 South Victoria Avenue, Ventura, CA 93009",
+                phone: "805-289-8500",
+                website: "https://www.ventura.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Ventura County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "4353 East Vineyard Avenue, Oxnard, CA 93036",
+                phone: "805-289-8500",
+                website: "https://www.ventura.courts.ca.gov",
+                branchName: "Oxnard Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Ventura County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "3855-F Alamo Street, Simi Valley, CA 93063",
+                phone: "805-289-8500",
+                website: "https://www.ventura.courts.ca.gov",
+                branchName: "Simi Valley Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Yolo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "725 Court Street, Woodland, CA 95695",
+                phone: "530-406-6700",
+                website: "https://www.yolo.courts.ca.gov",
+                branchName: "Yolo County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Yolo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "725 Court Street, Woodland, CA 95695",
+                phone: "530-406-6700",
+                website: "https://www.yolo.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Yolo County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "725 Court Street, Woodland, CA 95695",
+                phone: "530-406-6700",
+                website: "https://www.yolo.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Yuba County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "215 5th Street, Marysville, CA 95901",
+                phone: "530-749-7700",
+                website: "https://www.yuba.courts.ca.gov",
+                branchName: "Yuba County Courthouse",
+                departments: [],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Juvenile",
+                  "Probate",
+                  "Small Claims",
+                  "Traffic"
+                ]
+              },
+      {
+                courtName: "Yuba County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "215 5th Street, Marysville, CA 95901",
+                phone: "530-749-7700",
+                website: "https://www.yuba.courts.ca.gov",
+                branchName: "Family Court",
+                departments: [],
+                caseTypes: [
+                  "Family Law",
+                  "Juvenile"
+                ]
+              },
+      {
+                courtName: "Yuba County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "215 5th Street, Marysville, CA 95901",
+                phone: "530-749-7700",
+                website: "https://www.yuba.courts.ca.gov",
+                branchName: "Probate Court",
+                departments: [],
+                caseTypes: [
+                  "Probate"
+                ]
+              },
+      {
+                courtName: "Orange County Superior Court",
+                jurisdiction: "Superior Court",
+                courtLevel: "Superior",
+                courtState: "California",
+                address: "8141 13th Street, Westminster, CA 92683",
+                phone: "657-622-5900",
+                website: "https://www.occourts.org",
+                branchName: "West Justice Center",
+                departments: [
+                  { number: "W01", phone: "657-622-5901", judges: ["VALLEJO, TANIA R."] },
+                  { number: "W02", phone: "657-622-5902", judges: ["LUEGE, CARMEN"] },
+                  { number: "W03", phone: "657-622-5910", judges: ["POSTON, AMBER"] },
+                  { number: "W04", phone: "657-622-5904", judges: ["FERRENTINO, ANTHONY J."] },
+                  { number: "W06", phone: "657-622-5906", judges: ["BOKOSKY, WHITNEY L."] },
+                  { number: "W07", phone: "657-622-5907", judges: ["KIM, LYDIA"] },
+                  { number: "W08", phone: "657-622-5908", judges: ["RECIO, SHEILA"] },
+                  { number: "W09", phone: "657-622-5909", judges: ["JENSEN, LANCE P."] },
+                  { number: "W10", phone: "657-622-5910", judges: ["LADISKY, RANDY K."] },
+                  { number: "W12", phone: "657-622-5912", judges: ["ALVAREZ, CLAUDIA C."] },
+                  { number: "W13", phone: "657-622-5913", judges: ["HONER, SHERRI"] },
+                  { number: "W14", phone: "657-622-5914", judges: ["VAN CAMP, SCOTT"] },
+                  { number: "W15", phone: "657-622-5915", judges: ["LEE, RICHARD Y."] },
+                  { number: "W16", phone: "657-622-5916", judges: ["MOORHEAD, JAY J."] },
+                  { number: "W17", phone: "657-622-5917", judges: ["WATSON, KUNTHAVI C."] },
+                  { number: "W18", phone: "657-622-5918", judges: ["LEWIS, KATHERINE E."] }
+                ],
+                caseTypes: [
+                  "Civil",
+                  "Criminal",
+                  "Family Law",
+                  "Traffic"
+                ]
+              }
+      ];

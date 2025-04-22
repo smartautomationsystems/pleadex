@@ -18,8 +18,13 @@ const options = {
   },
   minPoolSize: 1,
   maxPoolSize: 10,
-  tls: true,
-  retryWrites: true
+  // Only use SSL in production
+  ...(process.env.NODE_ENV === 'production' ? {
+    ssl: true,
+    tls: true,
+    tlsAllowInvalidCertificates: false,
+    tlsAllowInvalidHostnames: false,
+  } : {})
 };
 
 let client: MongoClient;

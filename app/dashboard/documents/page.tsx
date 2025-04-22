@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { FaUpload, FaFile, FaTrash, FaDownload, FaList, FaThLarge, FaEye } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
@@ -28,7 +28,7 @@ export default function DocumentsPage() {
   const [documentViewMode, setDocumentViewMode] = useState<'image' | 'text'>('image');
   const [isPolling, setIsPolling] = useState(false);
 
-  const fetchDocuments = async () => {
+  const fetchDocuments = useCallback(async () => {
     try {
       const response = await fetch('/api/documents');
       if (!response.ok) {
@@ -56,13 +56,13 @@ export default function DocumentsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (session?.user) {
       fetchDocuments();
     }
-  }, [session]);
+  }, [session, fetchDocuments]);
 
   // Add polling effect for processing documents
   useEffect(() => {

@@ -1,3 +1,5 @@
+// DO NOT MODIFY — critical config, dev server must not restart
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,

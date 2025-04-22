@@ -129,11 +129,55 @@ export default function CourtManagementPage() {
     <div>
       <h1 className="text-2xl font-bold mb-6">Court Management</h1>
       
+      {/* Import Section */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4">Import Courts</h2>
+        <div className="flex items-center gap-4">
+          <p className="text-gray-600">Import courts from a CSV file</p>
+          <button
+            type="button"
+            onClick={() => {
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = '.csv';
+              input.onchange = async (e) => {
+                const file = (e.target as HTMLInputElement).files?.[0];
+                if (file) {
+                  try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    const response = await fetch('/api/courts/import', {
+                      method: 'POST',
+                      body: formData,
+                      headers: {
+                        'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`
+                      }
+                    });
+                    if (!response.ok) throw new Error('Failed to import courts');
+                    toast.success('Courts imported successfully');
+                    fetchCourts();
+                  } catch (error) {
+                    console.error('Error importing courts:', error);
+                    toast.error('Failed to import courts');
+                  }
+                }
+              };
+              input.click();
+            }}
+            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 flex items-center gap-2"
+          >
+            <FaPlus /> Import CSV
+          </button>
+        </div>
+      </div>
+      
       {/* Court Form */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">
-          {editingCourt ? 'Edit Court' : 'Add New Court'}
-        </h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">
+            {editingCourt ? 'Edit Court' : 'Add New Court'}
+          </h2>
+        </div>
         <form onSubmit={handleCourtSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>

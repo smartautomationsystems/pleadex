@@ -12,7 +12,8 @@ const textract = new TextractClient({
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
-  }
+  },
+  endpoint: `https://textract.${process.env.AWS_REGION || "us-east-1"}.amazonaws.com`
 });
 
 export async function processDocumentWithOCR(documentId: string, userId: string) {
