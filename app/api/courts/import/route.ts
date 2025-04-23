@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '@/libs/mongo';
+import { connectToDatabase } from '@/libs/db';
 import { parse } from 'csv-parse';
 
 interface Judge {

@@ -20,7 +20,7 @@ async function testOCR() {
     
     const s3Key = `test-ocr-${Date.now()}.jpg`;
     const uploadCommand = new PutObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: s3Key,
       Body: imageBuffer,
       ContentType: 'image/jpeg',
@@ -31,7 +31,7 @@ async function testOCR() {
 
     // 2. Get signed URL for the image
     const getObjectCommand = new GetObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: s3Key,
     });
 

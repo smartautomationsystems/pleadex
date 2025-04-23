@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/auth";
-import { connectToDatabase } from "@/libs/mongo";
+import { connectToDatabase } from '@/libs/db';
 import { Form } from "@/models/form";
 import { ObjectId } from "mongodb";
 

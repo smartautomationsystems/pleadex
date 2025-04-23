@@ -3,7 +3,7 @@ import {
   StartDocumentTextDetectionCommand,
   GetDocumentTextDetectionCommand
 } from "@aws-sdk/client-textract";
-import { connectToDatabase } from "./mongo";
+import { connectToDatabase } from "./db";
 import { Document } from "@/models/document";
 import { ObjectId } from "mongodb";
 

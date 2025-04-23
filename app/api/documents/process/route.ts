@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { processDocumentWithOCR } from '@/libs/ocr';
-import { connectToDatabase } from '@/libs/mongo';
+import { connectToDatabase } from '@/libs/db';
 import { ObjectId } from 'mongodb';
 
 export async function POST(request: Request) {

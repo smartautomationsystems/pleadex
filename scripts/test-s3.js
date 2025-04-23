@@ -6,7 +6,7 @@ async function testS3Access() {
     console.log('Testing AWS S3 access...');
     console.log('AWS Configuration:', {
       region: process.env.AWS_REGION,
-      bucket: process.env.AWS_BUCKET_NAME,
+      bucket: process.env.AWS_S3_BUCKET,
       hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
       hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
     });
@@ -20,11 +20,11 @@ async function testS3Access() {
     });
 
     const command = new HeadBucketCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
     });
     
     await s3Client.send(command);
-    console.log(`Successfully connected to bucket "${process.env.AWS_BUCKET_NAME}"`);
+    console.log(`Successfully connected to bucket "${process.env.AWS_S3_BUCKET}"`);
     
   } catch (error) {
     console.error('Error testing S3 access:', error);

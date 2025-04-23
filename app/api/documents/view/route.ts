@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/config';
 import { getSignedUrlForDocument } from '@/libs/storage';
-import { connectToDatabase } from '@/libs/mongo';
+import { connectToDatabase } from '@/libs/db';
 import { ObjectId } from 'mongodb';
 
 export async function GET(request: Request) {

@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectToDatabase } from "./mongo";
+import { connectToDatabase } from "./db";
 import { ObjectId } from "mongodb";
 import { hash, compare } from "bcryptjs";
 

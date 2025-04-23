@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
-import { FaUpload, FaFile, FaTrash, FaDownload, FaList, FaThLarge, FaEye } from 'react-icons/fa';
+import { FaUpload, FaFile, FaTrash, FaDownload, FaList, FaThLarge, FaEye, FaSearch, FaFileAlt, FaSearchPlus, FaSearchMinus, FaExpand, FaCompress } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 
 interface Document {
@@ -13,11 +13,16 @@ interface Document {
   uploadedAt: string;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   content: string | null;
+  searchMatch?: {
+    text: string;
+    context: string;
+  };
 }
 
 export default function DocumentsPage() {
   const { data: session } = useSession();
   const [documents, setDocuments] = useState<Document[]>([]);
+  const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -27,6 +32,12 @@ export default function DocumentsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [documentViewMode, setDocumentViewMode] = useState<'image' | 'text'>('image');
   const [isPolling, setIsPolling] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchType, setSearchType] = useState<'exact' | 'fuzzy' | 'ai'>('exact');
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
+  const [currentSummary, setCurrentSummary] = useState<{ text: string; loading: boolean }>({ text: '', loading: false });
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const fetchDocuments = useCallback(async () => {
     try {
@@ -50,6 +61,7 @@ export default function DocumentsPage() {
       
       console.log('Mapped documents:', newDocuments.map((d: Document) => ({ id: d.id, name: d.name, status: d.status })));
       setDocuments(newDocuments);
+      setFilteredDocuments(newDocuments);
     } catch (error: any) {
       console.error('Error fetching documents:', error);
       toast.error(error.message || 'Failed to load documents');
@@ -57,6 +69,87 @@ export default function DocumentsPage() {
       setIsLoading(false);
     }
   }, []);
+
+  // Search functionality
+  const handleSearch = useCallback(async () => {
+    if (!searchQuery.trim()) {
+      setFilteredDocuments(documents);
+      return;
+    }
+
+    if (searchType === 'exact') {
+      const searchResults = documents.map(doc => {
+        if (!doc.content) return null;
+
+        const searchIndex = doc.content.toLowerCase().indexOf(searchQuery.toLowerCase());
+        if (searchIndex === -1) return null;
+
+        // Get 100 characters before and after the match
+        const start = Math.max(0, searchIndex - 100);
+        const end = Math.min(doc.content.length, searchIndex + searchQuery.length + 100);
+        const context = doc.content.slice(start, end);
+
+        return {
+          ...doc,
+          searchMatch: {
+            text: doc.content.slice(searchIndex, searchIndex + searchQuery.length),
+            context
+          }
+        };
+      }).filter((doc): doc is Document & { searchMatch: { text: string; context: string } } => doc !== null);
+
+      setFilteredDocuments(searchResults);
+    } else {
+      try {
+        const response = await fetch('/api/documents/search', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: searchQuery,
+            documents: documents.map(doc => ({
+              id: doc.id,
+              content: doc.content
+            })),
+            searchType
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Search failed');
+        }
+
+        const results = await response.json();
+        const searchResults = documents.map(doc => {
+          const match = results.find((r: any) => r.id === doc.id);
+          if (!match) return null;
+
+          return {
+            ...doc,
+            searchMatch: {
+              text: match.text,
+              context: match.context,
+              relevance: match.relevance
+            }
+          };
+        }).filter((doc): doc is Document & { searchMatch: { text: string; context: string; relevance: number } } => doc !== null);
+
+        // Sort by relevance
+        searchResults.sort((a, b) => (b.searchMatch.relevance - a.searchMatch.relevance));
+        setFilteredDocuments(searchResults);
+      } catch (error) {
+        console.error('Search error:', error);
+        toast.error('Search failed. Falling back to exact search.');
+        // Fall back to exact search
+        handleSearch();
+      }
+    }
+  }, [searchQuery, documents, searchType]);
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchQuery, handleSearch]);
 
   useEffect(() => {
     if (session?.user) {
@@ -181,6 +274,24 @@ export default function DocumentsPage() {
     }
   };
 
+  const handleSummarize = async (documentId: string) => {
+    setSummaryModalOpen(true);
+    setCurrentSummary({ text: '', loading: true });
+
+    try {
+      const response = await fetch(`/api/documents/summarize?id=${documentId}`);
+      if (!response.ok) {
+        throw new Error('Failed to summarize document');
+      }
+      const data = await response.json();
+      setCurrentSummary({ text: data.summary, loading: false });
+    } catch (error) {
+      console.error('Error summarizing document:', error);
+      toast.error('Failed to summarize document');
+      setCurrentSummary({ text: '', loading: false });
+    }
+  };
+
   const getStatusClass = (status: string) => {
     switch (status) {
       case 'completed':
@@ -194,56 +305,104 @@ export default function DocumentsPage() {
     }
   };
 
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.25, 0.5));
+  };
+
+  const handleResetZoom = () => {
+    setZoomLevel(1);
+  };
+
+  const handleToggleFullscreen = () => {
+    setIsFullscreen(prev => !prev);
+  };
+
   const renderListView = () => (
     <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Type</th>
-            <th>Size</th>
-            <th>Status</th>
-            <th>Uploaded</th>
+            {!searchQuery && (
+              <>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Status</th>
+                <th>Uploaded</th>
+              </>
+            )}
+            {searchQuery && <th>Search Match</th>}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {documents.map((doc) => (
+          {filteredDocuments.map((doc) => (
             <tr key={doc.id}>
               <td className="flex items-center gap-2">
                 <FaFile className="text-gray-500" />
                 {doc.name}
               </td>
-              <td>{doc.type}</td>
-              <td>{(doc.size / 1024 / 1024).toFixed(2)} MB</td>
-              <td>
-                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClass(doc.status)}`}>
-                  {doc.status}
-                </span>
-              </td>
-              <td>{new Date(doc.uploadedAt).toLocaleDateString()}</td>
+              {!searchQuery && (
+                <>
+                  <td>{doc.type}</td>
+                  <td>{(doc.size / 1024 / 1024).toFixed(2)} MB</td>
+                  <td>
+                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClass(doc.status)}`}>
+                      {doc.status}
+                    </span>
+                  </td>
+                  <td>{new Date(doc.uploadedAt).toLocaleDateString()}</td>
+                </>
+              )}
+              {searchQuery && (
+                <td>
+                  {doc.searchMatch && (
+                    <div className="max-w-md">
+                      <p className="text-sm text-gray-600">
+                        <span className="text-gray-400">...</span>
+                        {doc.searchMatch.context}
+                        <span className="text-gray-400">...</span>
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Found: <span className="font-semibold">{doc.searchMatch.text}</span>
+                      </p>
+                    </div>
+                  )}
+                </td>
+              )}
               <td>
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleView(doc.id)}
                     className="btn btn-sm btn-info"
+                    title="View Document"
                   >
-                    <FaEye className="mr-1" />
-                    View
+                    <FaEye />
                   </button>
                   <button
                     onClick={() => handleDownload(doc.id)}
                     className="btn btn-sm btn-primary"
+                    title="Download Document"
                   >
-                    <FaDownload className="mr-1" />
-                    Download
+                    <FaDownload />
+                  </button>
+                  <button
+                    onClick={() => handleSummarize(doc.id)}
+                    className="btn btn-sm btn-secondary"
+                    title="Summarize Document"
+                  >
+                    <FaFileAlt />
                   </button>
                   <button
                     onClick={() => handleDelete(doc.id)}
                     className="btn btn-sm btn-error"
+                    title="Delete Document"
                   >
-                    <FaTrash className="mr-1" />
-                    Delete
+                    <FaTrash />
                   </button>
                 </div>
               </td>
@@ -256,7 +415,7 @@ export default function DocumentsPage() {
 
   const renderGridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {documents.map((document) => (
+      {filteredDocuments.map((document) => (
         <div key={document.id} className="card bg-base-100 shadow-xl">
           <div className="card-body">
             <div className="flex items-center mb-4">
@@ -264,32 +423,55 @@ export default function DocumentsPage() {
               <h2 className="card-title text-lg">{document.name}</h2>
             </div>
             <div className="text-sm text-gray-500 mb-4">
-              <p>Type: {document.type}</p>
-              <p>Size: {(document.size / 1024 / 1024).toFixed(2)} MB</p>
-              <p>Uploaded: {new Date(document.uploadedAt).toLocaleDateString()}</p>
-              <p>Status: {document.status}</p>
+              {!searchQuery && (
+                <>
+                  <p>Type: {document.type}</p>
+                  <p>Size: {(document.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p>Uploaded: {new Date(document.uploadedAt).toLocaleDateString()}</p>
+                  <p>Status: {document.status}</p>
+                </>
+              )}
+              {searchQuery && document.searchMatch && (
+                <div className="mt-2">
+                  <p className="text-sm text-gray-600">
+                    <span className="text-gray-400">...</span>
+                    {document.searchMatch.context}
+                    <span className="text-gray-400">...</span>
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Found: <span className="font-semibold">{document.searchMatch.text}</span>
+                  </p>
+                </div>
+              )}
             </div>
             <div className="card-actions justify-end">
               <button
                 className="btn btn-sm btn-info"
                 onClick={() => handleView(document.id)}
+                title="View Document"
               >
-                <FaEye className="mr-1" />
-                View
+                <FaEye />
               </button>
               <button
                 className="btn btn-sm btn-primary"
                 onClick={() => handleDownload(document.id)}
+                title="Download Document"
               >
-                <FaDownload className="mr-1" />
-                Download
+                <FaDownload />
+              </button>
+              <button
+                className="btn btn-sm btn-secondary"
+                onClick={() => handleSummarize(document.id)}
+                title="Summarize Document"
+              >
+                <FaFileAlt />
               </button>
               <button
                 className="btn btn-sm btn-error"
                 onClick={() => handleDelete(document.id)}
+                title="Delete Document"
               >
-                <FaTrash className="mr-1" />
-                Delete
+                <FaTrash />
               </button>
             </div>
           </div>
@@ -332,13 +514,38 @@ export default function DocumentsPage() {
         </label>
       </div>
 
+      {/* Search Bar */}
+      <div className="mb-8">
+        <div className="flex gap-4 items-center">
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              placeholder="Search documents..."
+              className="input input-bordered w-full pl-10"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+          <select
+            className="select select-bordered"
+            value={searchType}
+            onChange={(e) => setSearchType(e.target.value as 'exact' | 'fuzzy' | 'ai')}
+          >
+            <option value="exact">Exact Match</option>
+            <option value="fuzzy">Fuzzy Search</option>
+            <option value="ai">AI Search</option>
+          </select>
+        </div>
+      </div>
+
       {isLoading ? (
         <div className="flex justify-center">
           <span className="loading loading-spinner loading-lg"></span>
         </div>
-      ) : documents.length === 0 ? (
+      ) : filteredDocuments.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-gray-500">No documents uploaded yet.</p>
+          <p className="text-gray-500">No documents found.</p>
         </div>
       ) : (
         viewMode === 'grid' ? renderGridView() : renderListView()
@@ -365,50 +572,129 @@ export default function DocumentsPage() {
       {/* View Modal */}
       {viewModalOpen && currentDocument && (
         <div className="modal modal-open">
-          <div className="modal-box max-w-5xl">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-lg">Document Viewer</h3>
-              <div className="flex gap-2">
-                {currentDocument.content && (
+          <div className={`modal-box ${isFullscreen ? 'w-screen h-screen max-w-none' : 'max-w-4xl w-[8.5in] h-[11in]'} p-0 transition-all duration-300`}>
+            <div className="flex flex-col h-full">
+              <div className="flex justify-between items-center p-4 border-b">
+                <h3 className="font-bold text-lg">Document Viewer</h3>
+                <div className="flex gap-2">
+                  {currentDocument.content && (
+                    <button
+                      className={`btn btn-sm ${documentViewMode === 'image' ? 'btn-primary' : 'btn-ghost'}`}
+                      onClick={() => setDocumentViewMode('image')}
+                    >
+                      Image
+                    </button>
+                  )}
+                  {currentDocument.content && (
+                    <button
+                      className={`btn btn-sm ${documentViewMode === 'text' ? 'btn-primary' : 'btn-ghost'}`}
+                      onClick={() => setDocumentViewMode('text')}
+                    >
+                      Text
+                    </button>
+                  )}
+                  <div className="divider divider-horizontal mx-2"></div>
                   <button
-                    className={`btn btn-sm ${documentViewMode === 'image' ? 'btn-primary' : 'btn-ghost'}`}
-                    onClick={() => setDocumentViewMode('image')}
+                    className="btn btn-sm btn-ghost"
+                    onClick={handleZoomOut}
+                    title="Zoom Out"
                   >
-                    Image
+                    <FaSearchMinus />
                   </button>
-                )}
-                {currentDocument.content && (
                   <button
-                    className={`btn btn-sm ${documentViewMode === 'text' ? 'btn-primary' : 'btn-ghost'}`}
-                    onClick={() => setDocumentViewMode('text')}
+                    className="btn btn-sm btn-ghost"
+                    onClick={handleResetZoom}
+                    title="Reset Zoom"
                   >
-                    Text
+                    {Math.round(zoomLevel * 100)}%
                   </button>
+                  <button
+                    className="btn btn-sm btn-ghost"
+                    onClick={handleZoomIn}
+                    title="Zoom In"
+                  >
+                    <FaSearchPlus />
+                  </button>
+                  <div className="divider divider-horizontal mx-2"></div>
+                  <button
+                    className="btn btn-sm btn-ghost"
+                    onClick={handleToggleFullscreen}
+                    title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                  >
+                    {isFullscreen ? <FaCompress /> : <FaExpand />}
+                  </button>
+                  <button
+                    className="btn btn-sm btn-ghost"
+                    onClick={() => setViewModalOpen(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+              <div className="flex-1 overflow-auto">
+                {documentViewMode === 'image' ? (
+                  <div className="w-full h-full overflow-auto">
+                    <div 
+                      className="relative"
+                      style={{
+                        transform: `scale(${zoomLevel})`,
+                        transformOrigin: '0 0',
+                        width: `${100 / zoomLevel}%`,
+                        height: `${100 / zoomLevel}%`,
+                        transition: 'transform 0.2s ease-in-out'
+                      }}
+                    >
+                      <iframe
+                        src={currentDocument.url}
+                        className="w-full h-full"
+                        title="Document Viewer"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-full h-full overflow-auto">
+                    <div 
+                      className="bg-base-200 p-4 rounded-lg"
+                      style={{
+                        transform: `scale(${zoomLevel})`,
+                        transformOrigin: '0 0',
+                        width: `${100 / zoomLevel}%`,
+                        height: `${100 / zoomLevel}%`,
+                        transition: 'transform 0.2s ease-in-out'
+                      }}
+                    >
+                      <pre className="whitespace-pre-wrap font-mono text-sm">{currentDocument.content}</pre>
+                    </div>
+                  </div>
                 )}
-                <button
-                  className="btn btn-sm btn-ghost"
-                  onClick={() => setViewModalOpen(false)}
-                >
-                  Close
-                </button>
               </div>
             </div>
-            <div className="flex flex-col gap-4">
-              {documentViewMode === 'image' ? (
-                <div className="w-full h-[500px]">
-                  <iframe
-                    src={currentDocument.url}
-                    className="w-full h-full"
-                    title="Document Viewer"
-                  />
+          </div>
+        </div>
+      )}
+
+      {/* Summary Modal */}
+      {summaryModalOpen && (
+        <div className="modal modal-open">
+          <div className="modal-box max-w-3xl">
+            <h3 className="font-bold text-lg mb-4">Document Summary</h3>
+            <div className="max-h-[60vh] overflow-y-auto">
+              {currentSummary.loading ? (
+                <div className="flex justify-center items-center h-32">
+                  <span className="loading loading-spinner loading-lg"></span>
                 </div>
               ) : (
-                <div className="w-full h-[500px] overflow-auto">
-                  <div className="bg-base-200 p-4 rounded-lg h-full">
-                    <pre className="whitespace-pre-wrap">{currentDocument.content}</pre>
-                  </div>
+                <div className="prose max-w-none">
+                  {currentSummary.text.split('\n').map((paragraph, index) => (
+                    <p key={index} className="mb-4">{paragraph}</p>
+                  ))}
                 </div>
               )}
+            </div>
+            <div className="modal-action">
+              <button className="btn" onClick={() => setSummaryModalOpen(false)}>
+                Close
+              </button>
             </div>
           </div>
         </div>

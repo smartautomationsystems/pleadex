@@ -1,4 +1,4 @@
-const { connectToDatabase } = require('../libs/mongo');
+const { connectToDatabase } = require('../libs/db');
 const { hash } = require('bcryptjs');
 
 async function createUser() {

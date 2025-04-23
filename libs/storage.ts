@@ -7,7 +7,7 @@ const requiredEnvVars = {
   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
   AWS_REGION: process.env.AWS_REGION,
-  AWS_BUCKET_NAME: process.env.AWS_BUCKET_NAME,
+  AWS_S3_BUCKET: process.env.AWS_S3_BUCKET,
 };
 
 const missingVars = Object.entries(requiredEnvVars)
@@ -21,7 +21,7 @@ if (missingVars.length > 0) {
 
 console.log('AWS Configuration:', {
   region: process.env.AWS_REGION,
-  bucket: process.env.AWS_BUCKET_NAME,
+  bucket: process.env.AWS_S3_BUCKET,
   hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
   hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
 });
@@ -43,7 +43,7 @@ export async function uploadToS3(file: Buffer, key: string, contentType: string)
     });
 
     const command = new PutObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: key,
       Body: file,
       ContentType: contentType,
@@ -52,7 +52,7 @@ export async function uploadToS3(file: Buffer, key: string, contentType: string)
     const result = await s3Client.send(command);
     console.log('S3 upload result:', result);
 
-    const url = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
+    const url = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
     console.log('Generated S3 URL:', url);
     
     return { url, key };
@@ -65,7 +65,7 @@ export async function uploadToS3(file: Buffer, key: string, contentType: string)
 export async function getSignedUrlForFile(key: string, expiresIn: number = 3600) {
   try {
     const command = new GetObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: key,
     });
 
@@ -89,7 +89,7 @@ export async function streamToBuffer(stream: Readable): Promise<Buffer> {
 export async function getSignedUrlForDocument(key: string): Promise<string> {
   try {
     const command = new GetObjectCommand({
-      Bucket: process.env.AWS_BUCKET_NAME,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: key,
     });
 
@@ -113,7 +113,7 @@ export async function getSignedUrlForDocument(key: string): Promise<string> {
 
 export async function deleteObject(key: string) {
   const command = new DeleteObjectCommand({
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: process.env.AWS_S3_BUCKET,
     Key: key,
   });
 

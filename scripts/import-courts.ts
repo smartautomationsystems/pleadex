@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { connectToDatabase } from '@/libs/mongo';
+import { connectToDatabase } from '@/libs/db';
 import { Court } from '@/models/court';
 
 interface CourtData {

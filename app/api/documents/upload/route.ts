@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/config';
-import { connectToDatabase } from '@/libs/mongo';
+import { connectToDatabase } from '@/libs/db';
 import { uploadToS3 } from '@/libs/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { ObjectId } from 'mongodb';
