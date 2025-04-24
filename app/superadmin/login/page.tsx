@@ -22,13 +22,20 @@ export default function SuperAdminLogin() {
         redirect: false,
       });
 
+      console.log('Login result:', result);
+
       if (result?.error) {
-        toast.error('Invalid credentials');
+        toast.error(result.error);
         return;
       }
 
-      router.push('/superadmin/dashboard');
+      if (result?.ok) {
+        toast.success('Login successful');
+        router.push('/superadmin/dashboard');
+        router.refresh();
+      }
     } catch (error) {
+      console.error('Login error:', error);
       toast.error('An error occurred during login');
     } finally {
       setIsLoading(false);

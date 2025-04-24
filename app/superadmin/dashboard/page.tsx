@@ -62,7 +62,7 @@ export default function SuperAdminDashboard() {
       const response = await fetch('/api/globals');
       if (!response.ok) throw new Error('Failed to fetch globals');
       const data = await response.json();
-      setGlobals(data);
+      setGlobals(data.globals || []);
     } catch (error) {
       console.error('Error fetching globals:', error);
       toast.error('Failed to load globals');

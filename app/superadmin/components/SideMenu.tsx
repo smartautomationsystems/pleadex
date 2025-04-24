@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { FaDatabase, FaGavel, FaSignOutAlt } from 'react-icons/fa';
 
 export default function SideMenu() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const menuItems = [
     {
@@ -41,7 +42,12 @@ export default function SideMenu() {
         ))}
       </nav>
       <button
-        onClick={() => signOut({ callbackUrl: '/superadmin/login' })}
+        onClick={() => {
+          signOut({
+            redirect: true,
+            callbackUrl: '/superadmin/login'
+          });
+        }}
         className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 transition-colors mt-auto"
       >
         <FaSignOutAlt className="w-5 h-5" />

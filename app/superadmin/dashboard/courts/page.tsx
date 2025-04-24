@@ -125,6 +125,36 @@ export default function CourtManagementPage() {
     setNewJudge({ name: '', title: '', department: '' });
   };
 
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/courts/import', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer import-token' // This will be validated differently on server
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to import courts');
+      }
+
+      const data = await response.json();
+      toast.success(`Successfully imported ${data.insertedCount} courts`);
+      router.refresh();
+    } catch (error) {
+      console.error('Import error:', error);
+      toast.error(error instanceof Error ? error.message : 'Failed to import courts');
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6">Court Management</h1>
@@ -134,32 +164,22 @@ export default function CourtManagementPage() {
         <h2 className="text-xl font-semibold mb-4">Import Courts</h2>
         <div className="flex items-center gap-4">
           <p className="text-gray-600">Import courts from a CSV file</p>
+          <input
+            type="file"
+            accept=".csv"
+            onChange={handleImport}
+            className="hidden"
+          />
           <button
             type="button"
             onClick={() => {
               const input = document.createElement('input');
               input.type = 'file';
               input.accept = '.csv';
-              input.onchange = async (e) => {
-                const file = (e.target as HTMLInputElement).files?.[0];
-                if (file) {
-                  try {
-                    const formData = new FormData();
-                    formData.append('file', file);
-                    const response = await fetch('/api/courts/import', {
-                      method: 'POST',
-                      body: formData,
-                      headers: {
-                        'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`
-                      }
-                    });
-                    if (!response.ok) throw new Error('Failed to import courts');
-                    toast.success('Courts imported successfully');
-                    fetchCourts();
-                  } catch (error) {
-                    console.error('Error importing courts:', error);
-                    toast.error('Failed to import courts');
-                  }
+              input.onchange = (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.files?.[0]) {
+                  handleImport({ target } as React.ChangeEvent<HTMLInputElement>);
                 }
               };
               input.click();

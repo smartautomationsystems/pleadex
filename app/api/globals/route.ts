@@ -5,16 +5,25 @@ import { connectToDatabase } from '@/libs/db';
 import { Global } from "@/models/global";
 import { ObjectId } from "mongodb";
 
+const PARTY_TYPES = [
+  { id: 'plaintiff', label: 'Plaintiff', description: 'The party who initiates the lawsuit' },
+  { id: 'defendant', label: 'Defendant', description: 'The party against whom the lawsuit is filed' },
+  { id: 'third_party_plaintiff', label: 'Third-Party Plaintiff', description: 'A defendant who files a claim against a third party' },
+  { id: 'third_party_defendant', label: 'Third-Party Defendant', description: 'A party brought into the lawsuit by a third-party plaintiff' },
+  { id: 'cross_plaintiff', label: 'Cross-Plaintiff', description: 'A defendant who files a claim against a co-defendant' },
+  { id: 'cross_defendant', label: 'Cross-Defendant', description: 'A defendant against whom a cross-claim is filed' },
+  { id: 'intervenor', label: 'Intervenor', description: 'A party who joins the lawsuit voluntarily' },
+  { id: 'amicus_curiae', label: 'Amicus Curiae', description: 'A friend of the court who provides expertise' },
+  { id: 'guardian_ad_litem', label: 'Guardian Ad Litem', description: 'A person appointed to represent a minor or incompetent person' },
+  { id: 'next_friend', label: 'Next Friend', description: 'A person who represents someone unable to represent themselves' }
+];
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    if (session.user.role !== "superadmin") {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const { db } = await connectToDatabase();
@@ -24,7 +33,11 @@ export async function GET() {
       .sort({ type: 1, label: 1 })
       .toArray();
 
-    return NextResponse.json(globals);
+    // Always return party types for authenticated users
+    return NextResponse.json({
+      globals,
+      partyTypes: PARTY_TYPES
+    });
   } catch (error) {
     console.error("Error fetching globals:", error);
     return NextResponse.json(
