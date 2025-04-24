@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import SideMenu from '@/components/SideMenu';
+import UserMenu from '@/components/UserMenu';
 
 // This is a server-side component to ensure the user is logged in.
 // If not, it will redirect to the login page.
@@ -30,9 +30,15 @@ export default function DashboardLayout({
     return null;
   }
 
+  // Redirect superadmin to superadmin dashboard
+  if (session.user.role === 'superadmin') {
+    router.push('/superadmin/dashboard');
+    return null;
+  }
+
   return (
     <div className="flex min-h-screen">
-      <SideMenu />
+      <UserMenu />
       <main className="flex-1 p-8">
         {children}
       </main>

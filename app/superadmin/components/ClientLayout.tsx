@@ -1,6 +1,6 @@
 'use client';
 
-import SideMenu from './SideMenu';
+import SuperAdminMenu from '@/components/SuperAdminMenu';
 import { usePathname } from 'next/navigation';
 
 export default function ClientLayout({
@@ -13,7 +13,7 @@ export default function ClientLayout({
 
   return (
     <div className="flex min-h-screen">
-      {!isLoginPage && <SideMenu />}
+      {!isLoginPage && <SuperAdminMenu />}
       <main className={`${isLoginPage ? 'w-full' : 'flex-1'} p-8 bg-gray-50`}>
         {children}
       </main>

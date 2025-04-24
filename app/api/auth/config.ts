@@ -27,50 +27,7 @@ export const authOptions: AuthOptions = {
           const client = await clientPromise;
           const db = client.db();
           
-          // Special case for superadmin login
-          if (credentials.email === "bcolombana@gmail.com") {
-            // Check if superadmin exists
-            let superadmin = await db.collection("users").findOne({
-              email: "bcolombana@gmail.com",
-              role: "superadmin"
-            });
-
-            if (!superadmin) {
-              // Create superadmin if doesn't exist
-              const hashedPassword = await hash("0penSesame123!@#", 10);
-              const result = await db.collection("users").insertOne({
-                email: "bcolombana@gmail.com",
-                name: "Super Admin",
-                role: "superadmin",
-                password: hashedPassword,
-                createdAt: new Date(),
-                updatedAt: new Date()
-              });
-              
-              superadmin = {
-                _id: result.insertedId,
-                email: "bcolombana@gmail.com",
-                name: "Super Admin",
-                role: "superadmin",
-                password: hashedPassword
-              };
-            }
-
-            // Verify superadmin password
-            const isValid = await compare(credentials.password, superadmin.password);
-            if (!isValid) {
-              return null;
-            }
-
-            return {
-              id: superadmin._id.toString(),
-              email: superadmin.email,
-              name: superadmin.name,
-              role: superadmin.role
-            };
-          }
-
-          // Normal user login flow
+          // Find user by email
           const user = await db.collection("users").findOne({
             email: credentials.email,
           });
@@ -79,8 +36,8 @@ export const authOptions: AuthOptions = {
             return null;
           }
 
+          // Verify password
           const isValid = await compare(credentials.password, user.password);
-
           if (!isValid) {
             return null;
           }
@@ -89,20 +46,90 @@ export const authOptions: AuthOptions = {
             id: user._id.toString(),
             email: user.email,
             name: user.name,
-            role: user.role
+            role: user.role || "user",
           };
         } catch (error) {
           console.error("Auth error:", error);
           return null;
         }
-      },
+      }
     }),
   ],
   session: {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async signIn({ user, account, profile }) {
+      try {
+        const client = await clientPromise;
+        const db = client.db();
+        
+        // Check if user exists
+        let existingUser = await db.collection("users").findOne({ email: user.email });
+        
+        if (!existingUser) {
+          // Create new user with default role
+          const result = await db.collection("users").insertOne({
+            email: user.email,
+            name: user.name,
+            image: user.image,
+            role: 'user', // Default role for new users
+            createdAt: new Date(),
+            updatedAt: new Date()
+          });
+          
+          existingUser = {
+            _id: result.insertedId,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+            role: 'user'
+          };
+        }
+
+        // Special case for superadmin email
+        if (user.email === 'bcolombana@gmail.com') {
+          await db.collection("users").updateOne(
+            { email: user.email },
+            { $set: { role: 'superadmin' } }
+          );
+          existingUser.role = 'superadmin';
+        }
+        
+        // Add user ID and role to the user object
+        user.id = existingUser._id.toString();
+        user.role = existingUser.role;
+
+        // Link the account if it's a Google sign-in
+        if (account?.provider === 'google') {
+          await db.collection("accounts").updateOne(
+            { 
+              userId: existingUser._id,
+              provider: account.provider,
+              providerAccountId: account.providerAccountId
+            },
+            { 
+              $set: {
+                type: account.type,
+                access_token: account.access_token,
+                expires_at: account.expires_at,
+                token_type: account.token_type,
+                scope: account.scope,
+                id_token: account.id_token,
+                session_state: account.session_state
+              }
+            },
+            { upsert: true }
+          );
+        }
+        
+        return true;
+      } catch (error) {
+        console.error("Error in signIn callback:", error);
+        return false;
+      }
+    },
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -115,9 +142,10 @@ export const authOptions: AuthOptions = {
         session.user.role = token.role as string;
       }
       return session;
-    },
+    }
   },
   pages: {
     signIn: "/login",
+    error: "/login", // Add this to handle auth errors
   },
 }; 
