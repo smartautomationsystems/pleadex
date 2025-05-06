@@ -7,6 +7,7 @@ export interface Global {
   key: string;
   label: string;
   value: any;
+  coreCategory?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -18,6 +19,7 @@ export type GlobalCategory = 'fieldDefinition' | 'referenceObject';
 export type FieldDefinitionValue = {
   fieldType: 'text' | 'number' | 'date' | 'select' | 'textarea';
   required: boolean;
+  repeatable?: boolean;
   placeholder?: string;
   options?: string[]; // For select fields
 };
@@ -51,6 +53,10 @@ const globalSchema = new mongoose.Schema({
   value: {
     type: mongoose.Schema.Types.Mixed,
     required: true
+  },
+  coreCategory: {
+    type: String,
+    required: false
   },
   createdAt: {
     type: Date,

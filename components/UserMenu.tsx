@@ -14,6 +14,11 @@ export default function UserMenu() {
       icon: '📊'
     },
     {
+      label: 'Cases',
+      href: '/dashboard/cases',
+      icon: '📁'
+    },
+    {
       label: 'Documents',
       href: '/dashboard/documents',
       icon: '📄'

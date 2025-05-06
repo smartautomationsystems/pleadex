@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import UserMenu from '@/components/UserMenu';
+import { useEffect } from 'react';
 
 // This is a server-side component to ensure the user is logged in.
 // If not, it will redirect to the login page.
@@ -17,6 +18,17 @@ export default function DashboardLayout({
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    if (status === 'loading') return;
+    if (!session) {
+      router.push('/login');
+      return;
+    }
+    if (session.user.role === 'superadmin') {
+      router.push('/superadmin/dashboard');
+    }
+  }, [session, status, router]);
+
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -25,14 +37,7 @@ export default function DashboardLayout({
     );
   }
 
-  if (!session) {
-    router.push('/login');
-    return null;
-  }
-
-  // Redirect superadmin to superadmin dashboard
-  if (session.user.role === 'superadmin') {
-    router.push('/superadmin/dashboard');
+  if (!session || session.user.role === 'superadmin') {
     return null;
   }
 

@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const { type, key, label, value } = await request.json();
+    const { type, key, label, value, coreCategory } = await request.json();
 
     if (!type || !key || !label) {
       return NextResponse.json(
@@ -88,6 +88,7 @@ export async function POST(request: Request) {
       key,
       label,
       value,
+      coreCategory,
       createdAt: now,
       updatedAt: now,
     });
@@ -100,6 +101,7 @@ export async function POST(request: Request) {
         key,
         label,
         value,
+        coreCategory,
         createdAt: now,
         updatedAt: now,
       },
@@ -125,7 +127,7 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const { _id, type, key, label, value } = await request.json();
+    const { _id, type, key, label, value, coreCategory } = await request.json();
 
     if (!_id || !type || !key || !label) {
       return NextResponse.json(
@@ -157,6 +159,7 @@ export async function PUT(request: Request) {
           key,
           label,
           value,
+          coreCategory,
           updatedAt: now,
         },
       }

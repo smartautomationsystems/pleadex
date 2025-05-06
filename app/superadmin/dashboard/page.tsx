@@ -33,7 +33,7 @@ export default function SuperAdminDashboard() {
 
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/superadmin/login');
+      router.push('/login');
     } else if (session?.user?.role !== 'superadmin') {
       router.push('/dashboard');
     } else {

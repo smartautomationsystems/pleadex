@@ -1,191 +1,87 @@
-import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
 import { connectToDatabase } from '@/libs/db';
 import { Court } from '@/models/court';
 
-interface CourtData {
-  name: string;
-  jurisdiction: 'state' | 'federal';
-  state: string;
-  county: string;
+interface CourtLocation {
+  courtName: string;
+  jurisdiction: string;
+  courtLevel: string;
+  courtState: string;
   address: string;
+  phone: string;
+  website: string;
+  branchName: string;
   departments: Array<{
     number: string;
-    name: string;
+    phone?: string;
+    judges?: string[];
   }>;
-  judges: Array<{
-    name: string;
-    title: string;
-    department: string;
-  }>;
+  caseTypes: string[];
+  county?: string;
 }
 
-async function importCaliforniaCourts() {
+async function importCourts() {
   try {
-    const { db } = await connectToDatabase();
+    // Read the courts data file
+    const courtsDataPath = path.join(process.cwd(), 'court-data', 'courtsData.txt');
+    const courtsDataContent = fs.readFileSync(courtsDataPath, 'utf-8');
     
-    // California Superior Courts
-    const californiaCourts: CourtData[] = [
-      {
-        name: 'Superior Court of California, County of Los Angeles',
-        jurisdiction: 'state',
-        state: 'CA',
-        county: 'Los Angeles',
-        address: '111 N Hill St, Los Angeles, CA 90012',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Family Law' },
-          { number: '4', name: 'Probate' },
-          { number: '5', name: 'Juvenile' },
-          { number: '6', name: 'Small Claims' },
-          { number: '7', name: 'Traffic' },
-        ],
-        judges: [
-          { name: 'Eric Rosen', title: 'Presiding Judge', department: '1' },
-          { name: 'Samantha Jessner', title: 'Assistant Presiding Judge', department: '1' },
-        ],
-      },
-      {
-        name: 'Superior Court of California, County of Orange',
-        jurisdiction: 'state',
-        state: 'CA',
-        county: 'Orange',
-        address: '700 Civic Center Drive West, Santa Ana, CA 92701',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Family Law' },
-          { number: '4', name: 'Probate' },
-          { number: '5', name: 'Juvenile' },
-          { number: '6', name: 'Small Claims' },
-          { number: '7', name: 'Traffic' },
-        ],
-        judges: [
-          { name: 'Maria Hernandez', title: 'Presiding Judge', department: '1' },
-          { name: 'Cheri Pham', title: 'Assistant Presiding Judge', department: '1' },
-        ],
-      },
-      {
-        name: 'Superior Court of California, County of San Diego',
-        jurisdiction: 'state',
-        state: 'CA',
-        county: 'San Diego',
-        address: '220 W Broadway, San Diego, CA 92101',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Family Law' },
-          { number: '4', name: 'Probate' },
-          { number: '5', name: 'Juvenile' },
-          { number: '6', name: 'Small Claims' },
-          { number: '7', name: 'Traffic' },
-        ],
-        judges: [
-          { name: 'Michael Smyth', title: 'Presiding Judge', department: '1' },
-          { name: 'Lorna Alksne', title: 'Assistant Presiding Judge', department: '1' },
-        ],
-      },
-      {
-        name: 'Superior Court of California, County of Riverside',
-        jurisdiction: 'state',
-        state: 'CA',
-        county: 'Riverside',
-        address: '4050 Main St, Riverside, CA 92501',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Family Law' },
-          { number: '4', name: 'Probate' },
-          { number: '5', name: 'Juvenile' },
-          { number: '6', name: 'Small Claims' },
-          { number: '7', name: 'Traffic' },
-        ],
-        judges: [
-          { name: 'John Vineyard', title: 'Presiding Judge', department: '1' },
-          { name: 'Mark Johnson', title: 'Assistant Presiding Judge', department: '1' },
-        ],
-      },
-      {
-        name: 'Superior Court of California, County of San Bernardino',
-        jurisdiction: 'state',
-        state: 'CA',
-        county: 'San Bernardino',
-        address: '351 N Arrowhead Ave, San Bernardino, CA 92401',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Family Law' },
-          { number: '4', name: 'Probate' },
-          { number: '5', name: 'Juvenile' },
-          { number: '6', name: 'Small Claims' },
-          { number: '7', name: 'Traffic' },
-        ],
-        judges: [
-          { name: 'Michael Sachs', title: 'Presiding Judge', department: '1' },
-          { name: 'John P. Duran', title: 'Assistant Presiding Judge', department: '1' },
-        ],
-      },
-    ];
-
-    // Federal Courts
-    const federalCourts: CourtData[] = [
-      {
-        name: 'United States District Court, Central District of California',
-        jurisdiction: 'federal',
-        state: 'CA',
-        county: 'Los Angeles',
-        address: '312 N Spring St, Los Angeles, CA 90012',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Bankruptcy' },
-        ],
-        judges: [
-          { name: 'Philip S. Gutierrez', title: 'Chief Judge', department: '1' },
-          { name: 'John F. Walter', title: 'Senior Judge', department: '1' },
-        ],
-      },
-      {
-        name: 'United States District Court, Southern District of California',
-        jurisdiction: 'federal',
-        state: 'CA',
-        county: 'San Diego',
-        address: '221 W Broadway, San Diego, CA 92101',
-        departments: [
-          { number: '1', name: 'Civil' },
-          { number: '2', name: 'Criminal' },
-          { number: '3', name: 'Bankruptcy' },
-        ],
-        judges: [
-          { name: 'Dana M. Sabraw', title: 'Chief Judge', department: '1' },
-          { name: 'Roger T. Benitez', title: 'Senior Judge', department: '1' },
-        ],
-      },
-    ];
-
-    const allCourts = [...californiaCourts, ...federalCourts];
-
-    // Insert courts into database
-    for (const court of allCourts) {
-      await db.collection('courts').insertOne({
-        courtName: court.name,
-        jurisdiction: court.jurisdiction,
-        courtState: court.state,
-        courtCounty: court.county,
-        address: court.address,
-        departments: court.departments,
-        judges: court.judges,
-        caseTypes: ['Civil', 'Criminal', 'Family Law', 'Probate', 'Juvenile', 'Small Claims', 'Traffic'],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+    // Extract the courts array from the file content
+    const courtsDataMatch = courtsDataContent.match(/const courtsData = (\[[\s\S]*?\]);/);
+    if (!courtsDataMatch) {
+      throw new Error('Could not find courts data in file');
     }
-
-    console.log(`Successfully imported ${allCourts.length} courts`);
+    
+    const courtsData: CourtLocation[] = eval(courtsDataMatch[1]);
+    
+    // Connect to database
+    const { db } = await connectToDatabase();
+    const courtsCollection = db.collection<Court>('courts');
+    
+    // Clear existing courts
+    await courtsCollection.deleteMany({});
+    
+    // Transform and insert courts
+    const transformedCourts = courtsData.map(court => ({
+      courtName: court.courtName,
+      jurisdiction: court.jurisdiction.toLowerCase() === 'federal' ? 'federal' as const : 'state' as const,
+      courtState: court.courtState,
+      courtCounty: court.county || court.courtName.split(',')[1]?.trim() || '',
+      branchName: court.branchName,
+      caseTypes: court.caseTypes,
+      address: court.address,
+      phone: court.phone,
+      website: court.website,
+      departments: court.departments.map(dept => ({
+        number: dept.number,
+        name: dept.number, // Using number as name since it's not provided
+        phone: dept.phone
+      })),
+      judges: court.departments.flatMap(dept => 
+        (dept.judges || []).map(judge => ({
+          name: judge,
+          title: 'Judge',
+          department: dept.number
+        }))
+      ),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
+    
+    // Insert courts in batches
+    const batchSize = 100;
+    for (let i = 0; i < transformedCourts.length; i += batchSize) {
+      const batch = transformedCourts.slice(i, i + batchSize);
+      await courtsCollection.insertMany(batch);
+    }
+    
+    console.log(`Successfully imported ${transformedCourts.length} courts`);
   } catch (error) {
     console.error('Error importing courts:', error);
+    process.exit(1);
   }
 }
 
 // Run the import
-importCaliforniaCourts(); 
+importCourts(); 

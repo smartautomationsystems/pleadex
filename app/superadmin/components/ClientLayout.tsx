@@ -9,7 +9,7 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isLoginPage = pathname === '/superadmin/login';
+  const isLoginPage = pathname === '/login';
 
   return (
     <div className="flex min-h-screen">
