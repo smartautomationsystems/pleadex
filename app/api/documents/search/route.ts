@@ -361,7 +361,7 @@ async function performAISearch(query: string, documents: Document[]): Promise<Se
       const citations = extractCaseCitations(doc.content);
       const judge = extractJudge(doc.content);
       const attorneys = extractAttorneys(doc.content);
-      const arguments = extractArguments(doc.content);
+      const extractedArguments = extractArguments(doc.content);
       
       const metadata = {
         caseNumber: citations[0],
@@ -377,7 +377,7 @@ async function performAISearch(query: string, documents: Document[]): Promise<Se
           hearingDate: dates.find(d => d.context.includes('HEAR'))?.date,
           deadline: dates.find(d => d.context.includes('DEADLINE'))?.date
         },
-        arguments
+        arguments: extractedArguments
       };
   
   return {
@@ -391,7 +391,7 @@ async function performAISearch(query: string, documents: Document[]): Promise<Se
     })
   );
   
-  return results.filter((result): result is SearchResult => result !== null)
+  return results.filter((result: any): result is SearchResult => result !== null)
     .sort((a: SearchResult, b: SearchResult) => b.relevance - a.relevance);
 }
 
