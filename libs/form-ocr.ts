@@ -19,8 +19,7 @@ export async function processFormWithOCR(formId: string, userId: string) {
   try {
     const { db } = await connectToDatabase();
     const form = await db.collection<Form>("forms").findOne({
-      _id: new ObjectId(formId),
-      userId: new ObjectId(userId),
+      _id: new ObjectId(formId)
     });
 
     if (!form) {

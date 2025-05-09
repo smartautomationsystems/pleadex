@@ -13,6 +13,7 @@ interface Form {
   uploadedAt: string;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   fields: any[] | null;
+  description?: string;
 }
 
 export default function FormsPage() {
@@ -27,6 +28,9 @@ export default function FormsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [formViewMode, setFormViewMode] = useState<'image' | 'fields'>('image');
   const [isPolling, setIsPolling] = useState(false);
+  const [systemForms, setSystemForms] = useState<Form[]>([]);
+  const [systemFormSearch, setSystemFormSearch] = useState('');
+  const [selectedSystemFormId, setSelectedSystemFormId] = useState<string | null>(null);
 
   const fetchForms = useCallback(async () => {
     try {
@@ -81,6 +85,30 @@ export default function FormsPage() {
       setIsPolling(false);
     };
   }, [forms, isPolling, fetchForms]);
+
+  useEffect(() => {
+    const fetchSystemForms = async () => {
+      try {
+        const response = await fetch('/api/forms?system=1');
+        if (!response.ok) throw new Error('Failed to fetch system forms');
+        const data = await response.json();
+        const sysForms = data.filter((form: any) => !form.userId || form.userId === 'superadmin');
+        setSystemForms(sysForms.map((form: any) => ({
+          id: form._id.toString(),
+          name: form.name,
+          type: form.type,
+          size: form.size,
+          uploadedAt: form.uploadedAt || form.createdAt,
+          status: form.status || 'completed',
+          fields: form.fields || null,
+          description: form.description || '',
+        })));
+      } catch (error) {
+        toast.error('Failed to load system forms');
+      }
+    };
+    fetchSystemForms();
+  }, []);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -149,6 +177,10 @@ export default function FormsPage() {
     try {
       const response = await fetch(`/api/forms/view?id=${formId}`);
       if (!response.ok) {
+        if (response.status === 404) {
+          toast.error('Form not found.');
+          return;
+        }
         throw new Error('Failed to fetch form');
       }
       const data = await response.json();
@@ -277,6 +309,35 @@ export default function FormsPage() {
     </div>
   );
 
+  const filteredSystemForms = systemForms.filter(f =>
+    f.name.toLowerCase().includes(systemFormSearch.toLowerCase()) ||
+    (f.description?.toLowerCase() || '').includes(systemFormSearch.toLowerCase())
+  );
+  const selectedSystemForm = systemForms.find(f => f.id === selectedSystemFormId) || filteredSystemForms[0];
+
+  const handleViewSystemForm = async (formId: string) => {
+    try {
+      const response = await fetch(`/api/forms/view?id=${formId}`);
+      if (!response.ok) {
+        if (response.status === 404) {
+          toast.error('Form not found.');
+          return;
+        }
+        throw new Error('Failed to fetch form');
+      }
+      const data = await response.json();
+      setCurrentForm(data);
+      setViewModalOpen(true);
+    } catch (error: any) {
+      console.error('Error viewing form:', error);
+      toast.error(error.message || 'Failed to view form');
+    }
+  };
+
+  const handleDownloadSystemForm = (formId: string) => {
+    window.open(`/api/forms/download?id=${formId}`, '_blank');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
@@ -309,6 +370,50 @@ export default function FormsPage() {
             accept=".pdf,.jpg,.jpeg,.png"
           />
         </label>
+      </div>
+
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4">System Forms</h2>
+        <div className="flex flex-col md:flex-row md:items-end gap-4">
+          <div className="flex-1">
+            <label className="block text-sm font-medium mb-1">Search System Forms</label>
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              placeholder="Search by name..."
+              value={systemFormSearch}
+              onChange={e => setSystemFormSearch(e.target.value)}
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-sm font-medium mb-1">Select System Form</label>
+            <select
+              className="input input-bordered w-full"
+              value={selectedSystemFormId || (filteredSystemForms[0]?.id || '')}
+              onChange={e => setSelectedSystemFormId(e.target.value)}
+            >
+              {filteredSystemForms.map(form => (
+                <option key={form.id} value={form.id}>{form.name}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex gap-2 mt-4 md:mt-0">
+            <button
+              className="btn btn-info"
+              disabled={!selectedSystemForm}
+              onClick={() => selectedSystemForm && handleViewSystemForm(selectedSystemForm.id)}
+            >
+              <FaEye className="mr-1" /> View
+            </button>
+            <button
+              className="btn btn-primary"
+              disabled={!selectedSystemForm}
+              onClick={() => selectedSystemForm && handleDownloadSystemForm(selectedSystemForm.id)}
+            >
+              <FaDownload className="mr-1" /> Download
+            </button>
+          </div>
+        </div>
       </div>
 
       {isLoading ? (

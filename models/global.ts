@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 
 export interface Global {
   _id?: ObjectId;
-  type: 'caseType' | 'courtJurisdiction' | 'formField' | 'template';
+  type: 'caseType' | 'courtJurisdiction' | 'formField' | 'template' | 'caseEvent';
   key: string;
   label: string;
   value: any;

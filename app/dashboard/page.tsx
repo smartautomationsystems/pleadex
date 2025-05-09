@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import CaseCalendar from '@/components/CaseCalendar';
 
 export default function DashboardPage() {
   const { data: session } = useSession();
@@ -10,7 +11,7 @@ export default function DashboardPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
-      
+      <CaseCalendar />
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <p>Welcome to your dashboard!</p>

@@ -19,9 +19,10 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { name, email, password, role } = await request.json();
+    const body = await request.json();
+    const { name, email, password, role, phone, fax, address } = body;
     const { id } = params;
-    console.log('Update request:', { id, name, email, role, hasPassword: !!password });
+    console.log('Update request:', { id, name, email, role, hasPassword: !!password, phone, fax, address });
 
     // Validate required fields except password
     if (!name || !email || !role) {
@@ -65,6 +66,9 @@ export async function PUT(
       role,
       updatedAt: new Date(),
     };
+    if (typeof phone !== 'undefined') updateData.phone = phone;
+    if (typeof fax !== 'undefined') updateData.fax = fax;
+    if (typeof address !== 'undefined') updateData.address = address;
 
     // Only update password if provided and not empty
     if (password?.trim()) {
@@ -76,6 +80,9 @@ export async function PUT(
       name: updateData.name,
       email: updateData.email,
       role: updateData.role,
+      phone: updateData.phone,
+      fax: updateData.fax,
+      address: updateData.address,
       hasPasswordUpdate: !!updateData.password 
     });
 

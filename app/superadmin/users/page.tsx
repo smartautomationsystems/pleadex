@@ -5,12 +5,22 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import AddressAutocomplete from '@/components/AddressAutocomplete';
+import type { Address } from '@/components/AddressAutocomplete';
 
 interface User {
   _id: string;
   name: string;
   email: string;
   role: UserRole;
+  phone?: string;
+  fax?: string;
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -22,7 +32,23 @@ type UserFormData = {
   email: string;
   role: UserRole;
   password: string;
+  phone: string;
+  fax: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
 };
+
+// Format a 10-digit phone number as (XXX) XXX-XXXX
+function formatPhoneNumber(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 10);
+  if (digits.length < 4) return digits;
+  if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
 
 export default function UserManagementPage() {
   const { data: session, status } = useSession();
@@ -34,7 +60,15 @@ export default function UserManagementPage() {
     name: '',
     email: '',
     role: 'user',
-    password: ''
+    password: '',
+    phone: '',
+    fax: '',
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      zip: ''
+    }
   });
 
   useEffect(() => {
@@ -67,11 +101,32 @@ export default function UserManagementPage() {
       const url = editingUser ? `/api/users/${editingUser._id}` : '/api/users';
       const method = editingUser ? 'PUT' : 'POST';
 
+      // Validate phone number format
+      if (formData.phone && !/^\+?1?\d{10}$/.test(formData.phone.replace(/[^0-9]/g, ''))) {
+        toast.error('Please enter a valid 10-digit phone number');
+        return;
+      }
+
+      // Validate fax number format
+      if (formData.fax && !/^\+?1?\d{10}$/.test(formData.fax.replace(/[^0-9]/g, ''))) {
+        toast.error('Please enter a valid 10-digit fax number');
+        return;
+      }
+
+      // Validate ZIP code format
+      if (formData.address.zip && !/^\d{5}(-\d{4})?$/.test(formData.address.zip)) {
+        toast.error('Please enter a valid ZIP code (e.g., 12345 or 12345-6789)');
+        return;
+      }
+
       // Ensure role is included and defaulted if somehow undefined
       const requestData = {
         name: formData.name,
         email: formData.email,
         role: formData.role || (editingUser ? editingUser.role : 'user'),
+        phone: formData.phone,
+        fax: formData.fax,
+        address: formData.address,
         ...(formData.password ? { password: formData.password } : {})
       };
 
@@ -94,7 +149,15 @@ export default function UserManagementPage() {
         name: '',
         email: '',
         role: 'user',
-        password: ''
+        password: '',
+        phone: '',
+        fax: '',
+        address: {
+          street: '',
+          city: '',
+          state: '',
+          zip: ''
+        }
       });
       setEditingUser(null);
       fetchUsers();
@@ -132,7 +195,15 @@ export default function UserManagementPage() {
       name: user.name,
       email: user.email,
       role: user.role,
-      password: '' // Don't populate password when editing
+      password: '', // Don't populate password when editing
+      phone: user.phone || '',
+      fax: user.fax || '',
+      address: user.address || {
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+      }
     });
   };
 
@@ -202,6 +273,39 @@ export default function UserManagementPage() {
                   {...(!editingUser && { required: true })}
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Phone Number</label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const formatted = formatPhoneNumber(e.target.value);
+                    setFormData(prev => ({ ...prev, phone: formatted }));
+                  }}
+                  className="w-full p-2 border rounded"
+                  placeholder="(123) 456-7890"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Fax Number</label>
+                <input
+                  type="tel"
+                  value={formData.fax}
+                  onChange={(e) => {
+                    const formatted = formatPhoneNumber(e.target.value);
+                    setFormData(prev => ({ ...prev, fax: formatted }));
+                  }}
+                  className="w-full p-2 border rounded"
+                  placeholder="(123) 456-7890"
+                />
+              </div>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium mb-1">Address</label>
+                <AddressAutocomplete
+                  value={formData.address}
+                  onChange={(address: Address) => setFormData(prev => ({ ...prev, address }))}
+                />
+              </div>
             </div>
             <div className="flex justify-end gap-2">
               {editingUser && (
@@ -213,7 +317,15 @@ export default function UserManagementPage() {
                       name: '',
                       email: '',
                       role: 'user',
-                      password: ''
+                      password: '',
+                      phone: '',
+                      fax: '',
+                      address: {
+                        street: '',
+                        city: '',
+                        state: '',
+                        zip: ''
+                      }
                     });
                   }}
                   className="btn btn-outline"
@@ -238,6 +350,7 @@ export default function UserManagementPage() {
                   <tr className="border-b">
                     <th className="text-left p-2">Name</th>
                     <th className="text-left p-2">Email</th>
+                    <th className="text-left p-2">Phone</th>
                     <th className="text-left p-2">Role</th>
                     <th className="text-left p-2">Created At</th>
                     <th className="text-right p-2">Actions</th>
@@ -248,6 +361,7 @@ export default function UserManagementPage() {
                     <tr key={user._id} className="border-b hover:bg-gray-50">
                       <td className="p-2">{user.name}</td>
                       <td className="p-2">{user.email}</td>
+                      <td className="p-2">{user.phone || '-'}</td>
                       <td className="p-2">
                         <span className={`px-2 py-1 rounded-full text-xs ${
                           user.role === 'superadmin' 

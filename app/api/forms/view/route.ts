@@ -24,10 +24,20 @@ export async function GET(request: Request) {
     }
 
     const { db } = await connectToDatabase();
-    const form = await db.collection<Form>("forms").findOne({
-      _id: new ObjectId(formId),
-      userId: new ObjectId(session.user.id)
-    });
+    let form;
+    if (session.user.role === 'superadmin') {
+      form = await db.collection<Form>("forms").findOne({ _id: new ObjectId(formId) });
+    } else {
+      form = await db.collection<Form>("forms").findOne({
+        _id: new ObjectId(formId),
+        $or: [
+          { userId: new ObjectId(session.user.id) },
+          { userId: session.user.id },
+          { userId: { $exists: false } },
+          { userId: 'superadmin' }
+        ]
+      });
+    }
 
     if (!form) {
       return NextResponse.json(

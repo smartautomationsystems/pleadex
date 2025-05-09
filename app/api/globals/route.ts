@@ -18,6 +18,19 @@ const PARTY_TYPES = [
   { id: 'next_friend', label: 'Next Friend', description: 'A person who represents someone unable to represent themselves' }
 ];
 
+const DEFAULT_CASE_EVENTS = [
+  { id: 'court_hearing', label: 'Court Hearing', description: 'A scheduled court appearance or hearing' },
+  { id: 'filing_deadline', label: 'Filing Deadline', description: 'Deadline for filing documents with the court' },
+  { id: 'discovery_deadline', label: 'Discovery Deadline', description: 'Deadline for completing discovery' },
+  { id: 'mediation', label: 'Mediation', description: 'Scheduled mediation session' },
+  { id: 'deposition', label: 'Deposition', description: 'Scheduled deposition' },
+  { id: 'trial', label: 'Trial', description: 'Scheduled trial date' },
+  { id: 'status_conference', label: 'Status Conference', description: 'Scheduled status conference with the court' },
+  { id: 'settlement_conference', label: 'Settlement Conference', description: 'Scheduled settlement conference' },
+  { id: 'motion_hearing', label: 'Motion Hearing', description: 'Hearing on a motion' },
+  { id: 'pretrial_conference', label: 'Pretrial Conference', description: 'Scheduled pretrial conference' }
+];
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -33,10 +46,11 @@ export async function GET() {
       .sort({ type: 1, label: 1 })
       .toArray();
 
-    // Always return party types for authenticated users
+    // Always return party types and case events for authenticated users
     return NextResponse.json({
       globals,
-      partyTypes: PARTY_TYPES
+      partyTypes: PARTY_TYPES,
+      caseEvents: DEFAULT_CASE_EVENTS
     });
   } catch (error) {
     console.error("Error fetching globals:", error);

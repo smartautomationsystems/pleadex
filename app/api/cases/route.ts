@@ -50,6 +50,7 @@ export async function POST(request: Request) {
       title,
       description,
       status: status || 'active',
+      events: [],
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -59,6 +60,7 @@ export async function POST(request: Request) {
       title,
       description,
       status,
+      events: [],
       createdAt: new Date(),
       updatedAt: new Date(),
     });

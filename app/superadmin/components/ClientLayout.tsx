@@ -2,6 +2,7 @@
 
 import SuperAdminMenu from '@/components/SuperAdminMenu';
 import { usePathname } from 'next/navigation';
+import { FaUsers, FaGlobe, FaCog, FaGavel, FaFileAlt } from 'react-icons/fa';
 
 export default function ClientLayout({
   children,

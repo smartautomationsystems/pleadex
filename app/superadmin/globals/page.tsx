@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import React, { useRef } from 'react';
+import AddressAutocomplete, { Address } from '@/components/AddressAutocomplete';
 
 interface Global {
   _id: string;
@@ -24,31 +25,54 @@ interface FieldDefinitionForm {
   repeatable?: boolean;
   placeholder: string;
   options: string[];
+  optionsType?: 'custom' | keyof typeof PREDEFINED_OPTIONS;
 }
 
-// Add the core categories as a constant array
-const CORE_CATEGORIES = [
-  'Party Info',
-  'Attorney Info',
-  'Court Info',
-  'Case Info',
-  'Document Meta',
-  'Motion/Argument Sections',
-  'Family & Relationship Info',
-  'Address & Contact Info',
-  'Employment Info',
-  'Health & Insurance Info',
-  'Property Info',
-  'Probate & Estate Info',
-  'Criminal Info (optional)',
-  'Discovery & Evidence Info',
-  'Form-Specific Variables',
+// Add predefined options
+const PREDEFINED_OPTIONS = {
+  'Party Type': ['Plaintiff', 'Defendant', 'Cross-Defendant', 'Cross-Plaintiff', 'Third-Party Defendant', 'Third-Party Plaintiff', 'Intervenor', 'Amicus Curiae'],
+  'Gender': ['Male', 'Female', 'Other', 'Prefer not to say'],
+  'Marital Status': ['Single', 'Married', 'Divorced', 'Widowed', 'Separated'],
+  'Employment Status': ['Employed', 'Unemployed', 'Self-Employed', 'Retired', 'Student'],
+  'Education Level': ['High School', 'Associate Degree', 'Bachelor Degree', 'Master Degree', 'Doctorate', 'Other']
+} as const;
+
+interface Subfield {
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+  options: string[];
+  optionsType: 'custom' | keyof typeof PREDEFINED_OPTIONS;
+  placeholder?: string;
+  repeatable?: boolean;
+  address?: Address;
+}
+
+// 1. Address subfields structure
+const ADDRESS_SUBFIELDS = [
+  { name: 'address1', label: 'Address 1', type: 'text', required: true },
+  { name: 'address2', label: 'Address 2', type: 'text', required: false },
+  { name: 'city', label: 'City', type: 'text', required: true },
+  { name: 'state', label: 'State', type: 'text', required: true },
+  { name: 'zip', label: 'Zip', type: 'text', required: true },
 ];
+
+// 2. Validation regex
+const PHONE_REGEX = /^\+?[0-9 .\-()]{7,20}$/;
+const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+interface CaseEventType {
+  id: string;
+  label: string;
+  description: string;
+}
 
 export default function GlobalsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [globals, setGlobals] = useState<Global[]>([]);
+  const [categories, setCategories] = useState<{ _id: string; name: string; description: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingGlobal, setEditingGlobal] = useState<Global | null>(null);
   const [formData, setFormData] = useState<{
@@ -68,7 +92,8 @@ export default function GlobalsPage() {
       fieldType: 'text',
       required: true,
       placeholder: '',
-      options: []
+      options: [],
+      optionsType: 'custom'
     }
   });
   const [showBulkImport, setShowBulkImport] = useState(false);
@@ -84,6 +109,34 @@ export default function GlobalsPage() {
     applyToAll: '' | 'replace' | 'keep';
     onConfirm: (actions: Record<string, 'replace' | 'keep'>) => void;
   }>(null);
+  const [showRepeaterModal, setShowRepeaterModal] = useState(false);
+  const [repeaterForm, setRepeaterForm] = useState({
+    key: '',
+    label: '',
+    coreCategory: '',
+    subfields: [
+      { name: '', label: '', type: 'text', required: false, options: [], optionsType: 'custom' as const, placeholder: '', repeatable: false, address: undefined }
+    ] as Subfield[]
+  });
+  const [isSubmittingRepeater, setIsSubmittingRepeater] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+  const [jsonEdit, setJsonEdit] = useState<{ [id: string]: string }>({});
+  const [jsonEditError, setJsonEditError] = useState<{ [id: string]: string }>({});
+  const [jsonEditSaving, setJsonEditSaving] = useState<{ [id: string]: boolean }>({});
+  const [editRepeaterModal, setEditRepeaterModal] = useState<null | { global: Global, form: typeof repeaterForm }> (null);
+  const [caseEvents, setCaseEvents] = useState<CaseEventType[]>([]);
+  const [newEventType, setNewEventType] = useState<CaseEventType>({
+    id: '',
+    label: '',
+    description: ''
+  });
+  const [showEventTypeModal, setShowEventTypeModal] = useState(false);
+  const [editingEventType, setEditingEventType] = useState<CaseEventType | null>(null);
+  const [eventTypeForm, setEventTypeForm] = useState<CaseEventType>({
+    id: '',
+    label: '',
+    description: ''
+  });
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -92,6 +145,8 @@ export default function GlobalsPage() {
       router.push('/dashboard');
     } else {
       fetchGlobals();
+      fetchCategories();
+      fetchCaseEvents();
     }
   }, [session, status, router]);
 
@@ -106,6 +161,30 @@ export default function GlobalsPage() {
       toast.error('Failed to load globals');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/globals/categories');
+      if (!response.ok) throw new Error('Failed to fetch categories');
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      toast.error('Failed to load categories');
+    }
+  };
+
+  const fetchCaseEvents = async () => {
+    try {
+      const response = await fetch('/api/globals');
+      if (!response.ok) throw new Error('Failed to fetch case events');
+      const data = await response.json();
+      setCaseEvents(data.caseEvents || []);
+    } catch (error) {
+      console.error('Error fetching case events:', error);
+      toast.error('Failed to load case events');
     }
   };
 
@@ -140,7 +219,8 @@ export default function GlobalsPage() {
           fieldType: 'text',
           required: true,
           placeholder: '',
-          options: []
+          options: [],
+          optionsType: 'custom'
         }
       });
       setEditingGlobal(null);
@@ -152,16 +232,19 @@ export default function GlobalsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this global variable?')) return;
-
     try {
       const response = await fetch(`/api/globals/${id}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to delete global variable');
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Failed to delete global variable');
+        } else {
+          throw new Error('Failed to delete global variable (unexpected response)');
+        }
       }
 
       toast.success('Global variable deleted successfully');
@@ -201,6 +284,25 @@ export default function GlobalsPage() {
     } catch (e) {
       toast.error('Invalid JSON');
       return;
+    }
+    // Add new categories if needed
+    const existingCategoryNames = new Set(categories.map(c => c.name));
+    const newCategories = Array.from(new Set(parsed
+      .map(v => v.coreCategory)
+      .filter(cat => cat && !existingCategoryNames.has(cat))));
+    for (const cat of newCategories) {
+      try {
+        await fetch('/api/globals/categories', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: cat, description: '' })
+        });
+      } catch (err) {
+        // Ignore errors for now
+      }
+    }
+    if (newCategories.length > 0) {
+      await fetchCategories();
     }
     // Fetch current globals to check for duplicates
     const res = await fetch('/api/globals');
@@ -339,6 +441,197 @@ export default function GlobalsPage() {
     return matchesCategory && matchesSearch;
   });
 
+  const handleRepeaterSubfieldChange = (idx: number, field: string, value: string | boolean | string[]) => {
+    setRepeaterForm(prev => ({
+      ...prev,
+      subfields: prev.subfields.map((subfield, i) => {
+        if (i === idx) {
+          if (field === 'optionsType' && typeof value === 'string') {
+            const options = value === 'custom' ? [] : [...PREDEFINED_OPTIONS[value as keyof typeof PREDEFINED_OPTIONS]];
+            return { ...subfield, [field]: value as keyof typeof PREDEFINED_OPTIONS | 'custom', options };
+          }
+          return { ...subfield, [field]: value };
+        }
+        return subfield;
+      })
+    }));
+  };
+  const addRepeaterSubfield = () => {
+    setRepeaterForm(prev => ({ ...prev, subfields: [...prev.subfields, { name: '', label: '', type: 'text', required: false, options: [], optionsType: 'custom' as const, placeholder: '', repeatable: false, address: undefined }] }));
+  };
+  const removeRepeaterSubfield = (idx: number) => {
+    setRepeaterForm(prev => ({ ...prev, subfields: prev.subfields.filter((_, i) => i !== idx) }));
+  };
+  const resetRepeaterForm = () => {
+    setRepeaterForm({ 
+      key: '', 
+      label: '', 
+      coreCategory: '', 
+      subfields: [{ 
+        name: '', 
+        label: '', 
+        type: 'text', 
+        required: false, 
+        options: [], 
+        optionsType: 'custom' as const, 
+        placeholder: '', 
+        repeatable: false, 
+        address: undefined
+      }] 
+    });
+  };
+  const handleRepeaterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingRepeater(true);
+    try {
+      const response = await fetch('/api/globals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'formField',
+          key: repeaterForm.key,
+          label: repeaterForm.label,
+          category: 'fieldDefinition',
+          coreCategory: repeaterForm.coreCategory,
+          value: {
+            fieldType: 'repeater',
+            subfields: repeaterForm.subfields
+          }
+        })
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to create repeater variable');
+      }
+      toast.success('Repeater variable created');
+      setShowRepeaterModal(false);
+      resetRepeaterForm();
+      fetchGlobals();
+    } catch (err: any) {
+      toast.error(err.message || 'Failed to create repeater variable');
+    } finally {
+      setIsSubmittingRepeater(false);
+    }
+  };
+
+  // Handler for saving JSON edit
+  const handleSaveJsonEdit = async (global: Global) => {
+    setJsonEditSaving(prev => ({ ...prev, [global._id]: true }));
+    setJsonEditError(prev => ({ ...prev, [global._id]: '' }));
+    try {
+      let newValue;
+      try {
+        newValue = JSON.parse(jsonEdit[global._id] || '');
+      } catch (e: any) {
+        setJsonEditError(prev => ({ ...prev, [global._id]: 'Invalid JSON: ' + e.message }));
+        setJsonEditSaving(prev => ({ ...prev, [global._id]: false }));
+        return;
+      }
+      const response = await fetch('/api/globals', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...global,
+          value: newValue,
+          _id: global._id,
+        }),
+      });
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Failed to update variable');
+        } else {
+          throw new Error('Failed to update variable (unexpected response)');
+        }
+      }
+      toast.success('Variable updated');
+      setJsonEditSaving(prev => ({ ...prev, [global._id]: false }));
+      setJsonEditError(prev => ({ ...prev, [global._id]: '' }));
+      fetchGlobals();
+    } catch (error: any) {
+      setJsonEditError(prev => ({ ...prev, [global._id]: error.message || 'Failed to update variable' }));
+      setJsonEditSaving(prev => ({ ...prev, [global._id]: false }));
+    }
+  };
+
+  // Helper to open repeater edit modal
+  const openEditRepeaterModal = (global: Global) => {
+    setEditRepeaterModal({
+      global,
+      form: {
+        key: global.key,
+        label: global.label,
+        coreCategory: (global as any).coreCategory || '',
+        subfields: global.value.subfields || []
+      }
+    });
+  };
+
+  // Handler for saving repeater edits
+  const handleSaveEditRepeater = async () => {
+    if (!editRepeaterModal) return;
+    try {
+      const response = await fetch('/api/globals', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...editRepeaterModal.global,
+          key: editRepeaterModal.form.key,
+          label: editRepeaterModal.form.label,
+          coreCategory: editRepeaterModal.form.coreCategory,
+          value: {
+            fieldType: 'repeater',
+            subfields: editRepeaterModal.form.subfields
+          },
+          _id: editRepeaterModal.global._id,
+        }),
+      });
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'Failed to update variable');
+        } else {
+          throw new Error('Failed to update variable (unexpected response)');
+        }
+      }
+      toast.success('Repeater variable updated');
+      setEditRepeaterModal(null);
+      fetchGlobals();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to update variable');
+    }
+  };
+
+  const handleAddEventType = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/globals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'caseEvent',
+          key: newEventType.id,
+          label: newEventType.label,
+          value: {
+            description: newEventType.description
+          },
+          category: 'referenceObject'
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to add event type');
+
+      toast.success('Event type added successfully');
+      setNewEventType({ id: '', label: '', description: '' });
+      fetchGlobals();
+    } catch (error) {
+      console.error('Error adding event type:', error);
+      toast.error('Failed to add event type');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -351,12 +644,30 @@ export default function GlobalsPage() {
     <div className="container mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-4">Global Variables Management</h1>
-        <button
-          className="btn btn-secondary mb-4"
-          onClick={() => setShowBulkImport((v) => !v)}
-        >
-          {showBulkImport ? 'Close Bulk Import' : 'Bulk Import'}
-        </button>
+        <div className="flex gap-2 mb-4">
+          <button
+            className="btn btn-secondary"
+            onClick={() => setShowBulkImport((v) => !v)}
+          >
+            {showBulkImport ? 'Close Bulk Import' : 'Bulk Import'}
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowRepeaterModal(true)}
+          >
+            <FaPlus className="inline mr-1" /> Create Repeater Variable
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setEditingEventType(null);
+              setEventTypeForm({ id: '', label: '', description: '' });
+              setShowEventTypeModal(true);
+            }}
+          >
+            <FaPlus className="inline mr-1" /> Add Case Event Type
+          </button>
+        </div>
         {showBulkImport && (
           <div className="bg-gray-50 border rounded p-4 mb-6">
             <h2 className="text-lg font-semibold mb-2">Bulk Import Global Variables</h2>
@@ -380,6 +691,104 @@ export default function GlobalsPage() {
                 </ul>
               </div>
             )}
+          </div>
+        )}
+        {showRepeaterModal && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
+            style={{ resize: 'both', overflow: 'auto', minWidth: 400, minHeight: 400 }}
+          >
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+              <button className="absolute top-2 right-2 btn btn-xs btn-circle btn-ghost" onClick={() => { setShowRepeaterModal(false); resetRepeaterForm(); }}>✕</button>
+              <h2 className="text-lg font-bold mb-4">Create Repeater Variable</h2>
+              <form onSubmit={handleRepeaterSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Key (array variable name)</label>
+                  <input type="text" className="w-full p-2 border rounded" value={repeaterForm.key} onChange={e => setRepeaterForm(prev => ({ ...prev, key: e.target.value }))} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Label</label>
+                  <input type="text" className="w-full p-2 border rounded" value={repeaterForm.label} onChange={e => setRepeaterForm(prev => ({ ...prev, label: e.target.value }))} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Core Global Variable Category</label>
+                  <select className="w-full p-2 border rounded" value={repeaterForm.coreCategory} onChange={e => setRepeaterForm(prev => ({ ...prev, coreCategory: e.target.value }))} required>
+                    <option value="">Select a category</option>
+                    {categories.map(cat => (
+                      <option key={cat._id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Subfields</label>
+                  <div className="space-y-2">
+                    {repeaterForm.subfields.map((sf, idx) => (
+                      <div key={idx} className="flex flex-col gap-2 p-2 border rounded">
+                        <div className="flex gap-2 items-end">
+                          <input type="text" placeholder="Name" className="p-2 border rounded w-1/4" value={sf.name} onChange={e => handleRepeaterSubfieldChange(idx, 'name', e.target.value)} required />
+                          <input type="text" placeholder="Label" className="p-2 border rounded w-1/4" value={sf.label} onChange={e => handleRepeaterSubfieldChange(idx, 'label', e.target.value)} required />
+                          <select className="p-2 border rounded w-1/4" value={sf.type} onChange={e => handleRepeaterSubfieldChange(idx, 'type', e.target.value)}>
+                            <option value="text">Text</option>
+                            <option value="textarea">Text Area</option>
+                            <option value="select">Select</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="radio">Radio</option>
+                            <option value="date">Date</option>
+                            <option value="phone">Phone Number</option>
+                            <option value="email">Email</option>
+                            <option value="address">Address</option>
+                          </select>
+                          <label className="flex items-center gap-1 text-xs">
+                            <input type="checkbox" checked={sf.required} onChange={e => handleRepeaterSubfieldChange(idx, 'required', e.target.checked)} /> Required
+                          </label>
+                          {!['checkbox', 'select', 'phone', 'email', 'address'].includes(sf.type) && (
+                            <input type="text" placeholder="Placeholder" className="p-2 border rounded w-1/4" value={sf.placeholder || ''} onChange={e => handleRepeaterSubfieldChange(idx, 'placeholder', e.target.value)} />
+                          )}
+                          <label className="flex items-center gap-1 text-xs">
+                            <input type="checkbox" checked={sf.repeatable || false} onChange={e => handleRepeaterSubfieldChange(idx, 'repeatable', e.target.checked)} /> Repeatable
+                          </label>
+                          {repeaterForm.subfields.length > 1 && (
+                            <button type="button" className="btn btn-xs btn-error" onClick={() => removeRepeaterSubfield(idx)}>Remove</button>
+                          )}
+                        </div>
+                        {sf.type === 'select' && (
+                          <div className="mt-2">
+                            <label className="block text-sm font-medium mb-1">Options Source</label>
+                            <select 
+                              className="select select-bordered w-full" 
+                              value={sf.optionsType}
+                              onChange={e => handleRepeaterSubfieldChange(idx, 'optionsType', e.target.value)}
+                            >
+                              <option value="custom">Custom Options</option>
+                              {Object.keys(PREDEFINED_OPTIONS).map((key) => (
+                                <option key={key} value={key}>{key}</option>
+                              ))}
+                            </select>
+                            {sf.optionsType === 'custom' && (
+                              <div className="mt-2">
+                                <label className="block text-sm font-medium mb-1">Custom Options (one per line)</label>
+                                <textarea
+                                  className="w-full p-2 border rounded"
+                                  rows={4}
+                                  value={sf.options.join('\n')}
+                                  onChange={e => handleRepeaterSubfieldChange(idx, 'options', e.target.value.split('\n').filter(Boolean))}
+                                  placeholder="Enter options, one per line"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    <button type="button" className="btn btn-xs btn-outline mt-2" onClick={addRepeaterSubfield}>+ Add Subfield</button>
+                  </div>
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button type="button" className="btn btn-outline" onClick={() => { setShowRepeaterModal(false); resetRepeaterForm(); }}>Cancel</button>
+                  <button type="submit" className="btn btn-primary" disabled={isSubmittingRepeater}>{isSubmittingRepeater ? 'Saving...' : 'Create Repeater Variable'}</button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
         {/* Add/Edit Global Variable Form */}
@@ -426,8 +835,8 @@ export default function GlobalsPage() {
                   required
                 >
                   <option value="">Select a category</option>
-                  {CORE_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
+                  {categories.map((cat) => (
+                    <option key={cat._id} value={cat.name}>{cat.name}</option>
                   ))}
                 </select>
               </div>
@@ -476,21 +885,26 @@ export default function GlobalsPage() {
                     <option value="checkbox">Checkbox</option>
                     <option value="radio">Radio</option>
                     <option value="date">Date</option>
+                    <option value="phone">Phone Number</option>
+                    <option value="email">Email</option>
+                    <option value="address">Address</option>
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">Placeholder</label>
-                  <input
-                    type="text"
-                    value={(formData.value as FieldDefinitionForm).placeholder}
-                    onChange={(e) => setFormData(prev => ({
-                      ...prev,
-                      value: { ...prev.value as FieldDefinitionForm, placeholder: e.target.value }
-                    }))}
-                    className="w-full p-2 border rounded"
-                  />
-                </div>
+                {!['checkbox', 'select', 'phone', 'email', 'address'].includes((formData.value as FieldDefinitionForm).fieldType) && (
+                  <div>
+                    <label className="block text-sm font-medium mb-1">Placeholder</label>
+                    <input
+                      type="text"
+                      value={(formData.value as FieldDefinitionForm).placeholder}
+                      onChange={(e) => setFormData(prev => ({
+                        ...prev,
+                        value: { ...prev.value as FieldDefinitionForm, placeholder: e.target.value }
+                      }))}
+                      className="w-full p-2 border rounded"
+                    />
+                  </div>
+                )}
 
                 <div className="flex items-center">
                   <input
@@ -519,18 +933,77 @@ export default function GlobalsPage() {
 
                 {(['select', 'radio'] as string[]).includes((formData.value as FieldDefinitionForm).fieldType) && (
                   <div>
-                    <label className="block text-sm font-medium mb-1">Options (one per line)</label>
-                    <textarea
-                      value={(formData.value as FieldDefinitionForm).options.join('\n')}
-                      onChange={(e) => setFormData(prev => ({
+                    <label className="block text-sm font-medium mb-1">Options Source</label>
+                    <select
+                      className="w-full p-2 border rounded mb-2"
+                      value={(formData.value as FieldDefinitionForm).optionsType || 'custom'}
+                      onChange={e => {
+                        const value = e.target.value as 'custom' | keyof typeof PREDEFINED_OPTIONS;
+                        setFormData(prev => {
+                          let options: string[] = [];
+                          if (value === 'custom') {
+                            options = (prev.value as FieldDefinitionForm).options || [];
+                          } else {
+                            options = [...PREDEFINED_OPTIONS[value]];
+                          }
+                          return {
+                            ...prev,
+                            value: {
+                              ...(prev.value as FieldDefinitionForm),
+                              optionsType: value,
+                              options,
+                            }
+                          };
+                        });
+                      }}
+                    >
+                      <option value="custom">Custom Options</option>
+                      {Object.keys(PREDEFINED_OPTIONS).map((key) => (
+                        <option key={key} value={key}>{key}</option>
+                      ))}
+                    </select>
+                    {((formData.value as FieldDefinitionForm).optionsType || 'custom') === 'custom' && (
+                      <div className="mt-2">
+                        <label className="block text-sm font-medium mb-1">Custom Options (one per line)</label>
+                        <textarea
+                          value={(formData.value as FieldDefinitionForm).options.join('\n')}
+                          onChange={e => setFormData(prev => ({
+                            ...prev,
+                            value: {
+                              ...(prev.value as FieldDefinitionForm),
+                              options: e.target.value.split('\n').filter(Boolean)
+                            }
+                          }))}
+                          className="w-full p-2 border rounded"
+                          rows={4}
+                          placeholder="Enter options, one per line"
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {// 3. In the main variable form, if fieldType is 'address', show address subfields (read-only)
+                (formData.value as FieldDefinitionForm).fieldType === 'address' && (
+                  <div className="mt-2">
+                    <label className="block text-sm font-medium mb-1">Address</label>
+                    <AddressAutocomplete
+                      value={{
+                        street: (formData.value as any).street || '',
+                        city: (formData.value as any).city || '',
+                        state: (formData.value as any).state || '',
+                        zip: (formData.value as any).zip || '',
+                      }}
+                      onChange={(address: Address) => setFormData(prev => ({
                         ...prev,
                         value: {
-                          ...prev.value as FieldDefinitionForm,
-                          options: e.target.value.split('\n').filter(Boolean)
+                          ...(prev.value as FieldDefinitionForm),
+                          street: address.street,
+                          city: address.city,
+                          state: address.state,
+                          zip: address.zip,
                         }
                       }))}
-                      className="w-full p-2 border rounded"
-                      rows={4}
                     />
                   </div>
                 )}
@@ -553,7 +1026,8 @@ export default function GlobalsPage() {
                         fieldType: 'text',
                         required: true,
                         placeholder: '',
-                        options: []
+                        options: [],
+                        optionsType: 'custom'
                       }
                     });
                   }}
@@ -588,8 +1062,8 @@ export default function GlobalsPage() {
               onChange={e => setCategoryFilter(e.target.value)}
             >
               <option value="">All Categories</option>
-              {CORE_CATEGORIES.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+              {categories.map(cat => (
+                <option key={cat._id} value={cat.name}>{cat.name}</option>
               ))}
             </select>
           </div>
@@ -606,33 +1080,53 @@ export default function GlobalsPage() {
                 const isExpanded = expanded === global._id;
                 return (
                   <div key={global._id} className="border rounded p-4 bg-gray-50">
-                    <div className="flex justify-between items-center cursor-pointer" onClick={() => setExpanded(isExpanded ? null : global._id)}>
+                    <div className="flex justify-between items-center cursor-pointer" onClick={() => {
+                      if (global.value && global.value.fieldType === 'repeater') {
+                        openEditRepeaterModal(global);
+                      } else {
+                        setExpanded(isExpanded ? null : global._id);
+                      }
+                    }}>
                       <div>
                         <span className="font-semibold">{global.label}</span> <span className="text-xs text-gray-500">({global.key})</span>
                         <span className="ml-2 text-sm text-gray-600">{global.type} | {(global as any).coreCategory || ''}</span>
                       </div>
-                      <button className="btn btn-xs btn-outline">{isExpanded ? 'Collapse' : 'Expand'}</button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={e => { e.stopPropagation(); handleEdit(global); }}
+                          className="text-blue-500 hover:text-blue-600"
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          onClick={e => { e.stopPropagation(); setPendingDeleteId(global._id); }}
+                          className="text-red-500 hover:text-red-600"
+                        >
+                          <FaTrash />
+                        </button>
+                        <button className="btn btn-xs btn-outline">{isExpanded ? 'Collapse' : 'Expand'}</button>
+                      </div>
                     </div>
-                    {isExpanded && (
+                    {isExpanded && global.value && global.value.fieldType !== 'repeater' && (
                       <div className="mt-4">
-                        <div className="flex justify-between items-center mb-2">
-                          <div className="text-gray-600 text-sm">Category: {global.category} | <span className="font-semibold">{(global as any).coreCategory || ''}</span></div>
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => handleEdit(global)}
-                              className="text-blue-500 hover:text-blue-600"
-                            >
-                              <FaEdit />
-                            </button>
-                            <button
-                              onClick={() => handleDelete(global._id)}
-                              className="text-red-500 hover:text-red-600"
-                            >
-                              <FaTrash />
-                            </button>
-                          </div>
-                        </div>
-                        <pre className="text-sm text-gray-600 bg-white p-2 rounded border overflow-x-auto">
+                        <div className="text-gray-600 text-sm">Category: {global.category} | <span className="font-semibold">{(global as any).coreCategory || ''}</span></div>
+                        <label className="block text-xs font-semibold mb-1 mt-2">Edit JSON Value</label>
+                        <textarea
+                          className="w-full font-mono p-2 border rounded bg-white text-xs"
+                          rows={8}
+                          value={jsonEdit[global._id] ?? JSON.stringify(global.value, null, 2)}
+                          onChange={e => setJsonEdit(prev => ({ ...prev, [global._id]: e.target.value }))}
+                          spellCheck={false}
+                        />
+                        {jsonEditError[global._id] && <div className="text-red-500 text-xs mt-1">{jsonEditError[global._id]}</div>}
+                        <button
+                          className="btn btn-xs btn-primary mt-2"
+                          disabled={jsonEditSaving[global._id]}
+                          onClick={() => handleSaveJsonEdit(global)}
+                        >
+                          {jsonEditSaving[global._id] ? 'Saving...' : 'Save'}
+                        </button>
+                        <pre className="text-sm text-gray-600 bg-white p-2 rounded border overflow-x-auto mt-2">
                           {JSON.stringify(global.value, null, 2)}
                         </pre>
                         <div className="text-xs text-gray-400 mt-2">Created: {new Date(global.createdAt).toLocaleString()} | Updated: {new Date(global.updatedAt).toLocaleString()}</div>
@@ -645,6 +1139,241 @@ export default function GlobalsPage() {
           </div>
         </div>
         {duplicateModal && <DuplicateModal />}
+        {pendingDeleteId && (
+          <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+              <h2 className="text-lg font-bold mb-4">Delete Variable</h2>
+              <p className="mb-4">Are you sure you want to delete this global variable? This action cannot be undone.</p>
+              <div className="flex justify-end gap-2">
+                <button className="btn btn-outline" onClick={() => setPendingDeleteId(null)}>Cancel</button>
+                <button className="btn btn-error" onClick={() => { handleDelete(pendingDeleteId); setPendingDeleteId(null); }}>Delete</button>
+              </div>
+            </div>
+          </div>
+        )}
+        {editRepeaterModal && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
+            style={{ resize: 'both', overflow: 'auto', minWidth: 400, minHeight: 400 }}
+          >
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full relative">
+              <button className="absolute top-2 right-2 btn btn-xs btn-circle btn-ghost" onClick={() => setEditRepeaterModal(null)}>✕</button>
+              <h2 className="text-lg font-bold mb-4">Edit Repeater Variable</h2>
+              <form onSubmit={e => { e.preventDefault(); handleSaveEditRepeater(); }} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Key (array variable name)</label>
+                  <input type="text" className="w-full p-2 border rounded" value={editRepeaterModal.form.key} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, key: e.target.value } })} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Label</label>
+                  <input type="text" className="w-full p-2 border rounded" value={editRepeaterModal.form.label} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, label: e.target.value } })} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Core Global Variable Category</label>
+                  <select className="w-full p-2 border rounded" value={editRepeaterModal.form.coreCategory} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, coreCategory: e.target.value } })} required>
+                    <option value="">Select a category</option>
+                    {categories.map(cat => (
+                      <option key={cat._id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Subfields</label>
+                  <div className="space-y-2">
+                    {editRepeaterModal.form.subfields.map((sf, idx) => (
+                      <div key={idx} className="flex flex-col gap-2 p-2 border rounded">
+                        <div className="flex gap-2 items-end">
+                          <input type="text" placeholder="Name" className="p-2 border rounded w-1/4" value={sf.name} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, name: e.target.value } : s) } })} required />
+                          <input type="text" placeholder="Label" className="p-2 border rounded w-1/4" value={sf.label} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, label: e.target.value } : s) } })} required />
+                          <select className="p-2 border rounded w-1/4" value={sf.type} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, type: e.target.value } : s) } })}>
+                            <option value="text">Text</option>
+                            <option value="textarea">Text Area</option>
+                            <option value="select">Select</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="radio">Radio</option>
+                            <option value="date">Date</option>
+                            <option value="phone">Phone Number</option>
+                            <option value="email">Email</option>
+                            <option value="address">Address</option>
+                          </select>
+                          <label className="flex items-center gap-1 text-xs">
+                            <input type="checkbox" checked={sf.required} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, required: e.target.checked } : s) } })} /> Required
+                          </label>
+                          {!['checkbox', 'select', 'phone', 'email', 'address'].includes(sf.type) && (
+                            <input type="text" placeholder="Placeholder" className="p-2 border rounded w-1/4" value={sf.placeholder || ''} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, placeholder: e.target.value } : s) } })} />
+                          )}
+                          <label className="flex items-center gap-1 text-xs">
+                            <input type="checkbox" checked={sf.repeatable || false} onChange={e => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.map((s, i) => i === idx ? { ...s, repeatable: e.target.checked } : s) } })} /> Repeatable
+                          </label>
+                          {editRepeaterModal.form.subfields.length > 1 && (
+                            <button type="button" className="btn btn-xs btn-error" onClick={() => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: modal.form.subfields.filter((_, i) => i !== idx) } })}>Remove</button>
+                          )}
+                        </div>
+                        {sf.type === 'address' && (
+                          <div className="mt-2">
+                            <label className="block text-sm font-medium mb-1">Address</label>
+                            <AddressAutocomplete
+                              value={sf.address || { street: '', city: '', state: '', zip: '' }}
+                              onChange={(address: Address) => setEditRepeaterModal(modal => modal && {
+                                ...modal,
+                                form: {
+                                  ...modal.form,
+                                  subfields: modal.form.subfields.map((s, i) => i === idx ? {
+                                    ...s,
+                                    address,
+                                  } : s)
+                                }
+                              })}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    <button type="button" className="btn btn-xs btn-outline mt-2" onClick={() => setEditRepeaterModal(modal => modal && { ...modal, form: { ...modal.form, subfields: [...modal.form.subfields, { name: '', label: '', type: 'text', required: false, options: [], optionsType: 'custom', placeholder: '', repeatable: false, address: undefined }] } })}>+ Add Subfield</button>
+                  </div>
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button type="button" className="btn btn-outline" onClick={() => setEditRepeaterModal(null)}>Cancel</button>
+                  <button type="submit" className="btn btn-primary">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+        {/* Case Event Types Modal */}
+        {showEventTypeModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full">
+              <h2 className="text-xl font-semibold mb-4">
+                {editingEventType ? 'Edit Case Event Type' : 'Add Case Event Type'}
+              </h2>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                try {
+                  const response = await fetch('/api/globals', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      type: 'caseEvent',
+                      key: eventTypeForm.id,
+                      label: eventTypeForm.label,
+                      value: {
+                        description: eventTypeForm.description
+                      },
+                      category: 'referenceObject'
+                    }),
+                  });
+
+                  if (!response.ok) throw new Error('Failed to save event type');
+                  
+                  toast.success('Event type saved successfully');
+                  setShowEventTypeModal(false);
+                  fetchGlobals();
+                } catch (error) {
+                  console.error('Error saving event type:', error);
+                  toast.error('Failed to save event type');
+                }
+              }} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">ID</label>
+                  <input
+                    type="text"
+                    value={eventTypeForm.id}
+                    onChange={(e) => setEventTypeForm(prev => ({ ...prev, id: e.target.value }))}
+                    className="w-full p-2 border rounded"
+                    placeholder="e.g., court_hearing"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Label</label>
+                  <input
+                    type="text"
+                    value={eventTypeForm.label}
+                    onChange={(e) => setEventTypeForm(prev => ({ ...prev, label: e.target.value }))}
+                    className="w-full p-2 border rounded"
+                    placeholder="e.g., Court Hearing"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Description</label>
+                  <textarea
+                    value={eventTypeForm.description}
+                    onChange={(e) => setEventTypeForm(prev => ({ ...prev, description: e.target.value }))}
+                    className="w-full p-2 border rounded"
+                    placeholder="e.g., A scheduled court appearance or hearing"
+                    rows={3}
+                    required
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowEventTypeModal(false)}
+                    className="btn btn-outline"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    {editingEventType ? 'Update' : 'Add'} Event Type
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+        {/* Case Event Types Section */}
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Case Event Types</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Label</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {globals.filter(g => g.type === 'caseEvent').map((eventType) => (
+                  <tr key={eventType._id?.toString()}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{eventType.key}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{eventType.label}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500">{eventType.value?.description}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <button
+                        onClick={() => {
+                          setEditingEventType({
+                            id: eventType.key,
+                            label: eventType.label,
+                            description: eventType.value?.description
+                          });
+                          setEventTypeForm({
+                            id: eventType.key,
+                            label: eventType.label,
+                            description: eventType.value?.description
+                          });
+                          setShowEventTypeModal(true);
+                        }}
+                        className="text-blue-600 hover:text-blue-900 mr-2"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(eventType._id?.toString() || '')}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

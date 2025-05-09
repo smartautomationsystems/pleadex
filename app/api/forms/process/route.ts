@@ -24,6 +24,15 @@ export async function POST(request: Request) {
       return new NextResponse('Form ID and User ID are required', { status: 400 });
     }
 
+    const { db } = await connectToDatabase();
+    
+    // Get the form first to ensure it exists
+    const form = await db.collection('forms').findOne({ _id: new ObjectId(formId) });
+    if (!form) {
+      console.error('Form not found:', formId);
+      return new NextResponse('Form not found', { status: 404 });
+    }
+
     // Process the form with OCR and wait for completion
     const result = await processFormWithOCR(formId, userId);
     
@@ -33,7 +42,37 @@ export async function POST(request: Request) {
     }
 
     console.log('OCR processing completed successfully with fields:', result.fields?.length);
-    return NextResponse.json({ success: true, fields: result.fields });
+
+    // Trigger field matching process
+    const baseUrl = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : process.env.NEXT_PUBLIC_BASE_URL;
+
+    const fieldMatchingResponse = await fetch(`${baseUrl}/api/forms/process-fields`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.INTERNAL_API_KEY}`,
+      },
+      body: JSON.stringify({
+        formId,
+        userId
+      }),
+    });
+
+    if (!fieldMatchingResponse.ok) {
+      console.error('Field matching failed:', await fieldMatchingResponse.text());
+      return new NextResponse('Field matching failed', { status: 500 });
+    }
+
+    const fieldMatchingResult = await fieldMatchingResponse.json();
+    console.log('Field matching completed successfully');
+
+    return NextResponse.json({
+      success: true,
+      fields: result.fields,
+      matches: fieldMatchingResult.matches
+    });
   } catch (error) {
     console.error('OCR processing error:', {
       error,
