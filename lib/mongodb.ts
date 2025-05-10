@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
 import { MongoClient, Db } from 'mongodb';
 
 if (!process.env.MONGODB_URI) {
