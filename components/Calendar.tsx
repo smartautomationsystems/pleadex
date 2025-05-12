@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calendar as BigCalendar, dateFnsLocalizer } from "react-big-calendar";
+import { Calendar as BigCalendar, dateFnsLocalizer, View, ToolbarProps } from "react-big-calendar";
 import { format } from "date-fns/format";
 import { parse } from "date-fns/parse";
 import { startOfWeek } from "date-fns/startOfWeek";
@@ -39,6 +39,8 @@ interface CalendarProps {
 
 export default function Calendar({ events, onEventClick, onDateSelect }: CalendarProps) {
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
+  const [view, setView] = useState<View>("month");
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     setCalendarEvents(events);
@@ -56,8 +58,28 @@ export default function Calendar({ events, onEventClick, onDateSelect }: Calenda
     return { style };
   };
 
+  const handleEventClick = (event: CalendarEvent) => {
+    console.log('Calendar event clicked:', event);
+    onEventClick?.(event);
+  };
+
+  const handleDateSelect = (slotInfo: { start: Date; end: Date }) => {
+    console.log('Calendar date selected:', slotInfo);
+    onDateSelect?.(slotInfo.start, slotInfo.end);
+  };
+
+  const handleViewChange = (newView: View) => {
+    console.log('Calendar view changed:', newView);
+    setView(newView);
+  };
+
+  const handleNavigate = (newDate: Date) => {
+    console.log('Calendar date changed:', newDate);
+    setDate(newDate);
+  };
+
   return (
-    <div className="h-[600px] bg-white rounded-lg shadow p-4">
+    <div className="h-[600px] bg-white rounded-lg shadow p-4 relative">
       <BigCalendar
         localizer={localizer}
         events={calendarEvents}
@@ -65,13 +87,79 @@ export default function Calendar({ events, onEventClick, onDateSelect }: Calenda
         endAccessor="end"
         style={{ height: "100%" }}
         eventPropGetter={eventStyleGetter}
-        onSelectEvent={onEventClick}
-        onSelectSlot={({ start, end }) => onDateSelect && onDateSelect(start, end)}
+        onSelectEvent={handleEventClick}
+        onSelectSlot={handleDateSelect}
+        onView={handleViewChange}
+        onNavigate={handleNavigate}
+        view={view}
+        date={date}
         selectable
         popup
         views={["month", "week", "day"]}
         defaultView="month"
+        components={{
+          toolbar: CustomToolbar
+        }}
       />
+    </div>
+  );
+}
+
+// Custom toolbar component to ensure buttons are clickable
+function CustomToolbar(props: ToolbarProps) {
+  const goToBack = () => {
+    props.onNavigate('PREV');
+  };
+
+  const goToNext = () => {
+    props.onNavigate('NEXT');
+  };
+
+  const goToCurrent = () => {
+    props.onNavigate('TODAY');
+  };
+
+  const changeView = (view: View) => {
+    props.onView(view);
+  };
+
+  return (
+    <div className="rbc-toolbar">
+      <span className="rbc-btn-group">
+        <button type="button" onClick={goToBack} className="rbc-btn">
+          <span className="rbc-btn-content">Back</span>
+        </button>
+        <button type="button" onClick={goToCurrent} className="rbc-btn">
+          <span className="rbc-btn-content">Today</span>
+        </button>
+        <button type="button" onClick={goToNext} className="rbc-btn">
+          <span className="rbc-btn-content">Next</span>
+        </button>
+      </span>
+      <span className="rbc-toolbar-label">{props.label}</span>
+      <span className="rbc-btn-group">
+        <button 
+          type="button" 
+          onClick={() => changeView('month')} 
+          className={`rbc-btn ${props.view === 'month' ? 'rbc-active' : ''}`}
+        >
+          <span className="rbc-btn-content">Month</span>
+        </button>
+        <button 
+          type="button" 
+          onClick={() => changeView('week')} 
+          className={`rbc-btn ${props.view === 'week' ? 'rbc-active' : ''}`}
+        >
+          <span className="rbc-btn-content">Week</span>
+        </button>
+        <button 
+          type="button" 
+          onClick={() => changeView('day')} 
+          className={`rbc-btn ${props.view === 'day' ? 'rbc-active' : ''}`}
+        >
+          <span className="rbc-btn-content">Day</span>
+        </button>
+      </span>
     </div>
   );
 } 

@@ -35,11 +35,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { name, email, password, role } = await request.json();
+    const { firstName, lastName, email, password, role } = await request.json();
 
-    if (!name || !email || !password || !role) {
+    if (!firstName || !lastName || !email || !password || !role) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Missing required fields (firstName, lastName, email, password, role)' },
         { status: 400 }
       );
     }
@@ -60,7 +60,8 @@ export async function POST(request: Request) {
 
     // Create user
     const result = await db.collection('users').insertOne({
-      name,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
       role,

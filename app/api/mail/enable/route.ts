@@ -2,43 +2,63 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { connectToDatabase } from '@/lib/mongodb';
-import { makeZohoRequest } from '@/lib/zoho';
+import { getZohoAccessToken } from '@/lib/zoho';
 
 // Zoho Mail API configuration
 const ZOHO_DOMAIN = 'pleadex.com';
+const ZOHO_ORG_ID = process.env.ZOHO_ORG_ID!;
 
 interface ZohoAccountResponse {
-  id: string;
-  email: string;
-  status: string;
+  accountId: string;
+  primaryEmailAddress: string;
 }
 
-async function createZohoEmailAccount(username: string, userId: string): Promise<ZohoAccountResponse> {
-  try {
-    // Generate a secure random password that won't be used for direct login
-    const securePassword = Array.from(crypto.getRandomValues(new Uint8Array(32)))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-
-    // Create the email account in Zoho using the admin OAuth token
-    return makeZohoRequest<ZohoAccountResponse>('/accounts', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: `${username}@${ZOHO_DOMAIN}`,
-        password: securePassword,
-        displayName: username,
-        domain: ZOHO_DOMAIN,
-        // Disable direct login
-        loginEnabled: false,
-        // Set up forwarding to the user's primary email
-        forwardingEnabled: true,
-        forwardingAddress: userId, // This will be updated with the actual email
-      }),
-    });
-  } catch (error) {
-    console.error('Error creating Zoho email account:', error);
-    throw new Error('Failed to create email account');
+async function createZohoEmailUser({ username, firstName, lastName, password }: { username: string, firstName: string, lastName: string, password: string }) {
+  const accessToken = await getZohoAccessToken();
+  const primaryEmailAddress = `${username}@${ZOHO_DOMAIN}`;
+  const payload = {
+    primaryEmailAddress,
+    password,
+    firstName,
+    lastName,
+    displayName: `${firstName} ${lastName}`,
+    role: 'member',
+    country: 'us',
+    language: 'en',
+    timeZone: 'America/Los_Angeles',
+    oneTimePassword: false
+    // Add more fields as needed
+  };
+  const userRes = await fetch(`https://mail.zoho.com/api/organization/${ZOHO_ORG_ID}/accounts`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Zoho-oauthtoken ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  const userData = await userRes.json();
+  if (!userRes.ok) {
+    throw new Error(userData.message || JSON.stringify(userData));
   }
+  return userData;
+}
+
+function generateZohoPassword() {
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
+  const numbers = '0123456789';
+  const specials = '!@#$%^&*()_+-=';
+  const all = upper + lower + numbers + specials;
+  let password = '';
+  password += upper[Math.floor(Math.random() * upper.length)];
+  password += lower[Math.floor(Math.random() * lower.length)];
+  password += numbers[Math.floor(Math.random() * numbers.length)];
+  password += specials[Math.floor(Math.random() * specials.length)];
+  for (let i = 4; i < 16; i++) {
+    password += all[Math.floor(Math.random() * all.length)];
+  }
+  return password;
 }
 
 export async function POST(req: Request) {
@@ -52,7 +72,6 @@ export async function POST(req: Request) {
     }
 
     const { username } = await req.json();
-    
     if (!username) {
       return NextResponse.json(
         { message: 'Username is required' },
@@ -62,11 +81,21 @@ export async function POST(req: Request) {
 
     const { db } = await connectToDatabase();
 
+    // Fetch user's firstName and lastName from DB
+    const userDoc = await db.collection('users').findOne({ _id: session.user.id ? (typeof session.user.id === 'string' ? new (require('mongodb').ObjectId)(session.user.id) : session.user.id) : undefined });
+    if (!userDoc || !userDoc.firstName || !userDoc.lastName) {
+      return NextResponse.json(
+        { message: 'User profile missing firstName or lastName' },
+        { status: 400 }
+      );
+    }
+    const firstName = userDoc.firstName;
+    const lastName = userDoc.lastName;
+
     // Check if user already has an email
     const existingEmail = await db.collection('userEmails').findOne({
       userId: session.user.id,
     });
-
     if (existingEmail) {
       return NextResponse.json(
         { message: 'User already has an email account' },
@@ -76,9 +105,8 @@ export async function POST(req: Request) {
 
     // Check if username is available
     const usernameTaken = await db.collection('userEmails').findOne({
-      email: `${username}@pleadex.com`,
+      email: `${username}@${ZOHO_DOMAIN}`,
     });
-
     if (usernameTaken) {
       return NextResponse.json(
         { message: 'Username is already taken' },
@@ -86,21 +114,25 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create Zoho email account
-    const zohoResponse = await createZohoEmailAccount(username, session.user.id);
+    // Generate a strong Zoho-compliant password
+    const securePassword = generateZohoPassword();
+
+    // Create Zoho email user
+    const zohoResponse = await createZohoEmailUser({ username, firstName, lastName, password: securePassword });
 
     // Store email in database
     await db.collection('userEmails').insertOne({
       userId: session.user.id,
-      email: `${username}@pleadex.com`,
+      email: `${username}@${ZOHO_DOMAIN}`,
       provider: 'zoho',
-      providerId: zohoResponse.id,
+      providerId: zohoResponse.data?.userId || '',
       status: 'active',
       subscriptionStatus: 'active',
       subscriptionExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
       lastActiveAt: new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
+      zohoPassword: securePassword, // Store for internal use only
     });
 
     // TODO: Implement billing/subscription logic here
@@ -110,7 +142,7 @@ export async function POST(req: Request) {
     // 3. Storing subscription details in the database
 
     return NextResponse.json({
-      emailAddress: `${username}@pleadex.com`,
+      emailAddress: `${username}@${ZOHO_DOMAIN}`,
       message: 'Email account created successfully',
     });
   } catch (error) {

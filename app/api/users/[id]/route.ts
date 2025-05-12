@@ -20,15 +20,15 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { name, email, password, role, phone, fax, address } = body;
+    const { firstName, lastName, email, password, role, phone, fax, address } = body;
     const { id } = params;
-    console.log('Update request:', { id, name, email, role, hasPassword: !!password, phone, fax, address });
+    console.log('Update request:', { id, firstName, lastName, email, role, hasPassword: !!password, phone, fax, address });
 
     // Validate required fields except password
-    if (!name || !email || !role) {
-      console.log('Missing required fields:', { name, email, role });
+    if (!firstName || !lastName || !email || !role) {
+      console.log('Missing required fields:', { firstName, lastName, email, role });
       return NextResponse.json(
-        { error: 'Name, email, and role are required' },
+        { error: 'firstName, lastName, email, and role are required' },
         { status: 400 }
       );
     }
@@ -61,7 +61,8 @@ export async function PUT(
 
     // Prepare update data
     const updateData: any = {
-      name,
+      firstName,
+      lastName,
       email,
       role,
       updatedAt: new Date(),
@@ -77,7 +78,8 @@ export async function PUT(
 
     console.log('Updating user with data:', { 
       id, 
-      name: updateData.name,
+      firstName: updateData.firstName,
+      lastName: updateData.lastName,
       email: updateData.email,
       role: updateData.role,
       phone: updateData.phone,

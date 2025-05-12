@@ -1,5 +1,6 @@
 import { connectToDatabase } from './mongodb';
 import { ObjectId } from 'mongodb';
+import axios from 'axios';
 
 interface ZohoTokenResponse {
   access_token: string;
@@ -32,6 +33,15 @@ export async function getZohoAccessToken(): Promise<string> {
   const now = new Date();
 
   if (tokens.access_token && tokens.access_token_expires_at && tokens.access_token_expires_at > now) {
+    console.log('🔐 Access Token Used:', tokens.access_token);
+    try {
+      const tokenInfo = await axios.get('https://accounts.zoho.com/oauth/v2/token/info', {
+        headers: { Authorization: `Zoho-oauthtoken ${tokens.access_token}` }
+      });
+      console.log('🔍 Token Info:', tokenInfo.data);
+    } catch (err) {
+      console.error('Failed to fetch token info:', err?.response?.data || err);
+    }
     return tokens.access_token;
   }
 
@@ -43,7 +53,7 @@ export async function getZohoAccessToken(): Promise<string> {
     grant_type: 'refresh_token',
   });
 
-  const res = await fetch('https://accounts.zoho.com/oauth/v2/token', {
+  const res = await fetch(process.env.ZOHO_TOKEN_URL!, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params
@@ -68,6 +78,16 @@ export async function getZohoAccessToken(): Promise<string> {
     }
   );
 
+  console.log('🔐 Access Token Used:', data.access_token);
+  try {
+    const tokenInfo = await axios.get('https://accounts.zoho.com/oauth/v2/token/info', {
+      headers: { Authorization: `Zoho-oauthtoken ${data.access_token}` }
+    });
+    console.log('🔍 Token Info:', tokenInfo.data);
+  } catch (err) {
+    console.error('Failed to fetch token info:', err?.response?.data || err);
+  }
+
   return data.access_token;
 }
 
@@ -81,14 +101,15 @@ export async function makeZohoRequest<T>(
     ...options,
     headers: {
       ...options.headers,
-      'Authorization': `Bearer ${accessToken}`,
+      'Authorization': `Zoho-oauthtoken ${accessToken}`,
       'Content-Type': 'application/json',
     },
   });
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || 'Zoho API request failed');
+    console.error('Zoho API error:', error);
+    throw new Error(error.message || JSON.stringify(error) || 'Zoho API request failed');
   }
 
   return response.json();

@@ -30,9 +30,10 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const { db } = await connectToDatabase();
-    const { name, phone, fax, address } = await request.json();
+    const { firstName, lastName, phone, fax, address } = await request.json();
     const updateData: any = {
-      name,
+      firstName,
+      lastName,
       phone,
       fax,
       address,

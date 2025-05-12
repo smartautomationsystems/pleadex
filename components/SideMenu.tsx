@@ -10,6 +10,7 @@ const menuItems = [
   { name: 'Cases', href: '/dashboard/cases', icon: FaFolder },
   { name: 'Documents', href: '/dashboard/documents', icon: FaFileAlt },
   { name: 'Forms', href: '/dashboard/forms', icon: FaClipboardList },
+  { name: 'Mail', href: '/dashboard/mail', icon: FaClipboardList },
   { name: 'Users', href: '/dashboard/users', icon: FaUsers },
 ];
 

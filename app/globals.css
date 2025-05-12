@@ -20,3 +20,93 @@ progress::-webkit-progress-value {
     @apply !capitalize;
   }
 }
+
+/* Calendar Styles */
+.rbc-calendar {
+  position: relative;
+  z-index: 1;
+}
+
+.rbc-toolbar {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rbc-toolbar-label {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0 1rem;
+}
+
+.rbc-btn-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.rbc-btn {
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4rem;
+}
+
+.rbc-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.rbc-btn.rbc-active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.rbc-btn-content {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.rbc-event {
+  cursor: pointer;
+}
+
+.rbc-event:hover {
+  opacity: 0.8;
+}
+
+.rbc-day-slot .rbc-event {
+  border: none;
+}
+
+.rbc-today {
+  background-color: #f3f4f6;
+}
+
+.rbc-off-range-bg {
+  background-color: #f9fafb;
+}
+
+.rbc-header {
+  padding: 0.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.rbc-month-view {
+  border: 1px solid #e5e7eb;
+}
+
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid #e5e7eb;
+}
+
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid #e5e7eb;
+}

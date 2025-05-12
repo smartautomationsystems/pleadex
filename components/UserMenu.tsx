@@ -37,6 +37,11 @@ export default function UserMenu() {
       label: 'Profile',
       href: '/dashboard/profile',
       icon: '👤'
+    },
+    {
+      label: 'Settings',
+      href: '/dashboard/settings',
+      icon: '⚙️'
     }
   ];
 

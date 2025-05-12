@@ -4,9 +4,20 @@ import toJSON from "./plugins/toJSON";
 // USER SCHEMA
 const userSchema = new mongoose.Schema(
   {
+    // Deprecated: use firstName and lastName instead
     name: {
       type: String,
       trim: true,
+    },
+    firstName: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+      required: true,
     },
     email: {
       type: String,
