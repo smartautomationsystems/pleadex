@@ -47,10 +47,14 @@ interface ChunkResult {
   section?: string;
 }
 
-// Initialize OpenAI
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Initialize OpenAI client only when needed
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY is not configured');
+  }
+  return new OpenAI({ apiKey });
+}
 
 // Legal document section detection
 const LEGAL_SECTIONS = [
@@ -313,7 +317,7 @@ async function getEmbedding(text: string): Promise<number[]> {
   const maxTokens = 8000; // Leave some buffer
   const truncatedText = text.slice(0, maxTokens * 4); // Rough estimate: 4 chars per token
   
-  const response = await openai.embeddings.create({
+  const response = await getOpenAIClient().embeddings.create({
     model: "text-embedding-3-small",
     input: truncatedText,
   });

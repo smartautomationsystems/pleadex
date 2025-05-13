@@ -57,6 +57,15 @@ const nextConfig = {
   },
   // Configure metadata base URL
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  // Add dynamic route configuration
+  async rewrites() {
+    return [
+      {
+        source: '/api/documents/search',
+        destination: '/api/documents/search',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
