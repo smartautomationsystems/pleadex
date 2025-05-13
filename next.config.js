@@ -36,8 +36,8 @@ const nextConfig = {
   skipMiddlewareUrlNormalize: true,
   // Add environment variables that should be available at build time
   env: {
-    MONGODB_URI: process.env.MONGODB_URI,
-    DATABASE_URL: process.env.MONGODB_URI, // Use MONGODB_URI for DATABASE_URL
+    MONGODB_URI: process.env.MONGODB_URI || "mongodb+srv://bcolombana:0penSesame123%21%40%23@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster",
+    DATABASE_URL: process.env.MONGODB_URI || "mongodb+srv://bcolombana:0penSesame123%21%40%23@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster",
   },
   // Skip server-side validation during build
   output: 'standalone',
