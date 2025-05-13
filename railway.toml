@@ -6,7 +6,7 @@ buildCommand = "npm run build"
 startCommand = "node .next/standalone/server.js"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 300
-restartPolicyType = "on-failure"
+restartPolicyType = "always"
 restartPolicyMaxRetries = 10
 timeout = 30000  # 30 seconds timeout
 
