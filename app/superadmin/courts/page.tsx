@@ -79,7 +79,7 @@ export default function CourtsPage() {
       if (filters.state) queryParams.append('state', filters.state);
       if (filters.county) queryParams.append('county', filters.county);
 
-      const response = await fetch(`/api/courts?${queryParams.toString()}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courts?${queryParams.toString()}`);
       if (!response.ok) throw new Error('Failed to fetch courts');
       const data = await response.json();
       setCourts(data);

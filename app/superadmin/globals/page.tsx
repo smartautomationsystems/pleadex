@@ -152,7 +152,7 @@ export default function GlobalsPage() {
 
   const fetchGlobals = async () => {
     try {
-      const response = await fetch('/api/globals');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`);
       if (!response.ok) throw new Error('Failed to fetch globals');
       const data = await response.json();
       setGlobals(data.globals || []);
@@ -166,7 +166,7 @@ export default function GlobalsPage() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('/api/globals/categories');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals/categories`);
       if (!response.ok) throw new Error('Failed to fetch categories');
       const data = await response.json();
       setCategories(data);
@@ -178,7 +178,7 @@ export default function GlobalsPage() {
 
   const fetchCaseEvents = async () => {
     try {
-      const response = await fetch('/api/globals');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`);
       if (!response.ok) throw new Error('Failed to fetch case events');
       const data = await response.json();
       setCaseEvents(data.caseEvents || []);
@@ -191,7 +191,7 @@ export default function GlobalsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const url = '/api/globals';
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/globals`;
       const method = editingGlobal ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -233,7 +233,7 @@ export default function GlobalsPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`/api/globals/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals/${id}`, {
         method: 'DELETE',
       });
 
@@ -292,7 +292,7 @@ export default function GlobalsPage() {
       .filter(cat => cat && !existingCategoryNames.has(cat))));
     for (const cat of newCategories) {
       try {
-        await fetch('/api/globals/categories', {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals/categories`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name: cat, description: '' })
@@ -305,7 +305,7 @@ export default function GlobalsPage() {
       await fetchCategories();
     }
     // Fetch current globals to check for duplicates
-    const res = await fetch('/api/globals');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`);
     const data = await res.json();
     const { duplicates, newVars } = checkDuplicates(parsed, data.globals || []);
     if (duplicates.length > 0) {
@@ -330,7 +330,7 @@ export default function GlobalsPage() {
     // Import new variables
     for (const variable of newVars) {
       try {
-        const response = await fetch('/api/globals', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(variable),
@@ -349,12 +349,12 @@ export default function GlobalsPage() {
     for (const variable of duplicates) {
       if (actions[variable.key] === 'replace') {
         // Find the existing variable's _id
-        const res = await fetch('/api/globals');
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`);
         const data = await res.json();
         const existing = (data.globals || []).find((g: any) => g.key === variable.key);
         if (existing) {
           try {
-            const response = await fetch('/api/globals', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ ...variable, _id: existing._id }),
@@ -484,7 +484,7 @@ export default function GlobalsPage() {
     e.preventDefault();
     setIsSubmittingRepeater(true);
     try {
-      const response = await fetch('/api/globals', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -527,7 +527,7 @@ export default function GlobalsPage() {
         setJsonEditSaving(prev => ({ ...prev, [global._id]: false }));
         return;
       }
-      const response = await fetch('/api/globals', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -572,7 +572,7 @@ export default function GlobalsPage() {
   const handleSaveEditRepeater = async () => {
     if (!editRepeaterModal) return;
     try {
-      const response = await fetch('/api/globals', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -607,7 +607,7 @@ export default function GlobalsPage() {
   const handleAddEventType = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/globals', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1250,7 +1250,7 @@ export default function GlobalsPage() {
               <form onSubmit={async (e) => {
                 e.preventDefault();
                 try {
-                  const response = await fetch('/api/globals', {
+                  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/globals`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
