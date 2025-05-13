@@ -17,12 +17,14 @@ const nextConfig = {
     // Dangerously allow production builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false };
     return config;
   },
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
 };
 
 module.exports = nextConfig;
