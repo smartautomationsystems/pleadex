@@ -89,7 +89,7 @@ export default function FormsPage() {
   useEffect(() => {
     const fetchSystemForms = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/forms?system=1`);
+        const response = await fetch('/api/forms?system=1');
         if (!response.ok) throw new Error('Failed to fetch system forms');
         const data = await response.json();
         const sysForms = data.filter((form: any) => !form.userId || form.userId === 'superadmin');
