@@ -26,9 +26,17 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@mui/material', '@emotion/react', '@emotion/styled'],
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'pleadex.com'],
+    },
   },
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
+  // Add environment variables that should be available at build time
+  env: {
+    MONGODB_URI: process.env.MONGODB_URI,
+    DATABASE_URL: process.env.MONGODB_URI, // Use MONGODB_URI for DATABASE_URL
+  },
 };
 
 module.exports = nextConfig;
