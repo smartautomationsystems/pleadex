@@ -7,6 +7,12 @@ export const sendOpenAi = async (
   max = 100,
   temp = 1
 ) => {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    console.warn('OPENAI_API_KEY not available. Skipping OpenAI request.');
+    return null;
+  }
+
   const url = 'https://api.openai.com/v1/chat/completions';
 
   console.log('Ask GPT >>>');
@@ -24,7 +30,7 @@ export const sendOpenAi = async (
 
   const options = {
     headers: {
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
   };
