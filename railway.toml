@@ -3,7 +3,7 @@ builder = "nixpacks"
 buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npm start"
+startCommand = "node .next/standalone/server.js"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "always"
