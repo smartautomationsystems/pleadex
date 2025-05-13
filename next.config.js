@@ -29,6 +29,7 @@ const nextConfig = {
     serverActions: {
       allowedOrigins: ['localhost:3000', 'pleadex.com'],
     },
+    serverComponentsExternalPackages: ['mongodb'],
   },
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
@@ -39,10 +40,6 @@ const nextConfig = {
   },
   // Skip server-side validation during build
   output: 'standalone',
-  experimental: {
-    ...nextConfig.experimental,
-    serverComponentsExternalPackages: ['mongodb'],
-  },
 };
 
 module.exports = nextConfig;
