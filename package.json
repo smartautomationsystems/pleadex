@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "dotenv -e .env.local -- prisma generate && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
@@ -76,6 +76,7 @@
     "@types/react-syntax-highlighter": "^15.5.11",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.10.1",
+    "dotenv-cli": "^8.0.0",
     "postcss": "^8.4.38",
     "prisma": "^6.7.0",
     "sharp": "^0.34.1",
