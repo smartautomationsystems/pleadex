@@ -41,7 +41,7 @@ export default function DocumentsPage() {
 
   const fetchDocuments = useCallback(async () => {
     try {
-      const response = await fetch('/api/documents');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/documents`);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to fetch documents');
