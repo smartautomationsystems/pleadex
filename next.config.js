@@ -23,6 +23,10 @@ const nextConfig = {
     config.resolve.fallback = { fs: false };
     return config;
   },
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@mui/material', '@emotion/react', '@emotion/styled'],
+  },
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
 };
