@@ -34,10 +34,9 @@ const nextConfig = {
   },
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
-  // Add environment variables that should be available at build time
+  // Add public environment variables that are safe to expose
   env: {
-    MONGODB_URI: process.env.MONGODB_URI || "mongodb+srv://bcolombana:0penSesame123%21%40%23@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster",
-    DATABASE_URL: process.env.MONGODB_URI || "mongodb+srv://bcolombana:0penSesame123%21%40%23@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster",
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
   // Skip server-side validation during build
   output: 'standalone',
