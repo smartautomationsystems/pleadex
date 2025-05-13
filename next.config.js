@@ -11,6 +11,7 @@ const nextConfig = {
       "pbs.twimg.com",
       "images.unsplash.com",
       "logos-world.net",
+      "pleadex.com",
     ],
   },
   typescript: {
@@ -36,7 +37,7 @@ const nextConfig = {
   skipMiddlewareUrlNormalize: true,
   // Add public environment variables that are safe to expose
   env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://pleadex.com',
   },
   // Skip server-side validation during build
   output: 'standalone',
@@ -47,7 +48,7 @@ const nextConfig = {
         source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Origin', value: 'https://pleadex.com' },
           { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT' },
           { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version' },
         ],
@@ -55,7 +56,7 @@ const nextConfig = {
     ];
   },
   // Configure metadata base URL
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://pleadex.com'),
   // Add dynamic route configuration
   async rewrites() {
     return [
