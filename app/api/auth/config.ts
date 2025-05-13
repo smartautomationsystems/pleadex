@@ -19,29 +19,47 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log('Auth attempt for email:', credentials?.email);
+        
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          console.log('Missing credentials');
+          throw new Error(JSON.stringify({
+            error: "Missing credentials",
+            message: "Please provide both email and password"
+          }));
         }
 
         try {
+          console.log('Attempting database connection...');
           const client = await clientPromise;
           const db = client.db();
           
+          console.log('Searching for user...');
           // Find user by email
           const user = await db.collection("users").findOne({
             email: credentials.email,
           });
 
           if (!user) {
-            return null;
+            console.log('No user found');
+            throw new Error(JSON.stringify({
+              error: "Invalid credentials",
+              message: "No user found with this email"
+            }));
           }
 
+          console.log('User found, verifying password...');
           // Verify password
           const isValid = await compare(credentials.password, user.password);
           if (!isValid) {
-            return null;
+            console.log('Invalid password');
+            throw new Error(JSON.stringify({
+              error: "Invalid credentials",
+              message: "Invalid password"
+            }));
           }
 
+          console.log('Authentication successful');
           return {
             id: user._id.toString(),
             email: user.email,
@@ -49,8 +67,24 @@ export const authOptions: AuthOptions = {
             role: user.role || "user",
           };
         } catch (error) {
-          console.error("Auth error:", error);
-          return null;
+          console.error("Auth error details:", error);
+          if (error instanceof Error) {
+            try {
+              // If it's already a JSON string, parse it to ensure it's valid
+              JSON.parse(error.message);
+              throw error;
+            } catch {
+              // If it's not a JSON string, wrap it in a JSON error
+              throw new Error(JSON.stringify({
+                error: "Authentication failed",
+                message: error.message
+              }));
+            }
+          }
+          throw new Error(JSON.stringify({
+            error: "Authentication failed",
+            message: "An unexpected error occurred"
+          }));
         }
       }
     }),

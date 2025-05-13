@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,24 +19,35 @@ function LoginForm() {
     // Handle auth errors
     const error = searchParams.get('error');
     if (error) {
-      if (error === 'OAuthAccountNotLinked') {
-        toast.error('This email is already registered with a different login method');
-      } else {
-        toast.error('Authentication failed. Please try again.');
+      switch (error) {
+        case 'OAuthAccountNotLinked':
+          toast.error('This email is already registered with a different login method');
+          break;
+        case 'AccessDenied':
+          toast.error('Access denied. Please try again.');
+          break;
+        case 'Configuration':
+          toast.error('There is a problem with the server configuration.');
+          break;
+        case 'Verification':
+          toast.error('The verification token has expired or has already been used.');
+          break;
+        default:
+          toast.error('Authentication failed. Please try again.');
       }
     }
   }, [searchParams]);
 
   useEffect(() => {
     // Redirect if already logged in
-    if (session) {
+    if (status === 'authenticated' && session) {
       if (session.user.role === 'superadmin') {
         router.push('/superadmin/dashboard');
       } else {
         router.push('/dashboard');
       }
     }
-  }, [session, router]);
+  }, [session, status, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +64,14 @@ function LoginForm() {
         toast.error(result.error);
       } else if (result?.ok) {
         toast.success("Logged in successfully");
-        // The redirect will be handled by the useEffect above
+        // Force a session refresh
+        await fetch('/api/auth/session');
+        // Explicitly redirect based on role
+        if (session?.user?.role === 'superadmin') {
+          router.push('/superadmin/dashboard');
+        } else {
+          router.push('/dashboard');
+        }
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -66,16 +84,39 @@ function LoginForm() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     try {
-      await signIn("google", {
+      const result = await signIn("google", {
         callbackUrl: "/dashboard",
-        redirect: true,
+        redirect: false,
       });
+
+      if (result?.error) {
+        toast.error(result.error);
+      } else if (result?.ok) {
+        toast.success("Google sign-in successful");
+        // Force a session refresh
+        await fetch('/api/auth/session');
+        // Explicitly redirect based on role
+        if (session?.user?.role === 'superadmin') {
+          router.push('/superadmin/dashboard');
+        } else {
+          router.push('/dashboard');
+        }
+      }
     } catch (error) {
       console.error("Google sign-in error:", error);
       toast.error("An error occurred during Google sign-in");
+    } finally {
       setIsLoading(false);
     }
   };
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -101,6 +142,7 @@ function LoginForm() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
               />
             </div>
             <div>
@@ -117,6 +159,7 @@ function LoginForm() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -125,7 +168,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </button>
@@ -146,7 +189,7 @@ function LoginForm() {
             <button
               onClick={handleGoogleSignIn}
               disabled={isLoading}
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <FaGoogle className="h-5 w-5 mr-2" />
               Sign in with Google
@@ -160,7 +203,11 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    }>
       <LoginForm />
     </Suspense>
   );
