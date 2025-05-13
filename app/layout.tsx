@@ -6,6 +6,7 @@ import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://pleadex.com'),
 	title: "Pleadex",
 	description: "Your legal case management system",
 	icons: {

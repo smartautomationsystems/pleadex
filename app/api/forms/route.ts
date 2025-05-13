@@ -3,16 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/libs/auth';
 import { connectToDatabase } from '@/libs/db';
 import { ObjectId } from 'mongodb';
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { uploadToS3, deleteObject } from '@/libs/aws';
 import { processFormWithOCR } from '@/libs/form-ocr';
-
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION!,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
 
 export const dynamic = 'force-dynamic';
 
@@ -78,14 +70,7 @@ export async function POST(request: Request) {
     const key = `forms/${Date.now()}-${file.name}`;
 
     // Upload to S3
-    await s3Client.send(
-      new PutObjectCommand({
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: key,
-        Body: buffer,
-        ContentType: file.type,
-      })
-    );
+    await uploadToS3(buffer, key, file.type);
 
     const { db } = await connectToDatabase();
     const result = await db.collection('forms').insertOne({
@@ -217,12 +202,7 @@ export async function DELETE(request: NextRequest) {
     // Delete from S3
     if (form.s3Key) {
       try {
-        await s3Client.send(
-          new DeleteObjectCommand({
-            Bucket: process.env.AWS_S3_BUCKET,
-            Key: form.s3Key,
-          })
-        );
+        await deleteObject(form.s3Key);
       } catch (error) {
         console.error('Error deleting file from S3:', error);
       }

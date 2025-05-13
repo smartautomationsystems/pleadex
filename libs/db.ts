@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 // Environment variables
 const MONGODB_URI = process.env.MONGODB_URI;
 const IS_ATLAS = MONGODB_URI?.includes('mongodb.net');
-const MAX_RETRIES = 5;
-const RETRY_DELAY = 1000; // 1 second
+const MAX_RETRIES = 2;
+const RETRY_DELAY = 500;
 
 if (!MONGODB_URI) {
   throw new Error('Please add your Mongo URI to .env.local');
@@ -22,11 +22,11 @@ const commonOptions = {
   maxPoolSize: 10,
   retryWrites: true,
   retryReads: true,
-  connectTimeoutMS: 30000,
-  socketTimeoutMS: 45000,
-  heartbeatFrequencyMS: 10000,
-  maxIdleTimeMS: 60000,
-  waitQueueTimeoutMS: 30000,
+  connectTimeoutMS: 5000,
+  socketTimeoutMS: 10000,
+  heartbeatFrequencyMS: 5000,
+  maxIdleTimeMS: 30000,
+  waitQueueTimeoutMS: 5000,
   maxConnecting: 5,
 };
 

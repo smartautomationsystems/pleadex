@@ -68,23 +68,20 @@ export const authOptions: AuthOptions = {
           };
         } catch (error) {
           console.error("Auth error details:", error);
-          if (error instanceof Error) {
-            try {
-              // If it's already a JSON string, parse it to ensure it's valid
-              JSON.parse(error.message);
-              throw error;
-            } catch {
-              // If it's not a JSON string, wrap it in a JSON error
-              throw new Error(JSON.stringify({
-                error: "Authentication failed",
-                message: error.message
-              }));
-            }
+          // Ensure we always return a properly formatted error
+          const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+          try {
+            // Try to parse the error message as JSON
+            JSON.parse(errorMessage);
+            throw error; // If it's already JSON, throw it as is
+          } catch {
+            // If it's not JSON, wrap it in a JSON error
+            throw new Error(JSON.stringify({
+              error: "Authentication failed",
+              message: errorMessage,
+              timestamp: new Date().toISOString()
+            }));
           }
-          throw new Error(JSON.stringify({
-            error: "Authentication failed",
-            message: "An unexpected error occurred"
-          }));
         }
       }
     }),

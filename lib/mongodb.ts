@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, WriteConcern } from 'mongodb';
 
 // Only check for MONGODB_URI in production runtime, not during build
 if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
@@ -12,9 +12,17 @@ const options = {
   connectTimeoutMS: 10000, // 10 seconds
   socketTimeoutMS: 45000, // 45 seconds
   serverSelectionTimeoutMS: 10000, // 10 seconds
-  maxPoolSize: 10,
-  minPoolSize: 5,
+  maxPoolSize: 50, // Increased for production
+  minPoolSize: 10, // Increased for production
+  maxIdleTimeMS: 60000, // Close idle connections after 1 minute
+  waitQueueTimeoutMS: 10000, // Wait queue timeout
+  retryWrites: true,
+  retryReads: true,
+  writeConcern: { w: 'majority', wtimeout: 2500 } as WriteConcern, // Write concern
 };
+
+let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient> | null = null;
 
 // Initialize MongoDB client only when needed
 function getMongoClient() {
@@ -34,12 +42,17 @@ function getMongoClient() {
     }
     return globalWithMongo._mongoClientPromise;
   } else {
-    // In production mode, it's best to not use a global variable.
-    const client = new MongoClient(uri, options);
-    return client.connect().catch(error => {
-      console.error('MongoDB connection error:', error);
-      throw new Error('Failed to connect to database');
-    });
+    // In production mode, reuse the client
+    if (!clientPromise) {
+      client = new MongoClient(uri, options);
+      clientPromise = client.connect().catch(error => {
+        console.error('MongoDB connection error:', error);
+        client = null;
+        clientPromise = null;
+        throw new Error('Failed to connect to database');
+      });
+    }
+    return clientPromise;
   }
 }
 

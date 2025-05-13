@@ -4,6 +4,7 @@ import { authOptions } from "@/libs/auth";
 import { connectToDatabase } from "@/libs/db";
 import { ObjectId } from "mongodb";
 import OpenAI from "openai";
+import { ensureOpenAIConfig } from '@/libs/env';
 
 interface FormField {
   key: string;
@@ -30,6 +31,15 @@ interface VariableMatch {
     required: boolean;
     placeholder?: string;
   };
+}
+
+// Initialize OpenAI client only when needed
+function getOpenAIClient(apiKey: string) {
+  ensureOpenAIConfig();
+  if (!apiKey) {
+    throw new Error('OpenAI API key is required');
+  }
+  return new OpenAI({ apiKey });
 }
 
 export async function POST(request: Request) {
@@ -72,7 +82,6 @@ export async function POST(request: Request) {
   if (!openaiApiKey) {
     return new NextResponse("OpenAI API key not configured", { status: 500 });
   }
-  const openai = new OpenAI({ apiKey: openaiApiKey });
 
   // Get all existing global variables
   const existingVariables = await db.collection("globals").find({
@@ -106,6 +115,7 @@ export async function POST(request: Request) {
   `;
 
   // Call OpenAI to analyze the fields
+  const openai = getOpenAIClient(openaiApiKey);
   const completion = await openai.chat.completions.create({
     model: "gpt-4-turbo-preview",
     messages: [

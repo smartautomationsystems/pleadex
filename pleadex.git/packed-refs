@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled sorted 
+ef4f78b2d3cc9c4e149ae21a583a453b92f301ff refs/heads/chore/gitignore-env
+11907f02864a35e50e2f399ebfeb2c90e0ac8fd5 refs/heads/main
+ef4f78b2d3cc9c4e149ae21a583a453b92f301ff refs/pull/1/head
+274aa30cc59cb0c73fd13694122918f0110a68bd refs/tags/v0.3.0
+^ef4f78b2d3cc9c4e149ae21a583a453b92f301ff

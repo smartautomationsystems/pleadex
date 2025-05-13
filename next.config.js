@@ -29,7 +29,9 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['@mui/material', '@emotion/react', '@emotion/styled'],
     serverActions: {
-      allowedOrigins: ['localhost:3000', 'pleadex.com'],
+      allowedOrigins: process.env.NODE_ENV === 'development' 
+        ? ['localhost:3000', 'pleadex.com']
+        : ['pleadex.com'],
     },
     serverComponentsExternalPackages: ['mongodb'],
   },
@@ -48,15 +50,13 @@ const nextConfig = {
         source: '/api/:path*',
         headers: [
           { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: 'https://pleadex.com' },
+          { key: 'Access-Control-Allow-Origin', value: process.env.NODE_ENV === 'development' ? '*' : 'https://pleadex.com' },
           { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS' },
           { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization' },
         ],
       },
     ];
   },
-  // Configure metadata base URL
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://pleadex.com'),
   // Add dynamic route configuration
   async rewrites() {
     return [
