@@ -5,12 +5,24 @@ import { connectToDatabase } from "./db";
 import { ObjectId } from "mongodb";
 import { hash, compare } from "bcryptjs";
 
+if (!process.env.NEXTAUTH_SECRET) {
+  throw new Error('Please provide NEXTAUTH_SECRET environment variable');
+}
+
+if (!process.env.GOOGLE_ID || !process.env.GOOGLE_SECRET) {
+  console.warn('Google OAuth credentials not found. Google sign-in will be disabled.');
+}
+
 export const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+    ...(process.env.GOOGLE_ID && process.env.GOOGLE_SECRET
+      ? [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+          }),
+        ]
+      : []),
     CredentialsProvider({
       name: "Super Admin",
       credentials: {
@@ -68,10 +80,13 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/login"
+    signIn: "/login",
+    error: "/login", // Add error page
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -88,6 +103,7 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
             name: user.name,
             image: user.image,
+            role: "user", // Add default role
             createdAt: new Date(),
             updatedAt: new Date()
           });
@@ -96,12 +112,14 @@ export const authOptions: NextAuthOptions = {
             _id: result.insertedId,
             email: user.email,
             name: user.name,
-            image: user.image
+            image: user.image,
+            role: "user"
           };
         }
         
-        // Add user ID to the user object
+        // Add user ID and role to the user object
         user.id = existingUser._id.toString();
+        user.role = existingUser.role;
       }
       
       return true;
@@ -120,5 +138,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     }
-  }
+  },
+  debug: process.env.NODE_ENV === 'development',
 }; 
