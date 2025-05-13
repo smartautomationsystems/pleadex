@@ -4,9 +4,9 @@ buildCommand = "npm run build"
 
 [deploy]
 startCommand = "node .next/standalone/server.js"
-healthcheckPath = "/"
-healthcheckTimeout = 100
-restartPolicyType = "always"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "on-failure"
 restartPolicyMaxRetries = 10
 timeout = 30000  # 30 seconds timeout
 
