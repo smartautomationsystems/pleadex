@@ -22,11 +22,11 @@ const commonOptions = {
   maxPoolSize: 10,
   retryWrites: true,
   retryReads: true,
-  connectTimeoutMS: 5000,
-  socketTimeoutMS: 10000,
-  heartbeatFrequencyMS: 5000,
-  maxIdleTimeMS: 30000,
-  waitQueueTimeoutMS: 5000,
+  connectTimeoutMS: 15000,
+  socketTimeoutMS: 25000,
+  heartbeatFrequencyMS: 10000,
+  maxIdleTimeMS: 60000,
+  waitQueueTimeoutMS: 15000,
   maxConnecting: 5,
 };
 
