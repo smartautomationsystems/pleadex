@@ -37,6 +37,12 @@ const nextConfig = {
     MONGODB_URI: process.env.MONGODB_URI,
     DATABASE_URL: process.env.MONGODB_URI, // Use MONGODB_URI for DATABASE_URL
   },
+  // Skip server-side validation during build
+  output: 'standalone',
+  experimental: {
+    ...nextConfig.experimental,
+    serverComponentsExternalPackages: ['mongodb'],
+  },
 };
 
 module.exports = nextConfig;

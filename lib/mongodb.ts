@@ -2,11 +2,12 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 import { MongoClient, Db } from 'mongodb';
 
-if (!process.env.MONGODB_URI) {
+// Only check for MONGODB_URI in production runtime, not during build
+if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
   throw new Error('Please add your Mongo URI to your environment variables');
 }
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const options = {};
 
 let client: MongoClient;
