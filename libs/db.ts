@@ -50,16 +50,14 @@ const localOptions = {
 // Use Atlas options if connecting to MongoDB Atlas, otherwise use local options
 const options = IS_ATLAS ? atlasOptions : localOptions;
 
-// MongoDB Client for direct MongoDB operations
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+let globalWithMongo = global as typeof globalThis & {
+  _mongoClientPromise?: Promise<MongoClient>;
+};
 
 // Function to create a new MongoDB client with retry logic
 async function createMongoClient(retryCount = 0): Promise<MongoClient> {
   try {
     console.log(`Attempting to create MongoDB client (${IS_ATLAS ? 'Atlas' : 'Local'}) - Attempt ${retryCount + 1}/${MAX_RETRIES}`);
-    console.log('Connection URI:', MONGODB_URI);
-    console.log('Connection options:', JSON.stringify(options, null, 2));
     
     const newClient = new MongoClient(MONGODB_URI, options);
     await newClient.connect();
@@ -78,34 +76,21 @@ async function createMongoClient(retryCount = 0): Promise<MongoClient> {
   }
 }
 
-// Initialize the client promise
-if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  let globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>;
-  };
-
+export function getClientPromise() {
   if (!globalWithMongo._mongoClientPromise) {
-    console.log(`Creating new MongoDB connection in development mode (${IS_ATLAS ? 'Atlas' : 'Local'})`);
+    if (process.env.NODE_ENV !== 'test') {
+      console.log(`MongoDB client not yet initialized, deferring connection`);
+    }
     globalWithMongo._mongoClientPromise = createMongoClient();
   }
-  clientPromise = globalWithMongo._mongoClientPromise;
-} else {
-  // In production mode, it's best to not use a global variable.
-  console.log(`Creating new MongoDB connection in production mode (${IS_ATLAS ? 'Atlas' : 'Local'})`);
-  clientPromise = createMongoClient();
+  return globalWithMongo._mongoClientPromise;
 }
-
-// Export a module-scoped MongoClient promise. By doing this in a
-// separate module, the client can be shared across functions.
-export default clientPromise;
 
 // Function to connect to MongoDB using the native driver
 export async function connectToDatabase() {
   try {
     console.log('Attempting to connect to MongoDB...');
-    const client = await clientPromise;
+    const client = await getClientPromise();
     const db = client.db();
     
     // Verify the connection
@@ -176,8 +161,10 @@ export async function closeConnections() {
   try {
     console.log('Closing MongoDB connections...');
     await mongoose.connection.close();
-    const client = await clientPromise;
-    await client.close();
+    if (globalWithMongo._mongoClientPromise) {
+      const client = await globalWithMongo._mongoClientPromise;
+      await client.close();
+    }
     console.log('Successfully closed all MongoDB connections');
   } catch (error) {
     console.error('Error closing MongoDB connections:', error);

@@ -1,5 +1,7 @@
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import clientPromise from "./db";
+import { getClientPromise } from "./db";
 
-// Export the MongoDB adapter for NextAuth
-export const adapter = MongoDBAdapter(clientPromise); 
+export async function getAdapter() {
+  const clientPromise = getClientPromise();
+  return MongoDBAdapter(clientPromise);
+}
