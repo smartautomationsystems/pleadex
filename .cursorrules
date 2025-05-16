@@ -1,0 +1,16 @@
+# Cursor Rules
+
+## Git Workflow
+- NEVER skip the ChatGPT review process (git commit --no-verify)
+- Always wait for the ChatGPT review to complete before proceeding with commits
+- If the review fails, address the issues raised before committing
+
+## Code Quality
+- Follow the project's coding standards
+- Ensure all tests pass before committing
+- Document any significant changes
+
+## Security
+- Never commit sensitive information
+- Follow security best practices
+- Review all environment variables and secrets 
