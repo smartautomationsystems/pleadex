@@ -2,11 +2,11 @@ import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import clientPromise from '@/libs/db';
-import { compare, hash } from "bcryptjs";
+import { getClientPromise } from '@/libs/db';
+import { compare } from "bcryptjs";
 
 export const authOptions: AuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(getClientPromise()),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
@@ -31,7 +31,7 @@ export const authOptions: AuthOptions = {
 
         try {
           console.log('Attempting database connection...');
-          const client = await clientPromise;
+          const client = await getClientPromise();
           const db = client.db();
           
           console.log('Searching for user...');
@@ -92,7 +92,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
-        const client = await clientPromise;
+        const client = await getClientPromise();
         const db = client.db();
         
         // Check if user exists
