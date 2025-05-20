@@ -14,8 +14,7 @@ timeout = 30000  # 30 seconds timeout
 NODE_ENV = "production"
 NEXTAUTH_URL = "https://pleadex.com"
 NEXTAUTH_SECRET = "CM/iQuRfCvo16PWyhBw5iarHfGfs0ki9MNbVuYA+FW8="
-MONGODB_URI = "mongodb+srv://bcolombana:0openSesame123!@#@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster"
-DATABASE_URL = "mongodb+srv://bcolombana:0openSesame123!@#@pleadex-cluster.f5dcgdt.mongodb.net/pleadex?retryWrites=true&w=majority&appName=pleadex-cluster"
+# MongoDB credentials should be set in Railway's environment variables, not here
 NEXT_PUBLIC_APP_URL = "https://pleadex.com"
 
 [build.cache]
